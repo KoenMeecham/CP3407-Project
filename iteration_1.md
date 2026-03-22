@@ -29,24 +29,24 @@ In progress:
 * ...
 
 Completed:
-* Create a landing page (developer name or initials), date completed
-* Create a search page (developer name or initials), date completed
-* Create an orders page (developer name or initials), date completed
-* Admin log in (developer name or initials), date completed
-* User registration page (developer name or initials), date completed
-* Restaurant menu(developer name or initials), date completed
-* Shopping cart management (developer name or initials), date completed
-* Restaurant account setup (developer name or initials), date completed
-* Place order (developer name or initials), date completed
-* Online payment  (developer name or initials), date completed
-* Browse restaurants (developer name or initials), date completed
-* Receive new orders (developer name or initials), date completed
-* Store user details (developer name or initials), date completed
+* Create a landing page (developer name or initials), 23/2/2026
+* Create a search page (developer name or initials), 24/2/2026
+* Create an orders page (developer name or initials), 25/2/2026
+* Admin log in (developer name or initials), 26/2/2026
+* User registration page (developer name or initials), 2/3/2026
+* Restaurant menu(developer name or initials), 4/3/2026
+* Shopping cart management (developer name or initials), 6/3/2026
+* Restaurant account setup (developer name or initials), 9/3/2026
+* Place order (developer name or initials),  10/3/2026
+* Online payment  (developer name or initials), 12/3/2026
+* Browse restaurants (developer name or initials), 16/3/2026
+* Receive new orders (developer name or initials), 17/3/2026
+* Store user details (developer name or initials), 18/3/2026
 
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
 * 4 weeks left, 32 days of estimated amount of work 
-* 2 weeks left, xx days of estimated amount of  work 
-* 1 weeks left, xx days of estimated amount of work 
-* 0 weeks left, xx days of estimated amount of work 
-* Actual Velocity: ?? 
+* 2 weeks left, 18 days of estimated amount of  work 
+* 1 weeks left, 4 days of estimated amount of work 
+* 0 weeks left, 0 days of estimated amount of work 
+* Actual Velocity: 0.7
