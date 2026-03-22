@@ -13,7 +13,13 @@ export default function Orders() {
   const { addToCart } = useCart();
   const location = useLocation();
 
-  const allOrders = JSON.parse(localStorage.getItem("feedme_orders") || "[]");
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/orders")
+      .then(res => res.json())
+      .then(data => setOrders(data));
+  }, []);
 
   const visibleOrders = useMemo(() => {
     let orders = [...allOrders];
