@@ -48,8 +48,6 @@ Screenshot of routing table
 Ec2 instance
 <img width="1656" height="180" alt="image" src="https://github.com/user-attachments/assets/7d17fd95-f0f1-4cf4-b1db-2d46e35aca56" />
 
-RDS database 
-<img width="1625" height="197" alt="image" src="https://github.com/user-attachments/assets/2cbfb298-4c47-4694-9fd7-302adc220f83" />
 
 
 
