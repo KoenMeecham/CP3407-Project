@@ -33,3 +33,4 @@ As a user, I want to access a settings page so I can manage my account details a
 
 
 ## Completed:
+<img width="1910" height="564" alt="image" src="https://github.com/user-attachments/assets/b402537c-dab2-45a7-9d70-81ae95c8b40e" />
