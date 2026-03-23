@@ -7,7 +7,7 @@ Sub issue -
 
 ## Priority: 30 (e.g. latest for iteration-1)
 Priority Notes:
-Iteration 2 – 
+Iteration 2 – Ensure the order gets confirmed
 
 
 Design link: 
@@ -15,7 +15,7 @@ Design link:
 
 ## Estimation: 2 day
 Any notes on estimation go here. Keep your planning poker game numbers. For example
-* Scott: 2 day (e.g. estimated before iteration-1)
+* Scott: 2 day 
 * Kenneth: 2 days
 * Koen: 2 days
 * Ty: 2 days
