@@ -8,9 +8,10 @@ Iteration 2 – Upload/store images in database or cloud (S3)
 
 ## Estimation: 1 day
 Planning Poker:
-Bob: 1 day
-Lisa: 2 days
-Jack: 1 day
+Scott: 1 day
+Kenneth: 2 days
+Koen: 1 day
+Ty: 1 day
 Final agreed: 1 day
 
 ## Assumptions:
