@@ -33,3 +33,4 @@ Task 5 - Clear cart, Estimation 0.25 days
 
 
 ## Completed:
+<img width="1915" height="757" alt="image" src="https://github.com/user-attachments/assets/6b2e3d64-7f52-4c01-8c00-8125248991d2" />
