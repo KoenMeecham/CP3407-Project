@@ -40,4 +40,5 @@ Task 4 – Add image upload/display support, Estimation 0.5 days
 
 
 ## Completed:
+<img width="1917" height="901" alt="image" src="https://github.com/user-attachments/assets/736441bf-9255-41de-9230-d93c0439a2e1" />
 
