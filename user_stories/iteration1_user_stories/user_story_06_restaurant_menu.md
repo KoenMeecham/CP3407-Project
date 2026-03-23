@@ -36,5 +36,8 @@ Task 3 – Display menu items with prices, Estimation 0.5 days
 Task 4 – Add image upload/display support, Estimation 0.5 days  
 
 
+## UI Design:
 
+
+## Completed:
 
