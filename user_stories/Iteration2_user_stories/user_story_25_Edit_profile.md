@@ -3,7 +3,7 @@ Other versions: Update user details, Profile settings, Manage account informatio
 
 ## Priority: 20
 Priority Notes:
-Iteration 2 – Add profile picture + password change,user details, account info etc
+Iteration 2 – Change user details and account info.
 
 ## Estimation: 1 day
 Planning Poker:
