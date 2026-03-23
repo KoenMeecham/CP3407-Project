@@ -29,4 +29,7 @@ Task 3 – Implement update quantity feature, Estimation 0.5 days
 Task 4 – Display cart summary + total price, Estimation 0.5 days
 Task 5 - Clear cart, Estimation 0.25 days
 
+## UI Design:
 
+
+## Completed:
