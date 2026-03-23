@@ -23,11 +23,7 @@ Final agreed: 1 day
 ## Description:
 Users can leave reviews on restaurants so other customers can see feedback and ratings before ordering.
 
-Description-v1:
-Allow customers to submit a star rating and short comment for a restaurant.
 
-Description-v2:
-Display submitted reviews and ratings on the restaurant page.
 
 ## Tasks:
 Task 1 – Create review data model (rating, comment, user, restaurant), Estimation 0.25 days
