@@ -8,9 +8,9 @@ Iteration 2 – Basic status updates (placed, preparing, ready, delivered)
 
 ## Estimation: 2 days
 Planning Poker:
-Bob: 2 days
-Lisa: 3 days
-Jack: 2 days
+Scott: 2 days
+Kenneth: 3 days
+Ty: 2 days
 Final agreed: 2 days
 
 ## Assumptions:
