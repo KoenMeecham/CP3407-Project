@@ -63,7 +63,6 @@ Task 4 – Display “no results” + loading states, Estimation 0.25 days
 * Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
+<img width="1914" height="964" alt="image" src="https://github.com/user-attachments/assets/6c990e1c-6437-46c5-9d87-a5bc517caaf7" />
+
 
