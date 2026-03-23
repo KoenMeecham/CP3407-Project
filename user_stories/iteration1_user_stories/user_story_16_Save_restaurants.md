@@ -39,3 +39,4 @@ Task 4 – Add Save/Favourite button to restaurant UI (icon toggle), Estimated 0
 Many user stories are connected to a User interface.
 Insert a mockup design screenshot using any prototyping tools, e.g. https://ninjamock.com/
 # Completed:
+<img width="1891" height="589" alt="image" src="https://github.com/user-attachments/assets/ee343bc0-d1cd-4f84-af46-aeb3e46da735" />
