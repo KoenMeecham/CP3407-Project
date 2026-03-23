@@ -49,7 +49,6 @@ Task 4 – Display ratings and additional details, Estimation 0.5 days
 * Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
+<img width="1909" height="963" alt="image" src="https://github.com/user-attachments/assets/129e462d-dd91-4044-9b1e-1f043590a6be" />
+
 
