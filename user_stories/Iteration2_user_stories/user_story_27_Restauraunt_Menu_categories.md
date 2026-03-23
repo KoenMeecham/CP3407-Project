@@ -6,9 +6,10 @@ Iteration 2 - ensure the menu is split into categories
 
 ## Estimation: 1 day
 Planning Poker:
-Bob: 1 day 
-Lisa: 2 days
-Jack: 1 day
+Scott: 1 day
+Kenneth: 1 day
+Koen: 1 day
+Ty: 1 day
 Final agreed: 1 day
 
 ## Assumptions:
