@@ -4,27 +4,29 @@ const router = express.Router();
 const db = require("../db");
 
 // REGISTER
-router.post("/register", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+// Feedme_website/server/routes/auth.js
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 
-  const hashed = await bcrypt.hash(password, 10);
+const poolData = {
+    UserPoolId: process.env.COGNITO_USER_POOL_ID,
+    ClientId: process.env.COGNITO_CLIENT_ID
+};
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-  db.query(
-    "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, 'customer')",
-    [firstName, lastName, email, hashed],
-    (err, result) => {
-      if (err) return res.status(500).json(err);
+router.post("/register", (req, res) => {
+    const { email, password } = req.body;
 
-      res.json({
-        user: {
-          id: result.insertId,
-          email,
-          name: firstName,
-          role: "customer"
-        }
-      });
-    }
-  );
+    const attributeList = [
+        new AmazonCognitoIdentity.CognitoUserAttribute({ Name: "email", Value: email })
+    ];
+
+    userPool.signUp(email, password, attributeList, null, (err, result) => {
+        if (err) return res.status(400).json({ error: err.message });
+        
+        // Success! User is created in Cognito. 
+        // You can now also save them to your local MySQL database for profile info.
+        res.json({ message: "User registered. Please check email for verification." });
+    });
 });
 
 // LOGIN
