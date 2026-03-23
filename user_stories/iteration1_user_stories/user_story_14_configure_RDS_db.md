@@ -38,3 +38,5 @@ Task 5, Estimation 0.5 days: Test connectivity from backend and verify CRUD oper
 
 ## Completed:
 
+RDS database 
+<img width="1625" height="197" alt="image" src="https://github.com/user-attachments/assets/2cbfb298-4c47-4694-9fd7-302adc220f83" />
