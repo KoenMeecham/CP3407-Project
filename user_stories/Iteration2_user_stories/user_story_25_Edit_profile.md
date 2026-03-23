@@ -3,15 +3,14 @@ Other versions: Update user details, Profile settings, Manage account informatio
 
 ## Priority: 20
 Priority Notes:
-Iteration 1 – Update basic details (name, email, phone)
-Iteration 2 – Add profile picture + password change
-Future – Address management integration
+Iteration 2 – Add profile picture + password change,user details, account info etc
 
 ## Estimation: 1 day
 Planning Poker:
-Bob: 1 day (before iteration-1)
-Lisa: 2 days
-Jack: 1 day
+Scott: 1 day
+Kenneth: 1 day
+Koen: 1 day
+Ty: 1 day
 Final agreed: 1 day
 
 ## Assumptions:
