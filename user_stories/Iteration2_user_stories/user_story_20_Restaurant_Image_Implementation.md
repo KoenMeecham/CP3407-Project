@@ -7,9 +7,10 @@ Priority Notes:
 
 ## Estimation: 3 days
 Planning Poker:
-Bob: 3 days
-Lisa: 3 days
-Jack: 3 days
+Scott: 3 days
+Kenneth: 3 days
+Koen: 3 days
+Ty: 3 days
 Final agreed: 3 days
 
 ## Assumptions:
