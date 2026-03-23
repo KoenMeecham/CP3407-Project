@@ -44,7 +44,6 @@ Tasks:
 * Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
+<img width="1240" height="853" alt="image" src="https://github.com/user-attachments/assets/a8d9073f-3ae5-4034-a3b5-5de9516b765e" />
+
 
