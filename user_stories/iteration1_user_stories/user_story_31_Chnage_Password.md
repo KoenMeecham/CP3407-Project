@@ -32,3 +32,4 @@ As a user, I want to change my password so I can keep my account secure.
 
 
 ## Completed:
+<img width="912" height="354" alt="image" src="https://github.com/user-attachments/assets/1043de14-02fb-4493-8e5b-260b39301007" />
