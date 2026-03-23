@@ -27,3 +27,8 @@ As a user, I want to change my password so I can keep my account secure.
 - Task 2 – Implement backend endpoint for password update — Estimation: 0.25 days  
 - Task 3 – Validate current password and enforce new password rules — Estimation: 0.25 days  
 - Task 4 – Handle success/error states and user feedback — Estimation: 0.25 days  
+
+## UI Design:
+
+
+## Completed:
