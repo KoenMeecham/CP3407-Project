@@ -50,4 +50,5 @@ Task 5 – Responsive layout adjustments (mobile/desktop), Estimation 0.25 days
 
 ## Completed:
 
+<img width="1913" height="965" alt="image" src="https://github.com/user-attachments/assets/993132b8-3fa5-4af1-acca-e85fc8c332ad" />
 
