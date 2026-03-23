@@ -28,3 +28,8 @@ As a user, I want to access a settings page so I can manage my account details a
 - Task 2 – Connect settings page to user data (fetch current details) — Estimation: 0.25 days  
 - Task 3 – Implement ability to update basic user info (e.g. name/email) — Estimation: 0.25 days  
 - Task 4 – Add navigation and integrate settings page into app (menu/profile) — Estimation: 0.25 days  
+
+## UI Design:
+
+
+## Completed:
