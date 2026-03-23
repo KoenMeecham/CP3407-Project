@@ -47,6 +47,6 @@ Completed:
 Update this at least once per week
 * 4 weeks left, 32 days of estimated amount of work 
 * 2 weeks left, 18 days of estimated amount of  work 
-* 1 weeks left, 4 days of estimated amount of work 
-* 0 weeks left, 0 days of estimated amount of work 
-* Actual Velocity: 0.7
+* 1 weeks left, 8 days of estimated amount of work 
+* 0 weeks left, 4 days of estimated amount of work 
+* Actual Velocity: 0.5
