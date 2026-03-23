@@ -2,15 +2,14 @@
 
 ## Priority: 10
 Priority Notes:
-Iteration 1 – Basic pickup or delivery selection during checkout
-Iteration 2 – Remember previous choice and show estimated delivery details
-Future – Scheduled pickup or delivery time selection
+Iteration 2 - Set pickup or delivery based on user choice
 
 ## Estimation: 1 day
 Planning Poker:
-Bob: 1 day
-Lisa: 2 days
-Jack: 1 day
+Scott: 1 day
+Kenneth: 1 day
+Koen: 1 day
+Ty: 1 day
 Final agreed: 1 day
 
 ## Assumptions:
