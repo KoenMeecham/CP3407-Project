@@ -47,7 +47,6 @@ Task 4 – Save order to database, Estimation 0.25 days
 * Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
+<img width="1917" height="954" alt="image" src="https://github.com/user-attachments/assets/f27cc724-eecf-49cb-b06e-104979515944" />
+
 
