@@ -9,9 +9,10 @@ Future – Partial refunds / cancellation fees
 
 ## Estimation: 2 days
 Planning Poker:
-Bob: 2 days (before iteration-1)
-Lisa: 3 days
-Jack: 2 days
+Scott: 2 days (before iteration-1)
+Kenneth: 3 days
+Koen: 2 days
+Ty: 2 days
 Final agreed: 2 days
 
 ## Assumptions:
