@@ -1,40 +1,19 @@
-// server/services/email.js
+const { Resend } = require('resend');
 
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+// Initialize with the API key from your .env file
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const ses = new SESClient({
-  region: process.env.AWS_REGION || "ap-southeast-2",
-});
-
-export async function sendOrderEmail(to, order) {
+module.exports = async function sendEmail(to, subject, message) {
   try {
-    const command = new SendEmailCommand({
-      Source: process.env.SES_FROM_EMAIL, // e.g. noreply@feedmefood.pro
-      Destination: {
-        ToAddresses: [to],
-      },
-      Message: {
-        Subject: {
-          Data: "Your FeedMe Order Confirmation",
-        },
-        Body: {
-          Text: {
-            Data: `
-Thanks for your order!
-
-Order ID: ${order.id}
-Total: $${order.total_price}
-
-We’ll start preparing your food soon 
-            `,
-          },
-        },
-      },
+    const data = await resend.emails.send({
+      from: 'FeedMeFood <onboarding@resend.dev>', // Change this once domain is verified
+      to: [to],
+      subject: subject,
+      html: `<strong>${message}</strong>`,
     });
-
-    await ses.send(command);
-    console.log("Email sent");
-  } catch (err) {
-    console.error("SES error:", err);
+    return { success: true, data };
+  } catch (error) {
+    console.error("Resend Error:", error);
+    return { success: false, error };
   }
 }
