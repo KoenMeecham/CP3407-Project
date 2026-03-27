@@ -79,8 +79,6 @@ app.use("/api", (req, res) => {
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// IMPORTANT: SPA fallback (Express 5 safe version)
-app.get("(.*)", (req, res) => {
+app.get('/:any*', (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
-
