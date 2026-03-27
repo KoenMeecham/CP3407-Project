@@ -1,5 +1,5 @@
+// server/services/email.js
 const { Resend } = require("resend");
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendOrderEmail(to, order) {
@@ -12,27 +12,25 @@ async function sendOrderEmail(to, order) {
 
   try {
     await resend.emails.send({
-      from: "FeedMe <onboarding@resend.dev>",
+      from: "Orders <orders@feedmefood.pro>", // Using your verified domain
       to,
-      subject: "Order Confirmation",
+      subject: "Your FeedMe Order is Confirmed!",
       html: `
-        <div style="font-family: Arial; max-width:600px; margin:auto;">
-          <h2 style="color:#f4a14c;">Order Confirmed </h2>
-
-          <p>Your food is being prepared.</p>
-
-          <ul>${itemsHtml}</ul>
-
-          <h3>Total: $${order.total_price}</h3>
-
-          <p>Thanks for using FeedMe </p>
+        <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto; border: 1px solid #eee; padding: 20px;">
+          <h2 style="color:#f4a14c;">Order Confirmed!</h2>
+          <p>Hi there, your food is being prepared at the restaurant.</p>
+          <hr />
+          <ul style="list-style: none; padding: 0;">${itemsHtml}</ul>
+          <hr />
+          <h3>Total Paid: $${order.total_price}</h3>
+          <p>You can view your order status in the "Orders" tab of the app.</p>
+          <p>Thanks for choosing <strong>FeedMe</strong>!</p>
         </div>
       `,
     });
-
-    console.log("Email sent");
+    console.log(`Order email sent to ${to}`);
   } catch (err) {
-    console.error(err);
+    console.error("Resend Email Error:", err);
   }
 }
 
