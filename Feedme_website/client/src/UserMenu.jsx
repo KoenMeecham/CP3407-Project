@@ -1,57 +1,35 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useAuth } from "react-oidc-context";
-import "./App.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function UserMenu() {
-  const auth = useAuth();
+function UserMenu({ user, logout }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef();
 
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
-  if (!auth.isAuthenticated) {
+  if (!user) {
     return (
-      <button
-        className="user-menu-btn"
-        onClick={() => auth.signinRedirect()}
-      >
-        Login
-      </button>
+      <div className="lm-topbarRight">
+        <Link strokeWidth="2" to="/login" className="lm-navItem" style={{background: 'white'}}>Login</Link>
+      </div>
     );
   }
 
   return (
-    <div className="user-menu" ref={ref}>
-      <button
-        className="user-menu-btn"
-        onClick={() => setOpen(!open)}
-      >
-        {auth.user?.profile.email}
+    <div className="user-menu">
+      <button className="user-menu-btn" onClick={() => setOpen(!open)}>
+        Hi, {user.name || 'User'} ▼
       </button>
-
       {open && (
         <div className="user-menu-dropdown">
           <div className="user-menu-header">
-            <strong>{auth.user?.profile.email}</strong>
-            <div className="user-menu-email">Signed in</div>
+            <strong>{user.name}</strong>
+            <div className="user-menu-email">{user.email}</div>
           </div>
-
-          <button
-            className="user-menu-item user-menu-danger"
-            onClick={() => auth.signoutRedirect()}
-          >
-            Sign Out
-          </button>
+          <Link strokeWidth="2" to="/orders" className="user-menu-item">My Orders</Link>
+          <Link strokeWidth="2" to="/settings" className="user-menu-item">Settings</Link>
+          <button onClick={logout} className="user-menu-item user-menu-danger">Sign Out</button>
         </div>
       )}
     </div>
   );
 }
+
+export default UserMenu;
