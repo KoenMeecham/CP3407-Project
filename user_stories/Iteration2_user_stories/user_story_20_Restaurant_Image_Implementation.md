@@ -1,6 +1,9 @@
 ## User story title: Restaurant Image implementation
 Other versions: Add images to each restaurant to separate them
 
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/25#issue-4117984386
+Sub Issue -
+
 ## Priority: 20
 Priority Notes:
 

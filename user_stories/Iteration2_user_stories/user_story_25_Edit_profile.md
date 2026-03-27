@@ -1,6 +1,9 @@
 ## User story title: Edit Profile
 Other versions: Update user details, Profile settings, Manage account information
 
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/31#issue-4118041444
+Sub Issue - https://github.com/KoenMeecham/CP3407-Project/issues/36#issue-4148480938
+
 ## Priority: 20
 Priority Notes:
 Iteration 2 – Change user details and account info.

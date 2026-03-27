@@ -1,6 +1,8 @@
 ## User story title: Edit Password
 Other versions: Change password, Update password, Manage account security
 
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/36#issue-4148480938
+
 ## Priority: 20
 Priority Notes: Iteration 2 – Allow users to securely change their account password.
 

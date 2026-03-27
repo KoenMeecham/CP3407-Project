@@ -1,5 +1,9 @@
 ## User story title: Select Pickup or Delivery
 
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/33#issue-4118063242
+Sub issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-4118035947
+
+
 ## Priority: 10
 Priority Notes:
 Iteration 2 - Set pickup or delivery based on user choice

@@ -2,6 +2,9 @@
 
 Other versions: Write restaurant reviews, Rate a restaurant, Customer feedback on restaurants
 
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/35#issue-4118086804
+Sub Issue - 
+
 ## Priority: 30
 Priority Notes:
 Iteration 2 - allow customers to leave feedback after completing an order

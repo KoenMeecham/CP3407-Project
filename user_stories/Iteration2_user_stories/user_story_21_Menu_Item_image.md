@@ -1,6 +1,8 @@
 ## User story title: Menu Item Images
 Other versions: Display food images, Show menu item pictures, Add images to menu items
 
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/27#issue-4118006294
+Sub issue - 
 ## Priority: 15
 Priority Notes:
 Iteration 2 – Upload/store images in database or cloud (S3)

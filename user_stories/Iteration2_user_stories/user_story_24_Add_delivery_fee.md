@@ -1,6 +1,9 @@
 ## User story title: Add Delivery Fee
 Other versions: Delivery charge, Delivery cost, Apply delivery fee
 
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-4118035947
+
+
 ## Priority: 20
 Priority Notes:
 Iteration 1 – Add a fixed delivery fee at checkout

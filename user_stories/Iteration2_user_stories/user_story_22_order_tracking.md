@@ -1,6 +1,9 @@
 ## User story title: Order Tracking
 Other versions: Track order status, Real-time order tracking, View delivery progress
 
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/28#issue-4118015424
+Sub Issue -
+
 ## Priority: 20
 Priority Notes:
 Iteration 2 – Basic status updates (placed, preparing, ready, delivered)

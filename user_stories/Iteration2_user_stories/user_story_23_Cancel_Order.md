@@ -1,6 +1,9 @@
 ## User story title: Cancel Order (Before Preparation)
 Other versions: Cancel order, Order cancellation, Stop order before cooking
 
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/29#issue-4118026093
+Sub Issue -
+
 ## Priority: 20
 Priority Notes:
 Iteration 1 – Allow cancellation before order status = preparing

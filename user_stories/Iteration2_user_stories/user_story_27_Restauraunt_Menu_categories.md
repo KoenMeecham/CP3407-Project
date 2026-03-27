@@ -1,5 +1,9 @@
 ## User story title: Restaurant Menu Categories (Drinks,burgers chips etc.)
 
+
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/32#issue-4118061240
+Sub Issue - 
+
 ## Priority: 30
 Priority Notes:
 Iteration 2 - ensure the menu is split into categories
