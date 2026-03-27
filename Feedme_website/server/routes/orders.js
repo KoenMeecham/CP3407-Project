@@ -1,47 +1,81 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db");
-const sendEmail = require("../services/email");
+const db = require("../database");
+const { sendOrderEmail } = require("../services/email");
 
-// CREATE ORDER
-router.post("/", (req, res) => {
-  const { user_id, restaurant_id, address_id, total_price, items, email } = req.body;
+/* =========================
+   CREATE ORDER
+========================= */
+router.post("/", async (req, res) => {
+  try {
+    const { restaurant_id, address_id, total_price, items } = req.body;
 
-  db.query(
-    `INSERT INTO Orders (user_id, restaurant_id, address_id, status, total_price)
-     VALUES (?, ?, ?, 'pending', ?)`,
-    [user_id, restaurant_id, address_id, total_price],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ message: "DB error" });
-      }
+    const email = req.user.email;
 
-      const orderId = result.insertId;
+    // get user_id from DB
+    db.query(
+      "SELECT user_id FROM Users WHERE cognito_sub = ?",
+      [req.user.sub],
+      (err, results) => {
+        if (err) return res.status(500).json(err);
 
-      // insert order items
-      items.forEach(item => {
+        const user_id = results[0].user_id;
+
+        // create order
         db.query(
-          "INSERT INTO Order_Items (order_id, menu_item_id, quantity) VALUES (?, ?, ?)",
-          [orderId, item.id, item.quantity]
+          "INSERT INTO Orders (user_id, restaurant_id, address_id, total_price, status, created_at, email) VALUES (?, ?, ?, ?, 'pending', NOW(), ?)",
+          [user_id, restaurant_id, address_id, total_price, email],
+          (err, result) => {
+            if (err) return res.status(500).json(err);
+
+            const order_id = result.insertId;
+
+            // insert items
+            const itemQueries = items.map((item) => {
+              return new Promise((resolve, reject) => {
+                db.query(
+                  "INSERT INTO Order_Items (order_id, menu_item_id, quantity) VALUES (?, ?, ?)",
+                  [order_id, item.id, item.quantity],
+                  (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                  }
+                );
+              });
+            });
+
+            Promise.all(itemQueries)
+              .then(async () => {
+                // send email
+                await sendOrderEmail(email, {
+                  total_price,
+                  items,
+                });
+
+                res.json({ message: "Order placed", order_id });
+              })
+              .catch((err) => res.status(500).json(err));
+          }
         );
-      });
-
-      // ✅ SEND EMAIL HERE
-      sendEmail(email, `Order #${orderId} confirmed`)
-        .then(() => console.log("Email sent"))
-        .catch(err => console.error("Email error:", err));
-
-      res.json({ message: "Order created" });
-    }
-  );
+      }
+    );
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// GET ORDERS
+/* =========================
+   GET ORDERS
+========================= */
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM Orders ORDER BY created_at DESC", (err, results) => {
-    res.json(results);
-  });
+  db.query(
+    "SELECT * FROM Orders WHERE email = ? ORDER BY created_at DESC",
+    [req.user.email],
+    (err, results) => {
+      if (err) return res.status(500).json(err);
+      res.json(results);
+    }
+  );
 });
 
 module.exports = router;

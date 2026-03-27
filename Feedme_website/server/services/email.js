@@ -1,19 +1,39 @@
-const { Resend } = require('resend');
+const { Resend } = require("resend");
 
-// Initialize with the API key from your .env file
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-module.exports = async function sendEmail(to, subject, message) {
+async function sendOrderEmail(to, order) {
+  const itemsHtml = order.items
+    .map(
+      (item) =>
+        `<li>${item.name} x${item.quantity} - $${item.price}</li>`
+    )
+    .join("");
+
   try {
-    const data = await resend.emails.send({
-      from: 'FeedMeFood <onboarding@resend.dev>', // Change this once domain is verified
-      to: [to],
-      subject: subject,
-      html: `<strong>${message}</strong>`,
+    await resend.emails.send({
+      from: "FeedMe <onboarding@resend.dev>",
+      to,
+      subject: "Order Confirmation",
+      html: `
+        <div style="font-family: Arial; max-width:600px; margin:auto;">
+          <h2 style="color:#f4a14c;">Order Confirmed </h2>
+
+          <p>Your food is being prepared.</p>
+
+          <ul>${itemsHtml}</ul>
+
+          <h3>Total: $${order.total_price}</h3>
+
+          <p>Thanks for using FeedMe </p>
+        </div>
+      `,
     });
-    return { success: true, data };
-  } catch (error) {
-    console.error("Resend Error:", error);
-    return { success: false, error };
+
+    console.log("Email sent");
+  } catch (err) {
+    console.error(err);
   }
 }
+
+module.exports = { sendOrderEmail };

@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
 import CartDropdown from "./CartDropdown";
 import { useCart } from "./Cart";
-import { useUser } from "./UserContext";
+import { useAuth } from "react-oidc-context";
 import UserMenu from "./UserMenu";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { cart, subtotal, clearCart } = useCart();
-  const { user } = useUser();
+  const auth = useAuth();
 
   const [guestEmail, setGuestEmail] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
@@ -19,9 +19,13 @@ export default function Checkout() {
   const [cvv, setCvv] = useState("");
   const [error, setError] = useState("");
 
+  const isLoggedIn = auth.isAuthenticated;
+
   const orderEmail = useMemo(() => {
-    return user.isLoggedIn ? user.email : guestEmail.trim();
-  }, [user, guestEmail]);
+    return isLoggedIn
+      ? auth.user?.profile.email
+      : guestEmail.trim();
+  }, [isLoggedIn, auth, guestEmail]);
 
   const deliveryFee = cart.length > 0 ? 4.99 : 0;
   const total = subtotal + deliveryFee;
@@ -34,8 +38,13 @@ export default function Checkout() {
       return;
     }
 
-    if (!user.isLoggedIn && !guestEmail.trim()) {
+    if (!isLoggedIn && !guestEmail.trim()) {
       setError("Please enter an email.");
+      return;
+    }
+
+    if (!isLoggedIn) {
+      setError("Please login to place an order.");
       return;
     }
 
@@ -44,14 +53,14 @@ export default function Checkout() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.user?.id_token}`,
         },
         body: JSON.stringify({
-          user_id: user.user_id || null,
           restaurant_id: cart[0]?.restaurant_id || 1,
           address_id: 1,
           total_price: total,
           email: orderEmail,
-          items: cart
+          items: cart,
         }),
       });
 
@@ -116,19 +125,19 @@ export default function Checkout() {
               <h1>Checkout</h1>
               <p>Review your details and place your order.</p>
 
-              {!user.isLoggedIn && (
+              {!isLoggedIn && (
                 <div className="checkout-authRow">
-                  <Link to="/login" className="checkout-linkBtn">
-                    Login
-                  </Link>
-                  <Link to="/register" className="checkout-linkBtn">
-                    Register
-                  </Link>
+                  <button
+                    className="checkout-linkBtn"
+                    onClick={() => auth.signinRedirect()}
+                  >
+                    Login with Cognito
+                  </button>
                 </div>
               )}
 
               <form onSubmit={handlePlaceOrder} className="checkout-form">
-                {!user.isLoggedIn && (
+                {!isLoggedIn && (
                   <div className="checkout-section">
                     <h3>Guest Details</h3>
                     <input
@@ -198,16 +207,22 @@ export default function Checkout() {
                   <div className="checkout-summaryList">
                     {cart.map((item, index) => (
                       <div
-                        key={`${item.id}-${item.restaurant}-${index}`}
+                        key={`${item.id}-${index}`}
                         className="checkout-summaryItem"
                       >
                         <div>
                           <strong>{item.name}</strong>
-                          <div className="checkout-muted">{item.restaurant}</div>
-                          <div className="checkout-muted">Qty: {item.quantity}</div>
+                          <div className="checkout-muted">
+                            {item.restaurant}
+                          </div>
+                          <div className="checkout-muted">
+                            Qty: {item.quantity}
+                          </div>
                         </div>
 
-                        <div>${(item.price * item.quantity).toFixed(2)}</div>
+                        <div>
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </div>
                       </div>
                     ))}
                   </div>
