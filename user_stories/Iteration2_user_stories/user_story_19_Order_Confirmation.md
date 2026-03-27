@@ -2,7 +2,7 @@
 # User story title: Order Confirmation
 Other versions: As a customer, I want to receive an order confirmation so that I have a record of my purchase.
 
-Main issue - 
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/26#issue-4117985917
 Sub issue -
 
 ## Priority: 30 (e.g. latest for iteration-1)
