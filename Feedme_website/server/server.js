@@ -65,6 +65,12 @@ const attachUser = (req, res, next) => {
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
+// IMPORTANT: SPA fallback (Express 5 safe version)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
+
 /* =========================
    API ROUTES FIRST
 ========================= */
