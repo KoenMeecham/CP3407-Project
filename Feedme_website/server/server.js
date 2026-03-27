@@ -7,7 +7,7 @@ const db = require("./database");
 const restaurantRoutes = require("./routes/restaurants");
 const orderRoutes = require("./routes/orders");
 const authRoutes = require("./routes/auth");
-const { checkJwt, attachUser } = require("./middleware/auth"); // Assuming you moved this
+const { checkJwt, attachUser } = require("./middleware/userauth"); // Assuming you moved this
 
 const app = express();
 app.use(cors());
