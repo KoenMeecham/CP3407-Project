@@ -1,101 +1,39 @@
-// server/server.js
 require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const db = require("./database");
 
 const restaurantRoutes = require("./routes/restaurants");
 const orderRoutes = require("./routes/orders");
 const authRoutes = require("./routes/auth");
-
-const { expressjwt: jwt } = require("express-jwt");
-const jwksRsa = require("jwks-rsa");
+const { checkJwt, attachUser } = require("./middleware/userauth");
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-/* =========================
-   COGNITO JWT MIDDLEWARE
-========================= */
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksUri: `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}/.well-known/jwks.json`,
-  }),
-  audience: process.env.COGNITO_CLIENT_ID,
-  issuer: `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}`,
-  algorithms: ["RS256"],
-});
-
-/* =========================
-   ATTACH USER TO REQUEST
-========================= */
-const attachUser = (req, res, next) => {
-  const sub = req.auth?.sub;
-  const email = req.auth?.email || req.auth?.["email"];
-
-  if (!sub) return res.status(401).json({ error: "No sub found in token" });
-
-  db.query("SELECT * FROM Users WHERE cognito_sub = ?", [sub], (err, results) => {
-    if (err) return res.status(500).json(err);
-
-    if (results.length === 0) {
-      db.query(
-        "INSERT INTO Users (cognito_sub, email, role) VALUES (?, ?, 'user')",
-        [sub, email],
-        (insErr) => {
-          if (insErr) return res.status(500).json(insErr);
-          req.user = { sub, email };
-          next();
-        }
-      );
-    } else {
-      req.user = { sub, email };
-      next();
-    }
-  });
-};
-
-/* =========================
-   API ROUTES FIRST
-========================= */
+// API ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/orders", checkJwt, attachUser, orderRoutes);
 
-/* =========================
-   API 404 HANDLER
-========================= */
+// API 404
 app.use("/api", (req, res) => {
   res.status(404).json({ error: "API route not found" });
 });
 
-// 1. Serve static files normally
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// STATIC FILES
+const distPath = path.join(__dirname, "../client/dist");
+app.use(express.static(distPath));
 
-// 2. Manual Catch-all Middleware (Bypasses path-to-regexp entirely)
-app.use((req, res, next) => {
-  // If the request is for an API, but it wasn't caught by the routes above, 
-  // let it fall through to your 404 handler.
-  if (req.url.startsWith('/api')) {
-    return next();
-  }
-  
-  // For everything else (frontend routing), send the index.html
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"), (err) => {
-    if (err) {
-      // If index.html is missing, we need to know!
-      res.status(500).send("Critical Error: Frontend build missing in client/dist");
-    }
-  });
+// THE EXTREME FIX: No strings, no regex. 
+// This function handles the "fallback" for the SPA.
+app.use((req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
