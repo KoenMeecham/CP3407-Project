@@ -2,7 +2,7 @@
 # User story title: Browse by Cuisine
 Other versions: A feature to browse by cuisine in the search bar
 
-Main issue - 
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/23#issue-4117955493
 Sub issue -
 
 ## Priority: 30 (e.g. latest for iteration-1)
