@@ -57,15 +57,3 @@ export function UserProvider({ children }) {
 export function useUser() {
   return useContext(UserContext);
 }
-
-// The Safety Hook
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (context === undefined || context === null) {
-    // This prevents the "Cannot read properties of null" crash
-    // by giving you a helpful error or a dummy object
-    console.warn("useUser was used outside of its Provider!");
-    return { user: null, setUser: () => {} }; 
-  }
-  return context;
-};
