@@ -1,5 +1,6 @@
 // server/server.js
 require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -7,7 +8,7 @@ const db = require("./database");
 
 const restaurantRoutes = require("./routes/restaurants");
 const orderRoutes = require("./routes/orders");
-const authRoutes = require("./routes/auth"); // Uncomment this once you use the new auth.js
+const authRoutes = require("./routes/auth");
 
 const { expressjwt: jwt } = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
@@ -32,21 +33,18 @@ const checkJwt = jwt({
 });
 
 /* =========================
-   ATTACH USER TO REQUEST (Fixed Sync)
+   ATTACH USER TO REQUEST
 ========================= */
 const attachUser = (req, res, next) => {
-  // express-jwt puts the decoded token in req.auth
   const sub = req.auth?.sub;
-  const email = req.auth?.email || req.auth?.["email"]; 
+  const email = req.auth?.email || req.auth?.["email"];
 
   if (!sub) return res.status(401).json({ error: "No sub found in token" });
 
-  // Check if user exists
   db.query("SELECT * FROM Users WHERE cognito_sub = ?", [sub], (err, results) => {
     if (err) return res.status(500).json(err);
 
     if (results.length === 0) {
-      // Create user if they don't exist yet
       db.query(
         "INSERT INTO Users (cognito_sub, email, role) VALUES (?, ?, 'user')",
         [sub, email],
@@ -66,17 +64,32 @@ const attachUser = (req, res, next) => {
 /* =========================
    ROUTES
 ========================= */
-app.use("/api/auth", authRoutes); // Added this for your login/register logic
+app.use("/api/auth", authRoutes);
 app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/orders", checkJwt, attachUser, orderRoutes);
 
-// Serve Frontend
+/* =========================
+   FRONTEND + FALLBACK
+========================= */
+
+// Serve frontend
 app.use(express.static(path.join(__dirname, "../client/dist")));
-app.get("*", (req, res) => {
+
+// React fallback (FIXED)
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
+// API fallback
+app.use("/api", (req, res) => {
+  res.status(404).json({ error: "API route not found" });
+});
+
+/* =========================
+   START SERVER
+========================= */
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
