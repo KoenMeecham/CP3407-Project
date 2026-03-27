@@ -75,8 +75,8 @@ app.use("/api/orders", checkJwt, attachUser, orderRoutes);
 // Serve frontend
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 // API fallback
