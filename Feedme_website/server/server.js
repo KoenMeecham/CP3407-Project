@@ -1,3 +1,4 @@
+r// server/server.js
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -6,9 +7,7 @@ const db = require("./database");
 
 const restaurantRoutes = require("./routes/restaurants");
 const orderRoutes = require("./routes/orders");
-
-// ❌ REMOVE THIS LINE (no more custom auth)
-// const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/auth"); // Uncomment this once you use the new auth.js
 
 const { expressjwt: jwt } = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
@@ -25,67 +24,59 @@ const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
-    jwksUri:
-      "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_9WmF0Ctcw/.well-known/jwks.json",
+    jwksUri: `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}/.well-known/jwks.json`,
   }),
-  audience: "3lllfldg85qibrp8q9tt7vhce9",
-  issuer:
-    "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_9WmF0Ctcw",
+  audience: process.env.COGNITO_CLIENT_ID,
+  issuer: `https://cognito-idp.${process.env.AWS_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}`,
   algorithms: ["RS256"],
 });
 
 /* =========================
-   ATTACH USER TO REQUEST
+   ATTACH USER TO REQUEST (Fixed Sync)
 ========================= */
 const attachUser = (req, res, next) => {
+  // express-jwt puts the decoded token in req.auth
   const sub = req.auth?.sub;
-  const email = req.auth?.email;
+  const email = req.auth?.email || req.auth?.["email"]; 
 
-  if (!sub) return res.status(401).json({ error: "Invalid token" });
+  if (!sub) return res.status(401).json({ error: "No sub found in token" });
 
-  db.query(
-    "SELECT * FROM Users WHERE cognito_sub = ?",
-    [sub],
-    (err, results) => {
-      if (err) return res.status(500).json(err);
+  // Check if user exists
+  db.query("SELECT * FROM Users WHERE cognito_sub = ?", [sub], (err, results) => {
+    if (err) return res.status(500).json(err);
 
-      if (results.length === 0) {
-        db.query(
-          "INSERT INTO Users (cognito_sub, email) VALUES (?, ?)",
-          [sub, email]
-        );
-      }
-
+    if (results.length === 0) {
+      // Create user if they don't exist yet
+      db.query(
+        "INSERT INTO Users (cognito_sub, email, role) VALUES (?, ?, 'user')",
+        [sub, email],
+        (insErr) => {
+          if (insErr) return res.status(500).json(insErr);
+          req.user = { sub, email };
+          next();
+        }
+      );
+    } else {
       req.user = { sub, email };
       next();
     }
-  );
+  });
 };
 
 /* =========================
    ROUTES
 ========================= */
-
-// public routes
+app.use("/api/auth", authRoutes); // Added this for your login/register logic
 app.use("/api/restaurants", restaurantRoutes);
-
-// protected routes
 app.use("/api/orders", checkJwt, attachUser, orderRoutes);
 
-/* =========================
-   FRONTEND (React build)
-========================= */
+// Serve Frontend
 app.use(express.static(path.join(__dirname, "../client/dist")));
-
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
-/* =========================
-   START SERVER
-========================= */
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
