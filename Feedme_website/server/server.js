@@ -75,8 +75,8 @@ app.use("/api/orders", checkJwt, attachUser, orderRoutes);
 // Serve frontend
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// React fallback (FIXED)
-app.get("/*", (req, res) => {
+// Catch-all handler 
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
