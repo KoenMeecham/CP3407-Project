@@ -76,9 +76,26 @@ app.use("/api", (req, res) => {
   res.status(404).json({ error: "API route not found" });
 });
 
-// Serve frontend static files
+// 1. Serve static files normally
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get('/:any*', (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+// 2. Manual Catch-all Middleware (Bypasses path-to-regexp entirely)
+app.use((req, res, next) => {
+  // If the request is for an API, but it wasn't caught by the routes above, 
+  // let it fall through to your 404 handler.
+  if (req.url.startsWith('/api')) {
+    return next();
+  }
+  
+  // For everything else (frontend routing), send the index.html
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"), (err) => {
+    if (err) {
+      // If index.html is missing, we need to know!
+      res.status(500).send("Critical Error: Frontend build missing in client/dist");
+    }
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
