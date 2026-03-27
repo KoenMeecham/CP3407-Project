@@ -1,8 +1,7 @@
-## User story title: EStimated delivery times 
+## User story title: Estimated delivery times 
 
-Other versions: Write restaurant reviews, Rate a restaurant, Customer feedback on restaurants
 
-Main Issue -
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/37#issue-4148555040
 Sub Issue - 
 
 ## Priority: 30
