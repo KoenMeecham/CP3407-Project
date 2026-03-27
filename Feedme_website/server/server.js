@@ -78,9 +78,6 @@ app.use("/api", (req, res) => {
   res.status(404).json({ error: "API route not found" });
 });
 
-/* =========================
-   FRONTEND FALLBACK (MUST BE LAST)
-========================= */
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
