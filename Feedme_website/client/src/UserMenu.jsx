@@ -1,35 +1,85 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./App.css";
+import { useUser } from "./UserContext";
 
-function UserMenu({ user, logout }) {
+export default function UserMenu() {
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
 
-  if (!user) {
-    return (
-      <div className="lm-topbarRight">
-        <Link strokeWidth="2" to="/login" className="lm-navItem" style={{background: 'white'}}>Login</Link>
-      </div>
-    );
-  }
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="user-menu">
-      <button className="user-menu-btn" onClick={() => setOpen(!open)}>
-        Hi, {user.name || 'User'} ▼
+    <div className="user-menu" ref={menuRef}>
+      <button
+        className="user-menu-btn"
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        {user.name}
       </button>
+
       {open && (
         <div className="user-menu-dropdown">
           <div className="user-menu-header">
             <strong>{user.name}</strong>
-            <div className="user-menu-email">{user.email}</div>
+            {user.email && <div className="user-menu-email">{user.email}</div>}
           </div>
-          <Link strokeWidth="2" to="/orders" className="user-menu-item">My Orders</Link>
-          <Link strokeWidth="2" to="/settings" className="user-menu-item">Settings</Link>
-          <button onClick={logout} className="user-menu-item user-menu-danger">Sign Out</button>
+
+          {user.isLoggedIn ? (
+            <>
+              <Link
+                to="/settings"
+                className="user-menu-item"
+                onClick={() => setOpen(false)}
+              >
+                Settings
+              </Link>
+
+              <button
+                className="user-menu-item user-menu-danger"
+                onClick={() => {
+                  logout();
+                  setOpen(false);
+                  navigate("/");
+                }}
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="user-menu-item"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="user-menu-item"
+                onClick={() => setOpen(false)}
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       )}
     </div>
   );
 }
-
-export default UserMenu;
