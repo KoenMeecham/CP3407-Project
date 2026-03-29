@@ -16,7 +16,7 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,6 +34,7 @@ export default function Login() {
         return;
       }
 
+      localStorage.setItem("feedme_token", data.token);
       login(data.user);
       navigate("/");
     } catch (err) {

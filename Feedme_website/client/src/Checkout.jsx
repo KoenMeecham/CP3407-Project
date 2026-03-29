@@ -3,13 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
 import CartDropdown from "./CartDropdown";
 import { useCart } from "./Cart";
-import { useAuth } from "react-oidc-context";
+import { useUser } from "./UserContext";
 import UserMenu from "./UserMenu";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { cart, subtotal, clearCart } = useCart();
-  const auth = useAuth();
+  const { user } = useUser();
+  const isLoggedIn = !!user?.isLoggedIn;
 
   const [guestEmail, setGuestEmail] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
@@ -18,8 +19,6 @@ export default function Checkout() {
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
   const [error, setError] = useState("");
-
-  const isLoggedIn = auth.isAuthenticated;
 
   const orderEmail = useMemo(() => {
     return isLoggedIn
@@ -53,7 +52,7 @@ export default function Checkout() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.user?.id_token}`,
+          Authorization: `Bearer ${localStorage.getItem("feedme_token") || ""}`,
         },
         body: JSON.stringify({
           restaurant_id: cart[0]?.restaurant_id || 1,
@@ -127,12 +126,6 @@ export default function Checkout() {
 
               {!isLoggedIn && (
                 <div className="checkout-authRow">
-                  <button
-                    className="checkout-linkBtn"
-                    onClick={() => auth.signinRedirect()}
-                  >
-                    Login with Cognito
-                  </button>
                 </div>
               )}
 
