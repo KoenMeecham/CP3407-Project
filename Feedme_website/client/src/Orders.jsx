@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./App.css";
 import CartDropdown from "./CartDropdown";
@@ -16,54 +16,70 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch("/api/orders")
-      .then(res => res.json())
-      .then(data => setOrders(data));
+    const token = localStorage.getItem("feedme_token");
+
+    fetch("/api/orders", {
+      headers: token
+        ? {
+            Authorization: `Bearer ${token}`,
+          }
+        : {},
+    })
+      .then((res) => res.json())
+      .then((data) => setOrders(Array.isArray(data) ? data : []))
+      .catch((err) => {
+        console.error("Failed to load orders:", err);
+        setOrders([]);
+      });
   }, []);
 
   const visibleOrders = useMemo(() => {
-    let orders = [...allOrders];
+    let filteredOrders = [...orders];
 
     const guestEmail = localStorage.getItem("feedme_guest_email") || "";
 
-    if (user.isLoggedIn) {
-      orders = orders.filter((order) => order.email === user.email);
+    if (user?.isLoggedIn) {
+      filteredOrders = filteredOrders.filter(
+        (order) => order.email === user.email
+      );
     } else if (guestEmail) {
-      orders = orders.filter((order) => order.email === guestEmail);
+      filteredOrders = filteredOrders.filter(
+        (order) => order.email === guestEmail
+      );
     } else {
-      orders = [];
+      filteredOrders = [];
     }
 
     if (search.trim()) {
       const term = search.toLowerCase();
-      orders = orders.filter((order) => {
-        const restaurantNames = order.items
+      filteredOrders = filteredOrders.filter((order) => {
+        const restaurantNames = (order.items || [])
           .map((item) => item.restaurant || "")
           .join(" ")
           .toLowerCase();
 
-        const itemNames = order.items
+        const itemNames = (order.items || [])
           .map((item) => item.name || "")
           .join(" ")
           .toLowerCase();
 
         return (
-          String(order.orderNumber).toLowerCase().includes(term) ||
+          String(order.orderNumber || "").toLowerCase().includes(term) ||
           restaurantNames.includes(term) ||
           itemNames.includes(term)
         );
       });
     }
 
-    orders.sort((a, b) => {
+    filteredOrders.sort((a, b) => {
       if (filter === "oldest") {
         return new Date(a.createdAt) - new Date(b.createdAt);
       }
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    return orders;
-  }, [allOrders, user, search, filter]);
+    return filteredOrders;
+  }, [orders, user, search, filter]);
 
   return (
     <div className="lm-shell">
@@ -158,10 +174,10 @@ export default function Orders() {
             <div className="orders-list">
               {visibleOrders.map((order) => {
                 const restaurantNames = [
-                  ...new Set(order.items.map((item) => item.restaurant)),
+                  ...new Set((order.items || []).map((item) => item.restaurant)),
                 ].join(", ");
 
-                const itemSummary = order.items
+                const itemSummary = (order.items || [])
                   .map((item) => `${item.name} x${item.quantity}`)
                   .join(", ");
 
@@ -186,7 +202,7 @@ export default function Orders() {
                     <button
                       className="order-reorderBtn"
                       onClick={() => {
-                        order.items.forEach((item) => addToCart(item));
+                        (order.items || []).forEach((item) => addToCart(item));
                       }}
                     >
                       Reorder
