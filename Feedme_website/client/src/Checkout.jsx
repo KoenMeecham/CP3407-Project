@@ -21,10 +21,10 @@ export default function Checkout() {
   const [error, setError] = useState("");
 
   const orderEmail = useMemo(() => {
-    return isLoggedIn
-      ? auth.user?.profile.email
-      : guestEmail.trim();
-  }, [isLoggedIn, auth, guestEmail]);
+  return isLoggedIn
+    ? user?.email
+    : guestEmail.trim();
+}, [isLoggedIn, user, guestEmail]);
 
   const deliveryFee = cart.length > 0 ? 4.99 : 0;
   const total = subtotal + deliveryFee;
@@ -52,7 +52,7 @@ export default function Checkout() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("feedme_token") || ""}`,
+          Authorization: `Bearer ${user?.token}`,
         },
         body: JSON.stringify({
           restaurant_id: cart[0]?.restaurant_id || 1,
