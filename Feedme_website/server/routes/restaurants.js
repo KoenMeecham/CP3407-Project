@@ -15,15 +15,6 @@ router.get("/", (req, res) => {
   let limit = parsePositiveInt(req.query.limit, 20);
   if (limit > 50) limit = 50;
 
-  if (search !== "" && search.length < 2) {
-    return res.json({
-      page: 1,
-      totalPages: 0,
-      totalRestaurants: 0,
-      restaurants: []
-    });
-  }
-
   const offset = (page - 1) * limit;
 
   let baseQuery = "FROM Restaurants r";
@@ -34,8 +25,14 @@ router.get("/", (req, res) => {
     params = [`%${search}%`];
   }
 
+  // ✅ COUNT QUERY
   db.query(`SELECT COUNT(*) AS count ${baseQuery}`, params, (err, countResult) => {
-    const total = countResult[0].count;
+    if (err) {
+      console.error("COUNT ERROR:", err);
+      return res.status(500).json({ error: "Database error (count)" });
+    }
+
+    const total = countResult[0]?.count || 0;
     const totalPages = total === 0 ? 0 : Math.ceil(total / limit);
 
     let query = `
@@ -46,11 +43,16 @@ router.get("/", (req, res) => {
     `;
 
     db.query(query, [...params, limit, offset], (err, results) => {
+      if (err) {
+        console.error("QUERY ERROR:", err);
+        return res.status(500).json({ error: "Database error (results)" });
+      }
+
       res.json({
         page,
         totalPages,
         totalRestaurants: total,
-        restaurants: results
+        restaurants: results || [],
       });
     });
   });
@@ -61,7 +63,15 @@ router.get("/:id", (req, res) => {
   const id = parsePositiveInt(req.params.id, 0);
 
   db.query("SELECT * FROM Restaurants WHERE id = ?", [id], (err, results) => {
-    if (results.length === 0) return res.status(404).json({ error: "Not found" });
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "DB error" });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: "Not found" });
+    }
+
     res.json(results[0]);
   });
 });
@@ -73,7 +83,14 @@ router.get("/:id/menu", (req, res) => {
   db.query(
     "SELECT * FROM Menu_Items WHERE restaurant_id = ?",
     [id],
-    (err, results) => res.json(results)
+    (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "DB error" });
+      }
+
+      res.json(results || []);
+    }
   );
 });
 
