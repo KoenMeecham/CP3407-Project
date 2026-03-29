@@ -1,73 +1,74 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../database");
-const { sendOrderEmail } = require("../services/email");
 
 // CREATE ORDER
 router.post("/", async (req, res) => {
-  const { restaurant_id, address_id, total_price, items } = req.body;
-  
-  // These should come from your JWT middleware
-  const userSub = req.user.sub; 
-  const email = req.user.email;
+  try {
+    const { sub, email } = req.user;
+    const { restaurant_id, total_price, items } = req.body;
 
-  // 1. Get local user_id using Cognito Sub
-  db.query(
-    "SELECT user_id FROM Users WHERE cognito_sub = ?",
-    [userSub],
-    (err, results) => {
-      if (err || results.length === 0) return res.status(500).json({ error: "User not found in local DB" });
+    if (!restaurant_id || !items || items.length === 0) {
+      return res.status(400).json({ error: "Invalid order data" });
+    }
 
-      const user_id = results[0].user_id;
+    // ✅ ensure user exists
+    await db.promise().execute(
+      `INSERT INTO Users (cognito_sub, email)
+       VALUES (?, ?)
+       ON DUPLICATE KEY UPDATE email = VALUES(email)`,
+      [sub, email]
+    );
 
-      // 2. Create the Order
-      const orderSql = "INSERT INTO Orders (user_id, restaurant_id, address_id, total_price, status, created_at, email) VALUES (?, ?, ?, ?, 'pending', NOW(), ?)";
-      db.query(orderSql, [user_id, restaurant_id, address_id, total_price, email], (err, result) => {
-          if (err) return res.status(500).json(err);
+    // ✅ create order
+    const [orderResult] = await db.promise().execute(
+      `INSERT INTO Orders (user_id, restaurant_id, total_price)
+       VALUES (
+         (SELECT user_id FROM Users WHERE cognito_sub = ?),
+         ?, ?
+       )`,
+      [sub, restaurant_id, total_price]
+    );
 
-          const order_id = result.insertId;
+    const orderId = orderResult.insertId;
 
-          // 3. Insert Order Items
-          const itemQueries = items.map((item) => {
-            return new Promise((resolve, reject) => {
-              db.query(
-                "INSERT INTO Order_Items (order_id, menu_item_id, quantity) VALUES (?, ?, ?)",
-                [order_id, item.id, item.quantity],
-                (err) => {
-                  if (err) reject(err);
-                  else resolve();
-                }
-              );
-            });
-          });
-
-          Promise.all(itemQueries)
-            .then(async () => {
-              // 4. Send Confirmation Email via Resend
-              await sendOrderEmail(email, {
-                total_price,
-                items,
-              });
-
-              res.json({ message: "Order placed successfully", order_id });
-            })
-            .catch((err) => res.status(500).json({ error: "Failed to save items", detail: err }));
-        }
+    // ✅ insert items
+    for (const item of items) {
+      await db.promise().execute(
+        `INSERT INTO Order_Items (order_id, menu_item_id, quantity, price)
+         VALUES (?, ?, ?, ?)`,
+        [orderId, item.id, item.quantity, item.price]
       );
     }
-  );
+
+    res.json({ success: true, orderId });
+
+  } catch (err) {
+    console.error("ORDER ERROR:", err);
+    res.status(500).json({ error: "Order failed" });
+  }
 });
 
 // GET USER ORDERS
-router.get("/", (req, res) => {
-  db.query(
-    "SELECT * FROM Orders WHERE email = ? ORDER BY created_at DESC",
-    [req.user.email],
-    (err, results) => {
-      if (err) return res.status(500).json(err);
-      res.json(results);
-    }
-  );
+router.get("/", async (req, res) => {
+  try {
+    const { sub } = req.user;
+
+    const [orders] = await db.promise().execute(
+      `SELECT o.*
+       FROM Orders o
+       JOIN Users u ON o.user_id = u.user_id
+       WHERE u.cognito_sub = ?
+       ORDER BY o.created_at DESC`,
+      [sub]
+    );
+
+    res.json(orders);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
 });
 
 module.exports = router;
