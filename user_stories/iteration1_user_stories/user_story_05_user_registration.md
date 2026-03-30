@@ -1,4 +1,4 @@
-## User story title: User Registration and Login
+# User story title: User Registration and Login
 
 Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/7#issue-3956080344
 
