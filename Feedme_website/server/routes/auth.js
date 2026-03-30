@@ -1,82 +1,65 @@
-const express = require("express");
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const db = require('./database'); 
 const router = express.Router();
-const db = require("../database"); // Ensure this points to your db connection
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 
-const poolData = {
-    UserPoolId: process.env.COGNITO_USER_POOL_ID,
-    ClientId: process.env.COGNITO_CLIENT_ID
-};
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+// IMPORTANT: This must match the secret in your middleware/userauth.js
+const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key'; 
 
-// REGISTER & SYNC
-router.post("/register", (req, res) => {
-    const { email, password, f_name } = req.body;
+// Registration Route
+// Changed path to /register (assuming you mount this at /api/auth in server.js)
+router.post('/register', async (req, res) => {
+    const { f_name, l_name, email, password } = req.body;
+    try {
+        // Ensure we are using the correct database
+        await db.query("USE feedme");
 
-    const attributeList = [
-        new AmazonCognitoIdentity.CognitoUserAttribute({ Name: "email", Value: email })
-    ];
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-    userPool.signUp(email, password, attributeList, null, (err, result) => {
-        if (err) return res.status(400).json({ error: err.message });
-        
-        const cognitoSub = result.userSub; // This is the unique ID from AWS
+        // SQL matches your ALTER TABLE change (password column)
+        const sql = "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, 'customer')";
+        const [result] = await db.execute(sql, [f_name, l_name, email, hashedPassword]);
 
-        // Sync to local MySQL immediately so the user exists for future orders
-        const sql = "INSERT INTO Users (email, cognito_sub, f_name, role) VALUES (?, ?, ?, 'user')";
-        db.query(sql, [email, cognitoSub, f_name], (dbErr) => {
-            if (dbErr) {
-                console.error("DB Sync Error:", dbErr);
-                // We don't return error here because the user IS created in Cognito
-            }
-            res.json({ 
-                message: "User registered. Please check email for verification.",
-                sub: cognitoSub 
-            });
-        });
-    });
+        const newUser = { id: result.insertId, f_name, l_name, email, role: 'customer' };
+        const token = jwt.sign(newUser, JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(201).json({ token, user: newUser });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Registration failed. Email might already exist." });
+    }
 });
 
-// LOGIN (Via Cognito)
-router.post("/login", (req, res) => {
+// Login Route
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    try {
+        await db.query("USE feedme");
 
-    const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-        Username: email,
-        Password: password,
-    });
+        const [users] = await db.execute("SELECT * FROM Users WHERE email = ?", [email]);
+        if (users.length === 0) return res.status(404).json({ message: "User not found" });
 
-    const userData = {
-        Username: email,
-        Pool: userPool,
-    };
+        const user = users[0];
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+        // Create the payload for the token
+        const userData = { 
+            id: user.user_id, 
+            f_name: user.f_name, 
+            email: user.email, 
+            role: user.role 
+        };
+        
+        const token = jwt.sign(userData, JWT_SECRET, { expiresIn: '1h' });
 
-    cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: (result) => {
-            const accessToken = result.getAccessToken().getJwtToken();
-            const sub = result.getAccessToken().payload.sub;
-
-            // Get user info from local DB to return to frontend
-            db.query("SELECT * FROM Users WHERE cognito_sub = ?", [sub], (err, results) => {
-                if (err || results.length === 0) return res.status(404).json({ message: "User profile not found" });
-                
-                res.json({
-                    token: accessToken,
-                    user: {
-                        id: results[0].user_id,
-                        email: results[0].email,
-                        name: results[0].f_name,
-                        role: results[0].role
-                    }
-                });
-            });
-        },
-        onFailure: (err) => {
-            res.status(401).json({ error: err.message });
-        },
-    });
+        res.json({ token, user: userData });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Login error" });
+    }
 });
 
 module.exports = router;

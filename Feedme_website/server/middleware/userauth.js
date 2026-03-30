@@ -1,38 +1,32 @@
-const { expressjwt: jwt } = require("express-jwt");
-const jwksRsa = require("jwks-rsa");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
-const REGION = "ap-southeast-2";
-const USER_POOL_ID = "ap-southeast-2_9WmF0Ctcw";
-
-// JWT check middleware
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://cognito-idp.${REGION}.amazonaws.com/${USER_POOL_ID}/.well-known/jwks.json`,
-  }),
-  audience: "3lllfldg85qibrp8q9tt7vhce9",
-  issuer: `https://cognito-idp.${REGION}.amazonaws.com/${USER_POOL_ID}`,
-  algorithms: ["RS256"],
-});
-
-// Attach user info (VERY IMPORTANT)
-const attachUser = (req, res, next) => {
-  if (!req.auth) {
-    return res.status(401).json({ error: "No auth data" });
+const checkJwt = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "No token provided" });
   }
 
-  req.user = {
-    sub: req.auth.sub,
-    email: req.auth.email,
-  };
+  const token = authHeader.split(" ")[1];
 
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded; // This contains id, email, and role from your login route
+    next();
+  } catch (err) {
+    return res.status(403).json({ message: "Invalid or expired token" });
+  }
+};
+
+const attachUser = (req, res, next) => {
+  // Since checkJwt already attaches the user to req.user, 
+  // this middleware can ensure the user object is properly formatted for your routes
+  if (req.user) {
+    // Mapping internal 'id' from token back to 'user_id' if your routes expect that
+    req.user.user_id = req.user.id; 
+  }
   next();
 };
 
-// EXPORT BOTH CORRECTLY
-module.exports = {
-  checkJwt,
-  attachUser,
-};
+module.exports = { checkJwt, attachUser };

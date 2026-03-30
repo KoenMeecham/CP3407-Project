@@ -1,59 +1,35 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const UserContext = createContext();
 
-const defaultGuestUser = {
-  isLoggedIn: false,
-  user_id: null,
-  firstName: "Guest",
-  lastName: "",
-  name: "Guest",
-  email: "",
-  role: "customer",
-};
-
-export function UserProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem("feedme_user");
-    return saved ? JSON.parse(saved) : defaultGuestUser;
-  });
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("feedme_user", JSON.stringify(user));
-  }, [user]);
+    const token = localStorage.getItem("feedme_token");
+    if (token) {
+      // In a real app, you would verify the token with the backend here
+      const savedUser = JSON.parse(localStorage.getItem("feedme_user"));
+      if (savedUser) setUser({ ...savedUser, isLoggedIn: true });
+    }
+  }, []);
 
-  function login(userData) {
-    const firstName = userData.f_name || userData.firstName || "";
-    const lastName = userData.l_name || userData.lastName || "";
+  const login = (userData) => {
+    setUser({ ...userData, isLoggedIn: true });
+    localStorage.setItem("feedme_user", JSON.stringify(userData));
+  };
 
-    setUser({
-      isLoggedIn: true,
-      user_id: userData.user_id || null,
-      firstName,
-      lastName,
-      name: `${firstName} ${lastName}`.trim() || "User",
-      email: userData.email || "",
-      role: userData.role || "customer",
-    });
-  }
-
-  function continueAsGuest() {
-    setUser(defaultGuestUser);
-  }
-
-  function logout() {
+  const logout = () => {
+    localStorage.removeItem("feedme_token");
     localStorage.removeItem("feedme_user");
-    localStorage.removeItem("feedme_guest_email");
-    setUser(defaultGuestUser);
-}
+    setUser(null);
+  };
 
   return (
-    <UserContext.Provider value={{ user, login, logout, continueAsGuest }}>
+    <UserContext.Provider value={{ user, login, logout }}>
       {children}
     </UserContext.Provider>
   );
-}
+};
 
-export function useUser() {
-  return useContext(UserContext);
-}
+export const useUser = () => useContext(UserContext);
