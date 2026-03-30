@@ -22,23 +22,28 @@ export default function UserMenu() {
     };
   }, []);
 
+  // ✅ Prevent crash if user is null
+  const displayName = user?.name || user?.f_name || "Guest";
+
   return (
     <div className="user-menu" ref={menuRef}>
       <button
         className="user-menu-btn"
         onClick={() => setOpen((prev) => !prev)}
       >
-        {user.name}
+        {displayName}
       </button>
 
       {open && (
         <div className="user-menu-dropdown">
           <div className="user-menu-header">
-            <strong>{user.name}</strong>
-            {user.email && <div className="user-menu-email">{user.email}</div>}
+            <strong>{displayName}</strong>
+            {user?.email && (
+              <div className="user-menu-email">{user.email}</div>
+            )}
           </div>
 
-          {user.isLoggedIn ? (
+          {user ? (
             <>
               <Link
                 to="/settings"

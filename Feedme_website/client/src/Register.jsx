@@ -25,7 +25,7 @@ export default function Register() {
         },
         body: JSON.stringify({
           f_name: firstName,
-          lastName,
+          l_name: lastName, // ✅ FIXED (was lastName)
           email,
           password,
         }),
@@ -38,7 +38,12 @@ export default function Register() {
         return;
       }
 
-      login(data.user);
+      // ✅ store token
+      localStorage.setItem("feedme_token", data.token);
+
+      // ✅ store full user + token
+      login({ ...data.user, token: data.token });
+
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -48,7 +53,15 @@ export default function Register() {
 
   return (
     <div className="lm-shell">
-      <div style={{ maxWidth: "500px", margin: "60px auto", background: "#fff", padding: "30px", borderRadius: "16px" }}>
+      <div
+        style={{
+          maxWidth: "500px",
+          margin: "60px auto",
+          background: "#fff",
+          padding: "30px",
+          borderRadius: "16px",
+        }}
+      >
         <h1>Register</h1>
         <form onSubmit={handleRegister} className="checkout-form">
           <input

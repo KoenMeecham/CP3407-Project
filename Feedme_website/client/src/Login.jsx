@@ -10,15 +10,22 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+
     const data = await res.json();
+
     if (res.ok) {
+      // ✅ store token
       localStorage.setItem("feedme_token", data.token);
-      login(data.user);
+
+      // ✅ store full user + token in context
+      login({ ...data.user, token: data.token });
+
       navigate("/");
     } else {
       alert(data.message);
@@ -27,8 +34,18 @@ export default function Login() {
 
   return (
     <form onSubmit={handleLogin}>
-      <input type="email" placeholder="Email" onChange={e => setEmail(e.target.value)} required />
-      <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} required />
+      <input
+        type="email"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
       <button type="submit">Login</button>
     </form>
   );
