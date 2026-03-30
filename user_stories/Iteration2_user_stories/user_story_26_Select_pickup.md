@@ -25,11 +25,11 @@ Final agreed: 1 day
 Users can choose between pickup or delivery so they can receive their food in the way that suits them best.
 
 
-## Tasks:
-Task 1 – Add pickup/delivery selection UI to checkout page, Estimation 0.25 days
-Task 2 – Store selected order method in order data model, Estimation 0.25 days
-Task 3 – Update checkout summary based on selection, Estimation 0.25 days
-Task 4 – Save pickup/delivery choice when order is placed, Estimation 0.25 days
+## Tasks:  
+Task 1 – Add pickup/delivery selection UI to checkout page, Estimation 0.25 days  
+Task 2 – Store selected order method in order data model, Estimation 0.25 days  
+Task 3 – Update checkout summary based on selection, Estimation 0.25 days  
+Task 4 – Save pickup/delivery choice when order is placed, Estimation 0.25 days  
 
 
 # UI Design:
