@@ -13,19 +13,16 @@ export default function Login() {
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ email, password }),
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      // ✅ store token
-      localStorage.setItem("feedme_token", data.token);
-
-      // ✅ store full user + token in context
       login({ ...data.user, token: data.token });
-
       navigate("/");
     } else {
       alert(data.message);

@@ -7,16 +7,17 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("feedme_token");
-    if (token) {
-      // In a real app, you would verify the token with the backend here
-      const savedUser = JSON.parse(localStorage.getItem("feedme_user"));
-      if (savedUser) setUser({ ...savedUser, isLoggedIn: true });
+    const savedUser = JSON.parse(localStorage.getItem("feedme_user"));
+
+    if (token && savedUser) {
+      setUser({ ...savedUser, token, isLoggedIn: true });
     }
   }, []);
 
   const login = (userData) => {
     setUser({ ...userData, isLoggedIn: true });
     localStorage.setItem("feedme_user", JSON.stringify(userData));
+    localStorage.setItem("feedme_token", userData.token);
   };
 
   const logout = () => {

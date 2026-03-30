@@ -25,7 +25,7 @@ export default function Register() {
         },
         body: JSON.stringify({
           f_name: firstName,
-          l_name: lastName, // ✅ FIXED (was lastName)
+          l_name: lastName,
           email,
           password,
         }),
@@ -38,12 +38,7 @@ export default function Register() {
         return;
       }
 
-      // ✅ store token
-      localStorage.setItem("feedme_token", data.token);
-
-      // ✅ store full user + token
       login({ ...data.user, token: data.token });
-
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -63,6 +58,7 @@ export default function Register() {
         }}
       >
         <h1>Register</h1>
+
         <form onSubmit={handleRegister} className="checkout-form">
           <input
             type="text"
@@ -70,18 +66,21 @@ export default function Register() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
+
           <input
             type="text"
             placeholder="Last name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
+
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <input
             type="password"
             placeholder="Password"
