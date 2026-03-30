@@ -1,4 +1,4 @@
-## User story title: View Restaurant Menu
+# User story title: View Restaurant Menu
 
 
 Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/8#issue-3956082158
