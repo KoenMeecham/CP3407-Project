@@ -2,7 +2,7 @@
 Other versions: Make as button to save the restaurants 
 
 Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/39#issue-4166813469
-Sub issue -
+
 
 ## Priority: 30 
 Priority Notes: Iteration 1 – Must-have for MVP (first impression + navigation entry point)
