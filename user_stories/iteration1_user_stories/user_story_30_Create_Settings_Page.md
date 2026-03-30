@@ -1,6 +1,9 @@
 ## User story title: Settings page
 
-Other versions: Manage account settings, Update user preferences, Account management  
+Other versions: Manage account settings, Update user preferences, Account management 
+
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/40#issue-4166884926
+
 Priority: 30  
 
 **Priority Notes:**  
