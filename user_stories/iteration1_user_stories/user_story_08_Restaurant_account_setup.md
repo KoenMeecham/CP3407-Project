@@ -12,7 +12,7 @@ Iteration 2 – Restaurant profile editing + verification
 
 
 ## Estimation: 1 day
-Any notes on estimation go here. Keep your planning poker game numbers. For example
+Planning Poker  
 * Scott: 1 day 
 * Kenneth: 2 days
 * Koen: 1 day
