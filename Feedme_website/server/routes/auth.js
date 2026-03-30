@@ -12,11 +12,11 @@ router.post("/register", async (req, res) => {
   const { f_name, l_name, email, password } = req.body;
 
   try {
-    // ✅ Validate input
+    // Validate input
     if (!f_name || !l_name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
-
+    console.log("REQ BODY:", req.body);
     // Check if user exists
     const [existing] = await db.query(
       "SELECT * FROM Users WHERE email = ?",
