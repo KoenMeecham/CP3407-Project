@@ -6,7 +6,7 @@ Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/15#issue-395614
 ## Priority: 10 
 Iteration 1 – Basic dashboard + accept/reject order
 Iteration 2 – Real-time notifications + delay time feature
-Future – Analytics and reporting dashboard
+
 
 
 
@@ -25,7 +25,7 @@ Any notes on estimation go here. Keep your planning poker game numbers. For exam
 
 
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
+## Description:
 Restaurant owners can view and manage new incoming orders so food preparation can begin quickly.
 
 
