@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const restaurantRoutes = require("./routes/restaurants");
 const orderRoutes = require("./routes/orders");
-const authRoutes = require("./auth"); 
+const authRoutes = require("./routes/auth"); 
 
 const { checkJwt, attachUser } = require("./middleware/userauth");
 
