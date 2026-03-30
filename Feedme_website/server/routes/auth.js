@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db"); // adjust path if needed
+const db = require("../database"); 
 
 // ================= REGISTER =================
 router.post("/register", async (req, res) => {
