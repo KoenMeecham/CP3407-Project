@@ -44,6 +44,7 @@ Task 4 – Display “no results” + loading states, Estimation 0.25 days
 
 # UI Design:
 <img width="971" height="650" alt="image" src="https://github.com/user-attachments/assets/e9621fd1-44f3-4eec-999f-e075cbc4ccfe" />
+
 # Completed:
 <img width="1914" height="964" alt="image" src="https://github.com/user-attachments/assets/6c990e1c-6437-46c5-9d87-a5bc517caaf7" />
 
