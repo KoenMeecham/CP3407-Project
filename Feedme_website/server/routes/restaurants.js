@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
     }
 
     // COUNT
-    const [countResult] = await db.promise().query(
+    const [countResult] = await db.query(
       `SELECT COUNT(*) AS count ${baseQuery}`,
       params
     );
@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
     const totalPages = total === 0 ? 0 : Math.ceil(total / limit);
 
     // RESULTS
-    const [results] = await db.promise().query(
+    const [results] = await db.query(
       `
       SELECT r.id, r.name, r.category, r.price_range
       ${baseQuery}
@@ -65,7 +65,7 @@ router.get("/:id", async (req, res) => {
   const id = parsePositiveInt(req.params.id, 0);
 
   try {
-    const [results] = await db.promise().query(
+    const [results] = await db.query(
       "SELECT * FROM Restaurants WHERE id = ?",
       [id]
     );
@@ -75,6 +75,7 @@ router.get("/:id", async (req, res) => {
     }
 
     res.json(results[0]);
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "DB error" });
@@ -87,12 +88,13 @@ router.get("/:id/menu", async (req, res) => {
   const id = parsePositiveInt(req.params.id, 0);
 
   try {
-    const [results] = await db.promise().query(
+    const [results] = await db.query(
       "SELECT * FROM Menu_Items WHERE restaurant_id = ?",
       [id]
     );
 
     res.json(results || []);
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "DB error" });

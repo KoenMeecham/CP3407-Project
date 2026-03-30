@@ -5,7 +5,7 @@ const db = require("../database");
 // CREATE ORDER
 router.post("/", async (req, res) => {
   try {
-    const { id } = req.user; // from JWT
+    const { id } = req.user;
     const { restaurant_id, total_price, items } = req.body;
 
     if (!restaurant_id || !items || items.length === 0) {
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     }
 
     // Create order
-    const [orderResult] = await db.promise().query(
+    const [orderResult] = await db.query(
       `INSERT INTO Orders (user_id, restaurant_id, total_price)
        VALUES (?, ?, ?)`,
       [id, restaurant_id, total_price]
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 
     // Insert items
     for (const item of items) {
-      await db.promise().query(
+      await db.query(
         `INSERT INTO Order_Items (order_id, menu_item_id, quantity, price)
          VALUES (?, ?, ?, ?)`,
         [orderId, item.id, item.quantity, item.price]
@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
   try {
     const { id } = req.user;
 
-    const [orders] = await db.promise().query(
+    const [orders] = await db.query(
       `
       SELECT o.*
       FROM Orders o

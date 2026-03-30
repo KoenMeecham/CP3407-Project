@@ -12,8 +12,7 @@ router.post("/register", async (req, res) => {
   const { first_name, last_name, email, password } = req.body;
 
   try {
-    // Check if user exists
-    const [existing] = await db.promise().query(
+    const [existing] = await db.query(
       "SELECT * FROM Users WHERE email = ?",
       [email]
     );
@@ -22,11 +21,9 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert user
-    await db.promise().query(
+    await db.query(
       "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, ?)",
       [first_name, last_name, email, hashedPassword, "customer"]
     );
@@ -45,7 +42,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const [users] = await db.promise().query(
+    const [users] = await db.query(
       "SELECT * FROM Users WHERE email = ?",
       [email]
     );
@@ -66,7 +63,7 @@ router.post("/login", async (req, res) => {
       {
         id: user.user_id,
         email: user.email,
-        role: user.role
+        role: user.role,
       },
       JWT_SECRET,
       { expiresIn: "1h" }
@@ -78,8 +75,8 @@ router.post("/login", async (req, res) => {
       user: {
         id: user.user_id,
         email: user.email,
-        role: user.role
-      }
+        role: user.role,
+      },
     });
 
   } catch (err) {
