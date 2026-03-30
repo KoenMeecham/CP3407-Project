@@ -3,7 +3,7 @@
 # User story title:  Create a Search Page
 Other versions: Search restaurants, Find restaurants, Restaurant search screen
 
-https://github.com/KoenMeecham/CP3407-Project/issues/6#issue-3956077960
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/6#issue-3956077960
 
 
 Design Link: https://miro.com/app/board/uXjVG5mMYbY=/?moveToWidget=3458764661648964948&cot=14
