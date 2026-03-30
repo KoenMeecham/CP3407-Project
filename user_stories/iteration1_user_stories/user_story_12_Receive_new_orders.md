@@ -11,7 +11,7 @@ Iteration 2 – Real-time notifications + delay time feature
 
 
 ## Estimation: 1 days
-Any notes on estimation go here. Keep your planning poker game numbers. For example
+Planning Poker
 * Scott: 1 day 
 * Kenneth: 2 days
 * Koen: 1 day
