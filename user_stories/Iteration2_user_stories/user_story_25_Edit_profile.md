@@ -30,3 +30,8 @@ Task 1 – Create profile edit form UI, Estimation 0.25 days
 Task 2 – Fetch current user data from backend, Estimation 0.25 days
 Task 3 – Update user details in database, Estimation 0.25 days
 Task 4 – Add validation and success/error feedback, Estimation 0.25 days
+
+
+# UI Design:
+
+# Completed:
