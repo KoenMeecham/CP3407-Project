@@ -8,13 +8,13 @@ Sub issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-411803
 Priority Notes:
 Iteration 2 - Set pickup or delivery based on user choice
 
-## Estimation: 1 day
-Planning Poker:
-Scott: 1 day
-Kenneth: 1 day
-Koen: 1 day
-Ty: 1 day
-Final agreed: 1 day
+## Estimation: 1 day  
+Planning Poker:  
+Scott: 1 day  
+Kenneth: 1 day  
+Koen: 1 day  
+Ty: 1 day  
+Final agreed: 1 day  
 
 ## Assumptions:
 - Cart and checkout flow already exist
