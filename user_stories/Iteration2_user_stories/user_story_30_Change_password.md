@@ -23,11 +23,11 @@ User must provide current password before setting a new one
 ## Description:
 Users can update their password so their account remains secure.
 
-## Tasks:
-Task 1 – Create change password form UI, Estimation 0.25 days
-Task 2 – Verify current password with backend, Estimation 0.25 days
-Task 3 – Update new password in database with hashing, Estimation 0.25 days
-Task 4 – Add validation and success/error feedback, Estimation 0.25 days
+## Tasks:  
+Task 1 – Create change password form UI, Estimation 0.25 days  
+Task 2 – Verify current password with backend, Estimation 0.25 days  
+Task 3 – Update new password in database with hashing, Estimation 0.25 days  
+Task 4 – Add validation and success/error feedback, Estimation 0.25 days  
 
 # UI Design:
 
