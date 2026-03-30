@@ -26,7 +26,7 @@ Ty: 1 day
 **Description:**  
 As a user, I want to access a settings page so I can manage my account details and preferences.  
 
-## Tasks:* 
+## Tasks: 
 - Task 1 – Design and create settings page UI layout — Estimation: 0.25 days  
 - Task 2 – Connect settings page to user data (fetch current details) — Estimation: 0.25 days  
 - Task 3 – Implement ability to update basic user info (e.g. name/email) — Estimation: 0.25 days  
