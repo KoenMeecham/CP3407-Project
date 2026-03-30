@@ -1,4 +1,4 @@
-## User story title: Add Delivery Fee
+# User story title: Add Delivery Fee
 Other versions: Delivery charge, Delivery cost, Apply delivery fee
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-4118035947
@@ -32,3 +32,9 @@ Task 1 – Add delivery fee field/logic to order calculation, Estimation 0.25 da
 Task 2 – Apply fee only when delivery option is selected, Estimation 0.25 days
 Task 3 – Display delivery fee in cart/checkout summary, Estimation 0.25 days
 Task 4 – Update final total including delivery fee, Estimation 0.25 days
+
+
+
+# UI Design:
+
+# Completed:

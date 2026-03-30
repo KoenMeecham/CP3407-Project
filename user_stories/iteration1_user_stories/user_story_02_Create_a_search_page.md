@@ -35,11 +35,11 @@ Users can search for restaurants by keyword so they can find places to order fro
 
 
 ## Tasks
-Tasks:
-Task 1 – Create HTML + CSS for basic search page, Estimation 0.25 days
-Task 2 – Create search bar + results container UI, Estimation 0.25 days
-Task 3 – Hook page to backend search endpoint (basic), Estimation 0.25 days
-Task 4 – Display “no results” + loading states, Estimation 0.25 days
+Tasks:  
+Task 1 – Create HTML + CSS for basic search page, Estimation 0.25 days  
+Task 2 – Create search bar + results container UI, Estimation 0.25 days  
+Task 3 – Hook page to backend search endpoint (basic), Estimation 0.25 days  
+Task 4 – Display “no results” + loading states, Estimation 0.25 days  
 
 
 # UI Design:

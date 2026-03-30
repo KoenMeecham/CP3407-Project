@@ -1,18 +1,16 @@
-## User story title: Cancel Order (Before Preparation)
+# User story title: Cancel Order (Before Preparation)
 Other versions: Cancel order, Order cancellation, Stop order before cooking
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/29#issue-4118026093
-Sub Issue -
+
 
 ## Priority: 20
 Priority Notes:
-Iteration 1 – Allow cancellation before order status = preparing
-Iteration 2 – Add refund handling + notifications
-Future – Partial refunds / cancellation fees
+Iteration 2 – Allow cancellation before order status = preparing
 
 ## Estimation: 2 days
 Planning Poker:
-Scott: 2 days (before iteration-1)
+Scott: 2 days 
 Kenneth: 3 days
 Koen: 2 days
 Ty: 2 days
@@ -32,3 +30,9 @@ Task 1 – Add cancel button to order UI, Estimation 0.5 days
 Task 2 – Validate order status before allowing cancellation, Estimation 0.5 days
 Task 3 – Update order status to "cancelled" in database, Estimation 0.5 days
 Task 4 – Display success/error feedback to user, Estimation 0.5 days
+
+
+
+# UI Design:
+
+# Completed:

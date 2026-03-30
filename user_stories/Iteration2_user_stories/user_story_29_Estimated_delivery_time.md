@@ -1,20 +1,20 @@
-## User story title: Estimated delivery times 
+# User story title: Estimated delivery times 
 
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/37#issue-4148555040
-Sub Issue - 
+
 
 ## Priority: 30
 Priority Notes:
 Iteration 2 - allow customers to get esimated delivery ties.
 
-## Estimation: 1 day
-Planning Poker:
-Scott: 1 day
-Kenneth: 1 day
-Koen: 1 day
-Ty: 1 day
-Final agreed: 1 day
+## Estimation: 1 day  
+Planning Poker:  
+Scott: 1 day  
+Kenneth: 1 day  
+Koen: 1 day  
+Ty: 1 day  
+Final agreed: 1 day  
 
 ## Assumptions:
 - Order status and timestamps are already stored in the database
@@ -25,8 +25,12 @@ Final agreed: 1 day
 As a customer, I want to see an estimated delivery time so I can plan accordingly.
 
 
-## Tasks:
-Task 1 – Design and create ETA display UI component — Estimation: 0.25 days
-Task 2 – Calculate estimated delivery time from backend order data — Estimation: 0.25 days
-Task 3 – Display ETA dynamically based on current order status — Estimation: 0.25 days
-Task 4 – Handle edge cases (e.g. delayed orders, no estimate available) — Estimation: 0.25 days
+## Tasks:  
+Task 1 – Design and create ETA display UI component — Estimation: 0.25 days  
+Task 2 – Calculate estimated delivery time from backend order data — Estimation: 0.25 days  
+Task 3 – Display ETA dynamically based on current order status — Estimation: 0.25 days  
+Task 4 – Handle edge cases (e.g. delayed orders, no estimate available) — Estimation: 0.25 days  
+
+# UI Design:
+
+# Completed:

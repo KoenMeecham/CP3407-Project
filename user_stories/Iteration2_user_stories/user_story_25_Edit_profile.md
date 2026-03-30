@@ -1,4 +1,4 @@
-## User story title: Edit Profile
+# User story title: Edit Profile
 Other versions: Update user details, Profile settings, Manage account information
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/31#issue-4118041444
@@ -30,3 +30,8 @@ Task 1 – Create profile edit form UI, Estimation 0.25 days
 Task 2 – Fetch current user data from backend, Estimation 0.25 days
 Task 3 – Update user details in database, Estimation 0.25 days
 Task 4 – Add validation and success/error feedback, Estimation 0.25 days
+
+
+# UI Design:
+
+# Completed:
