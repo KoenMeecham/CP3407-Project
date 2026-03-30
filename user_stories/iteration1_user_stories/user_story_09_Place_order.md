@@ -13,7 +13,7 @@ Iteration 2 – Add order notes + ETA / wait time estimate
 
 
 ## Estimation: 1 day
-Any notes on estimation go here. Keep your planning poker game numbers. For example
+Planning Poker:  
 * Scott: 1 day 
 * Kenneth: 1 days
 * Koen: 2 days

@@ -8,7 +8,7 @@ Priority Notes:
 Iteration 1 – Secure admin routes and basic admin login  
 
 ## Estimation: 1 day
-Planning Poker:
+Planning Poker:  
 Ty: 1 day  
 Scott: 2 days  
 Koen: 1 day  

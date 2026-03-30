@@ -12,7 +12,7 @@ Iteration 2 – Production-ready payments + webhooks + receipts
 
 
 ## Estimation: 2 day
-Any notes on estimation go here. Keep your planning poker game numbers. For example
+Planning Poker
 * Scott: 2 day 
 * Kenneth: 3 days
 * Koen: 2 days
