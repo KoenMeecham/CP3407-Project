@@ -1,4 +1,4 @@
-## User story title: Provision and configure Amazon RDS database  
+# User story title: Provision and configure Amazon RDS database  
 
 Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/17#issue-3998972078
 
