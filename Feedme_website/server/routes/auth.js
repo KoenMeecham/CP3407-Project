@@ -9,7 +9,22 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // ================= REGISTER =================
 router.post("/register", async (req, res) => {
-  const { first_name, last_name, email, password } = req.body;
+  const {
+    first_name,
+    last_name,
+    f_name,
+    l_name,
+    email,
+    password
+  } = req.body;
+
+  // Normalize values
+  const finalFirstName = first_name || f_name;
+  const finalLastName = last_name || l_name;
+
+  if (!finalFirstName || !finalLastName || !email || !password) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
 
   try {
     const [existing] = await db.query(
@@ -25,7 +40,7 @@ router.post("/register", async (req, res) => {
 
     await db.query(
       "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, ?)",
-      [first_name, last_name, email, hashedPassword, "customer"]
+      [finalFirstName, finalLastName, email, hashedPassword, "customer"]
     );
 
     res.status(201).json({ message: "User registered successfully" });
@@ -34,6 +49,7 @@ router.post("/register", async (req, res) => {
     console.error("REGISTER ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
+  console.log(req.body);
 });
 
 
