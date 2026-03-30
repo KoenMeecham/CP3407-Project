@@ -19,7 +19,7 @@ Any notes on estimation go here. Keep your planning poker game numbers. For exam
 * Ty: 1 day
 * Final agreed: 1 day
 
-## Assumptions (if any):
+## Assumptions:
 - Restaurants table exists
 - Restaurant accounts can be basic (no verification for MVP)
 
