@@ -11,7 +11,7 @@ Iteration 2 – Restaurant profile editing + verification
 
 
 
-## Estimation: e.g. 2 days
+## Estimation: 1 day
 Any notes on estimation go here. Keep your planning poker game numbers. For example
 * Scott: 1 day 
 * Kenneth: 2 days
