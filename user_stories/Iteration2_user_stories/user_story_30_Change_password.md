@@ -6,13 +6,13 @@ Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/36#issue-41484
 ## Priority: 20
 Priority Notes: Iteration 2 – Allow users to securely change their account password.
 
-## Estimation: 1 day
-Planning Poker: 
-Scott: 1 day 
-Kenneth: 1 day 
-Koen: 1 day 
-Ty: 1 day 
-Final agreed: 1 day
+## Estimation: 1 day  
+Planning Poker:   
+Scott: 1 day   
+Kenneth: 1 day   
+Koen: 1 day   
+Ty: 1 day   
+Final agreed: 1 day  
 
 ## Assumptions:
 User authentication system already exists
