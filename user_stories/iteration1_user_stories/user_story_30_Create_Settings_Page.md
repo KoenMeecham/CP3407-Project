@@ -1,12 +1,15 @@
-## User story title: Settings page
+# User story title: Settings page
 
-Other versions: Manage account settings, Update user preferences, Account management  
-Priority: 30  
+Other versions: Manage account settings, Update user preferences, Account management 
+
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/40#issue-4166884926
+
+## Priority: 30  
 
 **Priority Notes:**  
 Iteration 2 – provide users with a central place to manage their account and preferences  
 
-**Estimation:** 1 day  
+## Estimation: 1 day  
 
 **Planning Poker:**  
 Scott: 1 day  
@@ -15,15 +18,15 @@ Koen: 1 day
 Ty: 1 day  
 **Final agreed:** 1 day  
 
-**Assumptions:**
+## Assumptions:
 - User authentication system is already implemented  
 - User data (name, email, etc.) is stored in the database  
 - Basic settings (profile info, password access) are sufficient for MVP  
 
-**Description:**  
+## Description:   
 As a user, I want to access a settings page so I can manage my account details and preferences.  
 
-**Tasks:**  
+## Tasks: 
 - Task 1 – Design and create settings page UI layout — Estimation: 0.25 days  
 - Task 2 – Connect settings page to user data (fetch current details) — Estimation: 0.25 days  
 - Task 3 – Implement ability to update basic user info (e.g. name/email) — Estimation: 0.25 days  

@@ -1,6 +1,6 @@
-## User story title: Shopping Cart Management
+# User story title: Shopping Cart Management
 
-https://github.com/KoenMeecham/CP3407-Project/issues/9#issue-3956096657
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/9#issue-3956096657
 
 ## Priority: 10
 Priority Notes:
