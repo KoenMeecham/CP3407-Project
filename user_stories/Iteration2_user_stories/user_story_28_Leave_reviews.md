@@ -28,11 +28,11 @@ Users can leave reviews on restaurants so other customers can see feedback and r
 
 
 
-## Tasks:
-Task 1 – Create review data model (rating, comment, user, restaurant), Estimation 0.25 days
-Task 2 – Create review form UI on restaurant page, Estimation 0.25 days
-Task 3 – Save review data to database, Estimation 0.25 days
-Task 4 – Display reviews and average rating on restaurant page, Estimation 0.25 days
+## Tasks:  
+Task 1 – Create review data model (rating, comment, user, restaurant), Estimation 0.25 days  
+Task 2 – Create review form UI on restaurant page, Estimation 0.25 days  
+Task 3 – Save review data to database, Estimation 0.25 days  
+Task 4 – Display reviews and average rating on restaurant page, Estimation 0.25 days  
 
 # UI Design:
 
