@@ -9,24 +9,15 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // ================= REGISTER =================
 router.post("/register", async (req, res) => {
-  const {
-    first_name,
-    last_name,
-    f_name,
-    l_name,
-    email,
-    password
-  } = req.body;
-
-  // Normalize values
-  const finalFirstName = first_name || f_name;
-  const finalLastName = last_name || l_name;
-
-  if (!finalFirstName || !finalLastName || !email || !password) {
-    return res.status(400).json({ message: "Missing required fields" });
-  }
+  const { f_name, l_name, email, password } = req.body;
 
   try {
+    // ✅ Validate input
+    if (!f_name || !l_name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // Check if user exists
     const [existing] = await db.query(
       "SELECT * FROM Users WHERE email = ?",
       [email]
@@ -36,20 +27,40 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await db.query(
+    // Insert user
+    const [result] = await db.query(
       "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, ?)",
-      [finalFirstName, finalLastName, email, hashedPassword, "customer"]
+      [f_name, l_name, email, hashedPassword, "customer"]
     );
 
-    res.status(201).json({ message: "User registered successfully" });
+    // Create token immediately (so frontend login() works)
+    const token = jwt.sign(
+      {
+        id: result.insertId,
+        email,
+        role: "customer",
+      },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.status(201).json({
+      message: "User registered successfully",
+      token,
+      user: {
+        id: result.insertId,
+        email,
+        role: "customer",
+      },
+    });
 
   } catch (err) {
     console.error("REGISTER ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
-  console.log(req.body);
 });
 
 
