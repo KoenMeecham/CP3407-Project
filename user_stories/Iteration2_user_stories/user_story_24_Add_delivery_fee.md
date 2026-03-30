@@ -1,4 +1,4 @@
-## User story title: Add Delivery Fee
+# User story title: Add Delivery Fee
 Other versions: Delivery charge, Delivery cost, Apply delivery fee
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-4118035947
