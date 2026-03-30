@@ -21,7 +21,7 @@ Planning Poker
 * Ty: 1 days
 * Final agreed: 1 day
 
-## Assumptions (if any):
+## Assumptions:
 - User has an account / session (or can show sample orders for MVP demo)
 - Orders table exists in DB (or mocked response allowed)
 
