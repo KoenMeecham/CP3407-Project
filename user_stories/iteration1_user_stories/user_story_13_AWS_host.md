@@ -1,4 +1,4 @@
-## User story title: Configure AWS infrastructure for hosting
+# User story title: Configure AWS infrastructure for hosting
 
 Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/16#issue-3998960140
 
