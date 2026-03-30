@@ -13,12 +13,12 @@ Iteration 2 – Add order notes + ETA / wait time estimate
 
 
 ## Estimation: 1 day
-Planning Poker:  
-* Scott: 1 day 
-* Kenneth: 1 days
-* Koen: 2 days
-* Ty: 1 days
-* Final agreed: 1 day
+Planning Poker:    
+Scott: 1 day   
+Kenneth: 1 days  
+Koen: 2 days  
+Ty: 1 days  
+Final agreed: 1 day  
 
 ## Assumptions:
 - User is logged in

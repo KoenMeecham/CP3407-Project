@@ -12,12 +12,12 @@ Iteration 2 – Production-ready payments + webhooks + receipts
 
 
 ## Estimation: 2 day
-Planning Poker
-* Scott: 2 day 
-* Kenneth: 3 days
-* Koen: 2 days
-* Ty: 2 days
-* Final agreed: 2 days
+Planning Poker:  
+Scott: 2 days   
+Kenneth: 3 days  
+Koen: 2 days  
+Ty: 2 days  
+Final agreed: 2 days  
 
 ## Assumptions:
 - Stripe sandbox keys available

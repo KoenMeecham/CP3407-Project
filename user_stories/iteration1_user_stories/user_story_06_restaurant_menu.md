@@ -9,11 +9,11 @@ Priority Notes:
 Iteration 1 – Menu list + pricing
 
 ## Estimation: 2 days
-Planning Poker:
-Ty: 2 days
-Koen: 2 days
-Scott: 3 days
-Kenneth: 4 days
+Planning Poker:  
+Ty: 2 days  
+Koen: 2 days  
+Scott: 3 days  
+Kenneth: 4 days  
 Final agreed: 2 days
 
 ## Assumptions:

@@ -11,12 +11,12 @@ Iteration 2 – Real-time notifications + delay time feature
 
 
 ## Estimation: 1 days
-Planning Poker
-* Scott: 1 day 
-* Kenneth: 2 days
-* Koen: 1 day
-* Ty: 1 day
-* Final agreed: 1 day
+Planning Poker:  
+Scott: 1 day   
+Kenneth: 2 days  
+Koen: 1 day  
+Ty: 1 day  
+Final agreed: 1 day  
 
 ## Assumptions:
 - Orders table exists in database

@@ -10,12 +10,12 @@ Iteration 2 – Advanced filters and sorting
 
 
 ## Estimation: 2 days
-Planning Poker
-* Scott: 2 days 
-* Kenneth: 3 days
-* Koen: 2 days
-* Ty: 2 days
-* Final agreed: 2 day
+Planning Poker:  
+Scott: 2 days   
+Kenneth: 3 days  
+Koen: 2 days  
+Ty: 2 days  
+Final agreed: 2 day  
 
 ## Assumptions:
 - Restaurant data exists in database
