@@ -7,17 +7,14 @@ Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/39#issue-41668
 ## Priority: 30 
 Priority Notes: Iteration 1 – Must-have for MVP (first impression + navigation entry point)
 
-Design link: 
 
 
-## Estimation: 1 day
-Any notes on estimation go here. Keep your planning poker game numbers. For example
-
-Scott: 1 day 
-Kenneth: 2 days
-Koen: 1 days
-Ty: 1 days
-Final agreed: 1 day
+## Estimation: 1 day  
+Scott: 1 day  
+Kenneth: 2 days  
+Koen: 1 days  
+Ty: 1 days  
+Final agreed: 1 day  
 
 ## Assumptions:
 - Users must be logged in to save restaurants
