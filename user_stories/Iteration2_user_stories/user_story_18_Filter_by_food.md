@@ -5,7 +5,7 @@ Other versions: A feature to browse by cuisine in the search bar
 Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/24#issue-4117966953
 Sub issue -
 
-## Priority: 30 (
+## Priority: 30 
 
 
 ## Estimation: 3 day
