@@ -1,4 +1,4 @@
-## User story title: Select Pickup or Delivery
+# User story title: Select Pickup or Delivery
 
 Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/33#issue-4118063242
 Sub issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-4118035947
@@ -30,3 +30,8 @@ Task 1 – Add pickup/delivery selection UI to checkout page, Estimation 0.25 da
 Task 2 – Store selected order method in order data model, Estimation 0.25 days
 Task 3 – Update checkout summary based on selection, Estimation 0.25 days
 Task 4 – Save pickup/delivery choice when order is placed, Estimation 0.25 days
+
+
+# UI Design:
+
+# Completed:
