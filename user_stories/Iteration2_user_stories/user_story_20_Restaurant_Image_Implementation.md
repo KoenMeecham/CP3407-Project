@@ -1,8 +1,7 @@
-## User story title: Restaurant Image implementation
+# User story title: Restaurant Image implementation
 Other versions: Add images to each restaurant to separate them
 
 Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/25#issue-4117984386
-Sub Issue -
 
 ## Priority: 20
 Priority Notes:
@@ -31,3 +30,13 @@ Task 1 – Add image field to restaurant model (e.g. image_url), Estimation 0.5 
 Task 2 – Update backend API to include image URL, Estimation 0.5 days
 Task 3 – Display images in restaurant listing page, Estimation 0.5 days
 Task 4 – Add fallback/default image if none exists, Estimation 0.5 days
+
+
+
+# UI Design: 
+
+
+
+
+
+# Completed:

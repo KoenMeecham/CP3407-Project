@@ -1,42 +1,42 @@
-Create more md files like this one as needed. Place them into the same folder 
-as this [user_stories folder](./)
+# User story title: Show Current Deals
 
-# User story title: e.g. Show current deals
+## Priority: 10  
+Priority Notes: Iteration 2 – Must-have for MVP (attract users and improve engagement)
 
-Keep any other version here as well, e.g. Display current deals, Let user to click on "show-current-deals".
 
-## Priority: 10 (e.g. latest for iteration-1)
-Any notes on priority go here. 
-Note you may have different priorities at different stages of you project.
-Again, keep all changes here for marking.
+## Estimation: 2 days  
 
-## Estimation: e.g. 2 days
-Any notes on estimation go here. Keep your planning poker game numbers. For example
-* Bob: 1 day (e.g. estimated before iteration-1)
-* Lisa: 2 days
-* Jack: 3 days
+Planning Poker:  
+Ty: 2 days  
+Scott: 3 days  
+Koen: 2 days  
+Kenneth: 2 days  
+Final agreed: 2 days  
 
-## Assumptions (if any):
+## Assumptions:
+- Deals data is available from the database or API  
+- Each deal is linked to a restaurant and menu item  
+- Deals have attributes such as discount, expiry date, and description  
+- Users do not need to be logged in to view deals  
+- UI can initially use a simple card-based layout  
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
-You need to keep all versions here so that your instructor/marker can see your changes easily. 
-In a real project, your older versions could be viewed via commits.
 
-Description-v1: e.g. The web site will show current deals to Orion's orbits users
+## Description:
+The system will display active deals on the landing page or a dedicated deals section. Deals may include limited-time discounts, combo offers, or featured promotions from restaurants. These deals will be visually highlighted and easy to browse.
 
-## Tasks, see chapter 4.
 
-1. Task 1, Estimation XX days
-2. ...
+## Tasks:
+Task 1 – Design deals section UI (cards/list layout), Estimation 0.5 days    
+Task 2 – Create database structure or API integration for deals, Estimation 0.5 days    
+Task 3 – Implement backend logic to fetch active deals, Estimation 0.5 days    
+Task 4 – Display deals on landing page with key info (title, discount, expiry), Estimation 0.25 days    
+Task 5 – Add basic styling and highlight featured deals, Estimation 0.25 days    
 
 
 # UI Design:
-* (New, not in the textbook) 
-* Many user stories are connected to a User interface.
-* Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
+
 
 # Completed:
-* (New, not in the textbook) 
-* Insert screenshots of completed. 
-* If you have multiple versions (changes between iteractions), show them all.
+- Insert screenshots of the deals section UI  
+- Show any iterations or improvements (e.g. initial vs styled version)  
 
