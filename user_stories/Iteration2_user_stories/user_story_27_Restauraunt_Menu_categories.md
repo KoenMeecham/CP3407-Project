@@ -2,19 +2,19 @@
 
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/32#issue-4118061240
-Sub Issue - 
+
 
 ## Priority: 30
 Priority Notes:
 Iteration 2 - ensure the menu is split into categories
 
-## Estimation: 1 day
-Planning Poker:
-Scott: 1 day
-Kenneth: 1 day
-Koen: 1 day
-Ty: 1 day
-Final agreed: 1 day
+## Estimation: 1 day   
+Planning Poker:  
+Scott: 1 day  
+Kenneth: 1 day  
+Koen: 1 day  
+Ty: 1 day  
+Final agreed: 1 day  
 
 ## Assumptions:
 - Categories are predefined (e.g., Drinks, Burgers, Chips)
