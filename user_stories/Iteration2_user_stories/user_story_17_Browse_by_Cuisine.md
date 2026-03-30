@@ -8,7 +8,7 @@ Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/23#issue-41179
 
 
 ## Estimation: 3 day
-Planning Poker:
+Planning Poker:  
 Scott: 3 day   
 Kenneth: 2 days  
 Koen: 3 days  
