@@ -7,13 +7,13 @@ Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/25#issue-41179
 Priority Notes:
 
 
-## Estimation: 3 days
-Planning Poker:
-Scott: 3 days
-Kenneth: 3 days
-Koen: 3 days
-Ty: 3 days
-Final agreed: 3 days
+## Estimation: 3 days  
+Planning Poker:  
+Scott: 3 days  
+Kenneth: 3 days  
+Koen: 3 days  
+Ty: 3 days  
+Final agreed: 3 days  
 
 ## Assumptions:
 - Restaurant data already exists
