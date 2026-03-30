@@ -5,7 +5,7 @@ Other versions: Landing page, Home page, Main page, Start page
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/3#issue-3956024487  
 Sub issue - https://github.com/KoenMeecham/CP3407-Project/issues/18
 
-## Priority: 10 (e.g. latest for iteration-1)
+## Priority: 10 
 Priority Notes:
 Iteration 1 – Must-have for MVP (first impression + navigation entry point)
 
@@ -24,7 +24,7 @@ Any notes on estimation go here. Keep your planning poker game numbers. For exam
 * Ty: 1 days
 * Final agreed: 1 day
 
-## Assumptions (if any):
+## Assumptions:
 - Branding/logo can be placeholder
 - Initial navigation routes can be dummy links first (Search, Login, Orders)
 
@@ -34,7 +34,7 @@ The website will provide a clean landing page that introduces FoodPandas and let
 
 
 
-## Tasks, see chapter 4.
+## Tasks
 Tasks:  
 Task 1 - Create Landing page wireframe, Estimated 0.25 days    
 Task 2 – Create HTML + CSS for basic landing page, Estimation 0.25 days  
