@@ -12,21 +12,11 @@ const checkJwt = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // This contains id, email, and role from your login route
+    req.user = decoded;
     next();
   } catch (err) {
     return res.status(403).json({ message: "Invalid or expired token" });
   }
 };
 
-const attachUser = (req, res, next) => {
-  // Since checkJwt already attaches the user to req.user, 
-  // this middleware can ensure the user object is properly formatted for your routes
-  if (req.user) {
-    // Mapping internal 'id' from token back to 'user_id' if your routes expect that
-    req.user.user_id = req.user.id; 
-  }
-  next();
-};
-
-module.exports = { checkJwt, attachUser };
+module.exports = { checkJwt };
