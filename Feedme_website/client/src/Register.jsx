@@ -7,8 +7,8 @@ export default function Register() {
   const navigate = useNavigate();
   const { login } = useUser();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [f_name, setFirstName] = useState("");
+  const [l_ame, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,8 +24,8 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          f_name: firstName,
-          l_name: lastName,
+          f_name,
+          l_name,
           email,
           password,
         }),
