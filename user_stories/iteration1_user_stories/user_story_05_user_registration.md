@@ -1,6 +1,6 @@
 ## User story title: User Registration and Login
 
-https://github.com/KoenMeecham/CP3407-Project/issues/7#issue-3956080344
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/7#issue-3956080344
 
 ## Priority: 10
 Priority Notes:
