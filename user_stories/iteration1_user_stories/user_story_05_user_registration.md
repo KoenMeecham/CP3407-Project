@@ -14,7 +14,7 @@ Koen: 2 days
 Kenneth: 2 days  
 Final agreed: 2 days
 
-## Assumptions:
+## Assumptions (if any):
 - Database contains a users table
 - Password hashing uses bcrypt
 
