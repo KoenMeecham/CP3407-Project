@@ -1,6 +1,6 @@
 # User story title: Select Pickup or Delivery
 
-Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/33#issue-4118063242
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/33#issue-4118063242  
 Sub issue - https://github.com/KoenMeecham/CP3407-Project/issues/30#issue-4118035947
 
 
