@@ -1,8 +1,6 @@
 ## User story title: Provision and configure Amazon RDS database  
 
-https://github.com/KoenMeecham/CP3407-Project/issues/17#issue-3998972078
-
-Keep any other version here as well, e.g. Setup AWS RDS instance, Create cloud-hosted relational database.
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/17#issue-3998972078
 
 ## Priority: 10
 
@@ -17,21 +15,21 @@ Ty: 4 days
 Kenneth: 3 days  
 
 ## Assumptions:
-We will use Amazon RDS (MySQL engine).  
-We will configure security groups to allow application access only.  
-We will deploy schema using SQL scripts.  
-Restaurants and menu CSV data will be imported into RDS.  
+- We will use Amazon RDS (MySQL engine).  
+- We will configure security groups to allow application access only.  
+- We will deploy schema using SQL scripts.  
+- Restaurants and menu CSV data will be imported into RDS.  
 
 ## Description:  
 Provision and configure an Amazon RDS relational database instance to host the FeedMe application schema, 
 including table creation, constraints, and initial data import to support Iteration-1 functionality.  
 
-## Tasks.  
-Task 1, Estimation 0.5 days: Create RDS instance.  
-Task 2, Estimation 0.5 days: Configure database credentials and network access  
-Task 3, Estimation 1 day: Deploy schema.  
-Task 4, Estimation 0.5 days: Import restaurant and menu CSV datasets.  
-Task 5, Estimation 0.5 days: Test connectivity from backend and verify CRUD operations.  
+## Tasks    
+Task 1, Estimation 0.5 days: Create RDS instance    
+Task 2, Estimation 0.5 days: Configure database credentials and network access    
+Task 3, Estimation 1 day: Deploy schema    
+Task 4, Estimation 0.5 days: Import restaurant and menu CSV datasets    
+Task 5, Estimation 0.5 days: Test connectivity from backend and verify CRUD operations    
 
 ## UI Design:
 
