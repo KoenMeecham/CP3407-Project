@@ -13,7 +13,7 @@ Iteration 2 – Production-ready payments + webhooks + receipts
 
 ## Estimation: 2 day
 Planning Poker:  
-Scott: 2 day   
+Scott: 2 days   
 Kenneth: 3 days  
 Koen: 2 days  
 Ty: 2 days  
