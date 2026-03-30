@@ -10,7 +10,7 @@ Priority Notes: Iteration 1 – Must-have for MVP (first impression + navigation
 
 
 ## Estimation: 1 day
-Planning Poker  
+Planning Poker:  
 Scott: 1 day  
 Kenneth: 2 days  
 Koen: 1 days  
