@@ -8,13 +8,13 @@ Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/37#issue-41485
 Priority Notes:
 Iteration 2 - allow customers to get esimated delivery ties.
 
-## Estimation: 1 day
-Planning Poker:
-Scott: 1 day
-Kenneth: 1 day
-Koen: 1 day
-Ty: 1 day
-Final agreed: 1 day
+## Estimation: 1 day  
+Planning Poker:  
+Scott: 1 day  
+Kenneth: 1 day  
+Koen: 1 day  
+Ty: 1 day  
+Final agreed: 1 day  
 
 ## Assumptions:
 - Order status and timestamps are already stored in the database
