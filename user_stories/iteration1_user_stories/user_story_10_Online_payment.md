@@ -2,7 +2,7 @@
 # User story title: Online Payment
 Other versions: Pay online, Card payment, Secure checkout payment
 
-https://github.com/KoenMeecham/CP3407-Project/issues/10#issue-3956097161
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/10#issue-3956097161
 
 ## Priority: 20 
 Priority Notes:
@@ -19,23 +19,23 @@ Any notes on estimation go here. Keep your planning poker game numbers. For exam
 * Ty: 2 days
 * Final agreed: 2 days
 
-## Assumptions (if any):
+## Assumptions:
 - Stripe sandbox keys available
 - Order exists before payment
 - Backend can securely create PaymentIntent
 
 
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
+## Description:
 Users can pay securely online using a credit or debit card so that their transaction is fast and safe.
 
 
 
-## Tasks, see chapter 4.
-Tasks:
-  Task 1 – Integrate payment gateway (Stripe sandbox), Estimation 1 day
-  Task 2 – Implement secure card form, Estimation 0.5 days
-  Task 3 – Handle payment confirmation & errors, Estimation 0.5 days
+## Tasks
+Tasks:  
+  Task 1 – Integrate payment gateway (Stripe sandbox), Estimation 1 day  
+  Task 2 – Implement secure card form, Estimation 0.5 days  
+  Task 3 – Handle payment confirmation & errors, Estimation 0.5 days  
 
 
 # UI Design:
