@@ -9,9 +9,9 @@ Iteration 2 – Advanced filters and sorting
 
 
 
-## Estimation: e.g. 2 days
-Any notes on estimation go here. Keep your planning poker game numbers. For example
-* Scott: 2 days (e.g. estimated before iteration-1)
+## Estimation: 2 days
+Planning Poker
+* Scott: 2 days 
 * Kenneth: 3 days
 * Koen: 2 days
 * Ty: 2 days
