@@ -30,6 +30,7 @@ Task 4 – Display cart summary + total price, Estimation 0.5 days
 Task 5 - Clear cart, Estimation 0.25 days  
 
 ## UI Design:
+<img width="539" height="542" alt="image" src="https://github.com/user-attachments/assets/2a3da5df-4d81-4e68-8df9-278e21fb8b7b" />
 
 
 ## Completed:
