@@ -11,12 +11,12 @@ Iteration 2 – provide users with a central place to manage their account and p
 
 ## Estimation: 1 day  
 
-**Planning Poker:**  
-Scott: 1 day  
-Kenneth: 1 day  
-Koen: 1 day  
-Ty: 1 day  
-**Final agreed:** 1 day  
+Planning Poker:  
+Scott: 1 day    
+Kenneth: 1 day    
+Koen: 1 day    
+Ty: 1 day    
+Final agreed: 1 day    
 
 ## Assumptions:
 - User authentication system is already implemented  
