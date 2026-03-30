@@ -14,12 +14,12 @@ Iteration 2 – Add order tracking statuses + reorder button
 
 
 ## Estimation: 1 day
-Planning Poker
-* Scott: 1 day 
-* Kenneth: 1 days
-* Koen: 2 days
-* Ty: 1 days
-* Final agreed: 1 day
+Planning Poker:
+Scott: 1 day 
+Kenneth: 1 days
+Koen: 2 days
+Ty: 1 days
+Final agreed: 1 day
 
 ## Assumptions:
 - User has an account / session (or can show sample orders for MVP demo)
