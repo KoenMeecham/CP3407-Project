@@ -5,36 +5,25 @@ const db = require("../database");
 // CREATE ORDER
 router.post("/", async (req, res) => {
   try {
-    const { sub, email } = req.user;
+    const { id } = req.user; // from JWT
     const { restaurant_id, total_price, items } = req.body;
 
     if (!restaurant_id || !items || items.length === 0) {
       return res.status(400).json({ error: "Invalid order data" });
     }
 
-    // ✅ ensure user exists
-    await db.promise().execute(
-      `INSERT INTO Users (cognito_sub, email)
-       VALUES (?, ?)
-       ON DUPLICATE KEY UPDATE email = VALUES(email)`,
-      [sub, email]
-    );
-
-    // ✅ create order
-    const [orderResult] = await db.promise().execute(
+    // Create order
+    const [orderResult] = await db.promise().query(
       `INSERT INTO Orders (user_id, restaurant_id, total_price)
-       VALUES (
-         (SELECT user_id FROM Users WHERE cognito_sub = ?),
-         ?, ?
-       )`,
-      [sub, restaurant_id, total_price]
+       VALUES (?, ?, ?)`,
+      [id, restaurant_id, total_price]
     );
 
     const orderId = orderResult.insertId;
 
-    // ✅ insert items
+    // Insert items
     for (const item of items) {
-      await db.promise().execute(
+      await db.promise().query(
         `INSERT INTO Order_Items (order_id, menu_item_id, quantity, price)
          VALUES (?, ?, ?, ?)`,
         [orderId, item.id, item.quantity, item.price]
@@ -49,24 +38,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+
 // GET USER ORDERS
 router.get("/", async (req, res) => {
   try {
-    const { sub } = req.user;
+    const { id } = req.user;
 
-    const [orders] = await db.promise().execute(
-      `SELECT o.*
-       FROM Orders o
-       JOIN Users u ON o.user_id = u.user_id
-       WHERE u.cognito_sub = ?
-       ORDER BY o.created_at DESC`,
-      [sub]
+    const [orders] = await db.promise().query(
+      `
+      SELECT o.*
+      FROM Orders o
+      WHERE o.user_id = ?
+      ORDER BY o.created_at DESC
+      `,
+      [id]
     );
 
     res.json(orders);
 
   } catch (err) {
-    console.error(err);
+    console.error("FETCH ORDERS ERROR:", err);
     res.status(500).json({ error: "Failed to fetch orders" });
   }
 });

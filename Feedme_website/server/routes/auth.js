@@ -9,11 +9,11 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // ================= REGISTER =================
 router.post("/register", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { first_name, last_name, email, password } = req.body;
 
   try {
     // Check if user exists
-    const [existing] = await db.query(
+    const [existing] = await db.promise().query(
       "SELECT * FROM Users WHERE email = ?",
       [email]
     );
@@ -23,19 +23,18 @@ router.post("/register", async (req, res) => {
     }
 
     // Hash password
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert user
-    await db.query(
+    await db.promise().query(
       "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, ?)",
-      [firstName, lastName, email, hashedPassword, "customer"]
+      [first_name, last_name, email, hashedPassword, "customer"]
     );
 
     res.status(201).json({ message: "User registered successfully" });
 
   } catch (err) {
-    console.error(err);
+    console.error("REGISTER ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
 });
@@ -46,8 +45,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find user
-    const [users] = await db.query(
+    const [users] = await db.promise().query(
       "SELECT * FROM Users WHERE email = ?",
       [email]
     );
@@ -58,14 +56,12 @@ router.post("/login", async (req, res) => {
 
     const user = users[0];
 
-    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Generate JWT
     const token = jwt.sign(
       {
         id: user.user_id,
@@ -87,7 +83,7 @@ router.post("/login", async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
+    console.error("LOGIN ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
 });
