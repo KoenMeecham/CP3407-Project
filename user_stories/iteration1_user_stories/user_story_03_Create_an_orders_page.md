@@ -32,7 +32,7 @@ Orders page shows order status (placed, preparing, ready, delivered) and order d
 
 
 ## Tasks
-Tasks:
+Tasks:  
 Task 1 – Create HTML + CSS for order page, Estimation 0.25 days  
 Task 2 – Create orders list UI component, Estimation 0.25 days  
 Task 3 – Fetch orders from backend endpoint (by user), Estimation 0.25 days  
