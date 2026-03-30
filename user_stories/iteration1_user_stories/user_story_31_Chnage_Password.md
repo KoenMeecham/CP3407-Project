@@ -9,12 +9,12 @@ Iteration 2 – improve account security and user control over credentials
 
 ## Estimation: 1 day  
 
-Planning Poker:  
-Scott: 1 day  
-Kenneth: 1 day  
-Koen: 1 day  
-Ty: 1 day  
-**Final agreed:** 1 day  
+Planning Poker:    
+Scott: 1 day    
+Kenneth: 1 day    
+Koen: 1 day    
+Ty: 1 day    
+Final agreed: 1 day    
 
 ## Assumptions:
 - User has already created an account. 
