@@ -4,7 +4,7 @@ Other versions: Manage account settings, Update user preferences, Account manage
 
 Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/40#issue-4166884926
 
-Priority: 30  
+## Priority: 30  
 
 **Priority Notes:**  
 Iteration 2 – provide users with a central place to manage their account and preferences  
