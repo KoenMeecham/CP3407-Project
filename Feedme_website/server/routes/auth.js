@@ -4,21 +4,16 @@ const jwt = require('jsonwebtoken');
 const db = require('./database'); 
 const router = express.Router();
 
-// IMPORTANT: This must match the secret in your middleware/userauth.js
 const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key'; 
 
-// Registration Route
-// Changed path to /register (assuming you mount this at /api/auth in server.js)
 router.post('/register', async (req, res) => {
     const { f_name, l_name, email, password } = req.body;
     try {
-        // Ensure we are using the correct database
         await db.query("USE feedme");
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // SQL matches your ALTER TABLE change (password column)
         const sql = "INSERT INTO Users (f_name, l_name, email, password, role) VALUES (?, ?, ?, ?, 'customer')";
         const [result] = await db.execute(sql, [f_name, l_name, email, hashedPassword]);
 
@@ -32,7 +27,6 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login Route
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -45,7 +39,6 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-        // Create the payload for the token
         const userData = { 
             id: user.user_id, 
             f_name: user.f_name, 

@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const restaurantRoutes = require("./routes/restaurants");
 const orderRoutes = require("./routes/orders");
-const authRoutes = require("./auth"); // Import your new auth.js
+const authRoutes = require("./auth"); 
 
 const { checkJwt, attachUser } = require("./middleware/userauth");
 
@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/", authRoutes); 
+app.use("/api/auth", authRoutes);
 
 // RESTAURANT ROUTES
 app.use("/api/restaurants", restaurantRoutes);
