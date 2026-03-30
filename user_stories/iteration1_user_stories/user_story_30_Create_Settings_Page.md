@@ -1,4 +1,4 @@
-## User story title: Settings page
+# User story title: Settings page
 
 Other versions: Manage account settings, Update user preferences, Account management 
 
@@ -23,7 +23,7 @@ Ty: 1 day
 - User data (name, email, etc.) is stored in the database  
 - Basic settings (profile info, password access) are sufficient for MVP  
 
-**Description:**  
+## Description:   
 As a user, I want to access a settings page so I can manage my account details and preferences.  
 
 ## Tasks: 
