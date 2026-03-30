@@ -25,11 +25,11 @@ Provision and configure an Amazon RDS relational database instance to host the F
 including table creation, constraints, and initial data import to support Iteration-1 functionality.  
 
 ## Tasks    
-Task 1, Estimation 0.5 days: Create RDS instance    
-Task 2, Estimation 0.5 days: Configure database credentials and network access    
-Task 3, Estimation 1 day: Deploy schema    
-Task 4, Estimation 0.5 days: Import restaurant and menu CSV datasets    
-Task 5, Estimation 0.5 days: Test connectivity from backend and verify CRUD operations    
+Task 1 - Estimation 0.5 days: Create RDS instance    
+Task 2 - Estimation 0.5 days: Configure database credentials and network access    
+Task 3 - Estimation 1 day: Deploy schema    
+Task 4 - Estimation 0.5 days: Import restaurant and menu CSV datasets    
+Task 5 - Estimation 0.5 days: Test connectivity from backend and verify CRUD operations    
 
 ## UI Design:
 
