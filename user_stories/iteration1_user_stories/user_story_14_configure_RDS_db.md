@@ -8,7 +8,7 @@ Required before backend integration.
 Enables cloud-hosted relational persistence for Iteration-1 MVP.   
 
 ## Estimation: 3 days
-Planning Poker  
+Planning Poker:  
 Scott: 3 days  
 Koen: 2 days  
 Ty: 4 days  
