@@ -3,7 +3,7 @@
 # User story title: Create an Orders page
 Other versions: View orders, Order history, My orders page
 
-https://github.com/KoenMeecham/CP3407-Project/issues/4#issue-3956061370
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/4#issue-3956061370
 
 
 Design Link: https://miro.com/app/board/uXjVG5mMYbY=/?moveToWidget=3458764661991950233&cot=14
@@ -32,13 +32,7 @@ Any notes on estimation go here. Keep your planning poker game numbers. For exam
 - Orders table exists in DB (or mocked response allowed)
 
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
-Users can view their orders so they can track what they’ve placed and see history.
-
-Description-v1:
-Create an orders page showing order history.
-
-Description-v2:
+## Description: 
 Orders page shows order status (placed, preparing, ready, delivered) and order details.
 
 

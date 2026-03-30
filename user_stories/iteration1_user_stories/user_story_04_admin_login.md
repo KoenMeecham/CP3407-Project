@@ -29,3 +29,8 @@ Task 2 – Implement authentication logic, Estimation 0.25 days
 Task 3 – Add role-based access control, Estimation 0.25 days  
 Task 4 – Secure admin routes (middleware), Estimation 0.25 days  
 
+
+## UI Design:
+
+
+## Completed:
