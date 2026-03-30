@@ -1,4 +1,4 @@
-## User story title: Edit Password
+# User story title: Edit Password
 Other versions: Change password, Update password, Manage account security
 
 Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/36#issue-4148480938
@@ -28,3 +28,7 @@ Task 1 – Create change password form UI, Estimation 0.25 days
 Task 2 – Verify current password with backend, Estimation 0.25 days
 Task 3 – Update new password in database with hashing, Estimation 0.25 days
 Task 4 – Add validation and success/error feedback, Estimation 0.25 days
+
+# UI Design:
+
+# Completed:
