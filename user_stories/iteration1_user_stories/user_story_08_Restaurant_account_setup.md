@@ -2,9 +2,9 @@
 # User story title: Restaurant Account Setup
 Other versions: Restaurant registration, Create restaurant profile, Restaurant signup
 
-https://github.com/KoenMeecham/CP3407-Project/issues/12#issue-3956131349
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/12#issue-3956131349
 
-## Priority: 10 (e.g. latest for iteration-1)
+## Priority: 10 
 Iteration 1 – Basic restaurant signup + store details
 Iteration 2 – Restaurant profile editing + verification
 
@@ -26,13 +26,13 @@ Any notes on estimation go here. Keep your planning poker game numbers. For exam
 
 
 
-## Description: e.g. The web page will show current deals to Orion's orbits users
+## Description:
 Restaurant owners can create an account so their restaurant can receive orders.
 
 
 
 
-## Tasks, see chapter 4.
+## Tasks
 Tasks:
 1. Create restaurant registration form 0.25 days
 2. Validate input fields 0.25 days
