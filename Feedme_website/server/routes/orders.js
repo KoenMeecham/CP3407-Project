@@ -12,7 +12,6 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Invalid order data" });
     }
 
-    // Create order
     const [orderResult] = await db.query(
       `INSERT INTO Orders (user_id, restaurant_id, total_price)
        VALUES (?, ?, ?)`,
@@ -21,12 +20,11 @@ router.post("/", async (req, res) => {
 
     const orderId = orderResult.insertId;
 
-    // Insert items
     for (const item of items) {
       await db.query(
-        `INSERT INTO Order_Items (order_id, menu_item_id, quantity, price)
-         VALUES (?, ?, ?, ?)`,
-        [orderId, item.id, item.quantity, item.price]
+        `INSERT INTO Order_Items (order_id, menu_item_id, quantity)
+         VALUES (?, ?, ?)`,
+        [orderId, item.id, item.quantity]
       );
     }
 
@@ -37,7 +35,6 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Order failed" });
   }
 });
-
 
 // GET USER ORDERS
 router.get("/", async (req, res) => {
