@@ -37,9 +37,8 @@ Task 4 – Display ratings and additional details, Estimation 0.5 days
 
 
 # UI Design:
-* (New, not in the textbook) 
-* Many user stories are connected to a User interface.
-* Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
+<img width="599" height="750" alt="image" src="https://github.com/user-attachments/assets/a95d783d-781f-4dae-941a-77a896f55d6a" />
+
 
 # Completed:
 <img width="1909" height="963" alt="image" src="https://github.com/user-attachments/assets/129e462d-dd91-4044-9b1e-1f043590a6be" />
