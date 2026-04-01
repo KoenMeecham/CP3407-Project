@@ -33,6 +33,8 @@ As a user, I want to access a settings page so I can manage my account details a
 - Task 4 – Add navigation and integrate settings page into app (menu/profile) — Estimation: 0.25 days  
 
 ## UI Design:
+<img width="470" height="362" alt="image" src="https://github.com/user-attachments/assets/554f67a8-03e1-448c-a9ae-29fa1680a92d" />
+
 
 
 ## Completed:
