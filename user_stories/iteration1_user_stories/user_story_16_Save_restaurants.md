@@ -34,7 +34,7 @@ Task 3 – Implement backend logic to save/unsave a restaurant (Django views/API
 Task 4 – Add Save/Favourite button to restaurant UI (icon toggle), Estimated 0.25 days  
 
 # UI Design:
-Many user stories are connected to a User interface.
-Insert a mockup design screenshot using any prototyping tools, e.g. https://ninjamock.com/
+<img width="181" height="274" alt="image" src="https://github.com/user-attachments/assets/69164991-5a87-4e5d-aedd-03fedbab7a5b" />
+
 # Completed:
 <img width="1891" height="589" alt="image" src="https://github.com/user-attachments/assets/ee343bc0-d1cd-4f84-af46-aeb3e46da735" />
