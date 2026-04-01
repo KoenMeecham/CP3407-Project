@@ -30,6 +30,7 @@ Task 3 – Validate current password and enforce new password rules — Estimati
 Task 4 – Handle success/error states and user feedback — Estimation: 0.25 days  
 
 ## UI Design:
+<img width="404" height="509" alt="image" src="https://github.com/user-attachments/assets/92d0b315-a254-4ee3-8127-80a5295c219d" />
 
 
 ## Completed:
