@@ -25,14 +25,17 @@ Final agreed: 2 days
 Users can cancel an order before preparation starts so they are not charged for unwanted orders.
 
 
-## Tasks:
-Task 1 – Add cancel button to order UI, Estimation 0.5 days
-Task 2 – Validate order status before allowing cancellation, Estimation 0.5 days
-Task 3 – Update order status to "cancelled" in database, Estimation 0.5 days
-Task 4 – Display success/error feedback to user, Estimation 0.5 days
+## Tasks:  
+Task 1 – Add cancel button to order UI, Estimation 0.5 days  
+Task 2 – Validate order status before allowing cancellation, Estimation 0.5 days  
+Task 3 – Update order status to "cancelled" in database, Estimation 0.5 days  
+Task 4 – Display success/error feedback to user, Estimation 0.5 days  
 
 
 
 # UI Design:
+
+
+<img width="796" height="513" alt="image" src="https://github.com/user-attachments/assets/45bc89fd-0b68-4bea-97d3-3212f134bf9b" />
 
 # Completed:
