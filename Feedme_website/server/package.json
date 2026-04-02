@@ -11,7 +11,6 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-  "amazon-cognito-identity-js": "^6.3.16",
   "bcrypt": "^5.1.1",
   "cors": "^2.8.6",
   "dotenv": "^17.3.1",
