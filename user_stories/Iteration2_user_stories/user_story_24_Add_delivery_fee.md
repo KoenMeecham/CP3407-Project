@@ -27,14 +27,18 @@ Final agreed: 1 day
 Users can see a delivery fee added to their order total so they know the full cost before placing an order.
 
 
-## Tasks:
-Task 1 – Add delivery fee field/logic to order calculation, Estimation 0.25 days
-Task 2 – Apply fee only when delivery option is selected, Estimation 0.25 days
-Task 3 – Display delivery fee in cart/checkout summary, Estimation 0.25 days
-Task 4 – Update final total including delivery fee, Estimation 0.25 days
+## Tasks:  
+Task 1 – Add delivery fee field/logic to order calculation, Estimation 0.25 days  
+Task 2 – Apply fee only when delivery option is selected, Estimation 0.25 days  
+Task 3 – Display delivery fee in cart/checkout summary, Estimation 0.25 days  
+Task 4 – Update final total including delivery fee, Estimation 0.25 days  
 
 
 
 # UI Design:
+
+
+<img width="908" height="572" alt="image" src="https://github.com/user-attachments/assets/4eb89c1f-f090-4633-8184-a758cdc76df5" />
+
 
 # Completed:
