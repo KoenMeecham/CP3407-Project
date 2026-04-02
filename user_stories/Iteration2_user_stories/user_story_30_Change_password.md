@@ -15,10 +15,10 @@ Ty: 1 day
 Final agreed: 1 day  
 
 ## Assumptions:
-User authentication system already exists
-Current user is identified through session/JWT
-Passwords are securely hashed in the database
-User must provide current password before setting a new one
+- User authentication system already exists  
+- Current user is identified through session/JWT  
+- Passwords are securely hashed in the database  
+- User must provide current password before setting a new one  
 
 ## Description:
 Users can update their password so their account remains secure.
