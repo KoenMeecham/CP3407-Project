@@ -33,7 +33,7 @@ Task 4 – Integrate cuisine filter with search results page, Estimation 0.5 day
 Task 5 – Test functionality and edge cases, Estimation 0.25 days    
 
 # UI Design:
-* Many user stories are connected to a User interface.
-* Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
+<img width="793" height="559" alt="image" src="https://github.com/user-attachments/assets/fb0223a8-db38-4b05-84f7-f7c6b1b510b5" />
+
 
 # Completed
