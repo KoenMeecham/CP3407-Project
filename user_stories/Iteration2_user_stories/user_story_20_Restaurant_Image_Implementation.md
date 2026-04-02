@@ -35,6 +35,21 @@ Task 4 – Add fallback/default image if none exists, Estimation 0.5 days
 
 # UI Design: 
 
+Make all the restaurants have unique identifiable images
+
+
+
+<img width="554" height="696" alt="image" src="https://github.com/user-attachments/assets/bb5436b2-2632-4b0a-86a0-26c4016634be" />
+
+
+
+Currently they look like this:
+
+
+
+<img width="1134" height="814" alt="image" src="https://github.com/user-attachments/assets/9d6c8a12-9e8b-4577-9f64-a3eef5e10d34" />
+
+
 
 
 
