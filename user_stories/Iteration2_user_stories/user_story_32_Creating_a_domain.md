@@ -1,5 +1,7 @@
 # User story title: Creating Our Domain
 
+
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/42#issue-4197520855
 ## Priority: 10
 
 Priority Notes:
