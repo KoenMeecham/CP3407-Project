@@ -1,8 +1,8 @@
 # User story title: Order Tracking
 Other versions: Track order status, Real-time order tracking, View delivery progress
 
-Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/28#issue-4118015424
-Sub Issue -
+Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/28#issue-4118015424  
+Sub Issue - https://github.com/KoenMeecham/CP3407-Project/issues/29#issue-4118026093  
 
 ## Priority: 20
 Priority Notes:
@@ -38,8 +38,6 @@ Task 4 – Improve UI with progress indicators, Estimation 0.5 days
 
 
 
-
-<img width="796" height="513" alt="image" src="https://github.com/user-attachments/assets/45bc89fd-0b68-4bea-97d3-3212f134bf9b" />
 
 
 
