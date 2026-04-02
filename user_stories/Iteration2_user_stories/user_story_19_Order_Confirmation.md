@@ -42,14 +42,8 @@ Task 4 – Add confirmation message and navigation options, Estimated 0.5 day
 
 
 # UI Design:
-Pick Up
 
+<img width="541" height="632" alt="image" src="https://github.com/user-attachments/assets/1d12619e-f3f5-4d5f-8d06-bbbce6693590" />
 
-<img width="688" height="235" alt="image" src="https://github.com/user-attachments/assets/faffbda7-57cf-45c3-8f4d-6892f0e6ef79" />
-
-Delivery
-
-
-<img width="267" height="444" alt="image" src="https://github.com/user-attachments/assets/e1a5a440-2a13-40d7-8855-1b836720241f" />
 
 # Completed:
