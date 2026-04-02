@@ -34,4 +34,7 @@ Task 4 – Save pickup/delivery choice when order is placed, Estimation 0.25 day
 
 # UI Design:
 
+<img width="908" height="572" alt="image" src="https://github.com/user-attachments/assets/9c0d6054-73eb-4856-b7f2-22c31fdf48a4" />
+
+
 # Completed:
