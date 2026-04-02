@@ -6,12 +6,12 @@ Priority Notes:
 Iteration 2 – Need a domain so users can access the website through a professional and memorable web address
 
 ## Estimation: 2 days
-Planning Poker:
-Ty: 2 days
-Scott: 2 days
-Koen: 1 day
-Kenneth: 2 days
-Final agreed: 2 days
+Planning Poker:  
+Ty: 2 days  
+Scott: 2 days  
+Koen: 1 day  
+Kenneth: 2 days  
+Final agreed: 2 days  
 
 ## Assumptions:
 - A hosting platform or server for the website already exists
