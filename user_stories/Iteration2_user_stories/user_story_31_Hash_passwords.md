@@ -1,6 +1,6 @@
 # User story title: Hashing Passwords
 
-Main issue - 
+Main issue - https://github.com/KoenMeecham/CP3407-Project/issues/41#issue-4197500374
 
 ## Priority: 10
 
@@ -28,7 +28,6 @@ The system will hash passwords before storing them in the database, rather than 
 During login, the system will compare the entered password against the stored hashed password using a secure verification method. This improves user security and follows standard authentication practices.
 
 ## Tasks
-Tasks:  
 Task 1 – Research and choose a secure password hashing method such as bcrypt, Estimation 0.25 days  
 Task 2 – Update user registration logic to hash passwords before saving, Estimation 0.5 days  
 Task 3 – Update login logic to verify entered passwords against hashed passwords, Estimation 0.5 days  
