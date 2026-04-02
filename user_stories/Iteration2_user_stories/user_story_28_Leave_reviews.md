@@ -36,4 +36,10 @@ Task 4 – Display reviews and average rating on restaurant page, Estimation 0.2
 
 # UI Design:
 
+<img width="1018" height="637" alt="image" src="https://github.com/user-attachments/assets/f51d2554-9785-4850-9d2a-42cbd1b2e8bd" />
+
+
+<img width="1018" height="637" alt="image" src="https://github.com/user-attachments/assets/6b21fbad-27da-4908-bd85-a822cb14282f" />
+
+
 # Completed:
