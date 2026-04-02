@@ -31,6 +31,7 @@ Task 4 – Add validation and success/error feedback, Estimation 0.25 days
 
 # UI Design:
 
-<img width="401" height="683" alt="image" src="https://github.com/user-attachments/assets/266dcfac-14a3-4a28-bd13-225584e21b86" />
+<img width="235" height="304" alt="image" src="https://github.com/user-attachments/assets/d8a83ec8-be65-4504-8b34-fd9a3c223e96" />
 
-# Completed:
+
+# Completed
