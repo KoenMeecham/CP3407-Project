@@ -40,8 +40,7 @@ Task 6 – Test filtering accuracy, usability, and responsiveness, Estimated 0.5
 
 
 # UI Design:
-* Many user stories are connected to a User interface.
-* Insert a mockup design screenshot using any prototyping tools, e.g. [https://ninjamock.com/](https://ninjamock.com/)
+<img width="793" height="559" alt="image" src="https://github.com/user-attachments/assets/d53c1de9-cdf3-4a52-94e4-5d08f69f9a59" />
 
 
 # Completed:
