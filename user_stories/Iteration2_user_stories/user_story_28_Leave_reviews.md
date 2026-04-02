@@ -1,4 +1,4 @@
-## User story title: Leave Reviews on Restaurants
+# User story title: Leave Reviews on Restaurants
 
 Other versions: Write restaurant reviews, Rate a restaurant, Customer feedback on restaurants
 
