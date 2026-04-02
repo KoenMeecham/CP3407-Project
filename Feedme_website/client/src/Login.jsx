@@ -1,51 +1,80 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
 import { useUser } from "./UserContext";
 
-
 export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useUser();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useUser();
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      login({ ...data.user, token: data.token });
+      if (!res.ok) {
+        setError(data.message || "Login failed.");
+        return;
+      }
+
+      login(data.user);
       navigate("/");
-    } else {
-      alert(data.message);
+    } catch (err) {
+      setError("Could not log in.");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className="lm-shell">
+      <div className="lm-authWrap">
+        <div className="lm-card lm-authCard">
+          <h2>Login</h2>
+
+          <form onSubmit={handleLogin} className="lm-authForm">
+            <input
+              className="lm-input"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <input
+              className="lm-input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            {error && <div className="lm-error">{error}</div>}
+
+            <button type="submit" className="lm-btnPrimary">
+              Login
+            </button>
+          </form>
+
+          <p className="lm-authText">
+            Don’t have an account? <Link to="/register">Register</Link>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
