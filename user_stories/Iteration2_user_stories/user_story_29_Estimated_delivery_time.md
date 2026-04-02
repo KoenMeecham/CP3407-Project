@@ -33,4 +33,7 @@ Task 4 – Handle edge cases (e.g. delayed orders, no estimate available) — Es
 
 # UI Design:
 
+<img width="611" height="240" alt="image" src="https://github.com/user-attachments/assets/18d0897f-3cc7-4ad8-9168-ca0810f0949e" />
+
+
 # Completed:
