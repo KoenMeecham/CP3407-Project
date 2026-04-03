@@ -25,11 +25,11 @@ Final agreed: 1 day
 Users can see images of menu items so they know what they are ordering.
 
 
-## Tasks:
-Task 1 – Add image field to menu item model (image_url), Estimation 0.25 days
-Task 2 – Update backend API to include image URLs, Estimation 0.25 days
-Task 3 – Display images in menu UI, Estimation 0.25 days
-Task 4 – Add fallback/default image, Estimation 0.25 days
+## Tasks:  
+Task 1 – Add image field to menu item model (image_url), Estimation 0.25 days  
+Task 2 – Update backend API to include image URLs, Estimation 0.25 days  
+Task 3 – Display images in menu UI, Estimation 0.25 days  
+Task 4 – Add fallback/default image, Estimation 0.25 days  
 
 
 
