@@ -33,7 +33,6 @@ total cost, and confirmation of purchase so the customer has a clear record of t
 
 
 ## Tasks
-Tasks:   
 Task 1 – Implement backend logic to retrieve completed order details, Estimated 0.5 days  
 Task 2 – Create the order confirmation page UI, Estimated 0.5 days  
 Task 3 – Display order number, purchased items, and total price, Estimated 0.5 days  
