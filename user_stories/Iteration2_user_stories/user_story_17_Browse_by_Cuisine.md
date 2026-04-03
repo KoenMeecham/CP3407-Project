@@ -25,7 +25,6 @@ The website will provide a clean landing page that introduces FoodPandas and let
 
 
 ## Tasks  
-Tasks:      
 Task 1 - Search by cuisine, estimation 0.5 days    
 Task 2 – Implement backend filtering/search logic for cuisine, Estimation 1 day    
 Task 3 – Add cuisine filter UI (dropdown, buttons, or tags), Estimation 0.75 days    
