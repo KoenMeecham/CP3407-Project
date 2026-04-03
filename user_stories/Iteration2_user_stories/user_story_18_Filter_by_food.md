@@ -29,7 +29,6 @@ The system will allow users to filter by food e.g pasta, burgers etc.
 
 
 ## Tasks
-Tasks:    
 Task 1 – Create wireframe for cuisine filtering feature, Estimated 0.5 days  
 Task 2 – Add cuisine/category data to restaurant records if required, Estimated 0.5 days  
 Task 3 – Implement backend logic for filtering restaurants by cuisine, Estimated 0.5 days  
