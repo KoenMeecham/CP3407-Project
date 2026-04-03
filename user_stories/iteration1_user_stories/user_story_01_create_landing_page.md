@@ -29,7 +29,6 @@ The website will provide a clean landing page that introduces FoodPandas and let
 
 
 ## Tasks
-Tasks:  
 Task 1 - Create Landing page wireframe, Estimated 0.25 days    
 Task 2 – Create HTML + CSS for basic landing page, Estimation 0.25 days  
 Task 3 – Add header/nav links (Search, Login, Orders), Estimation 0.25 days  
