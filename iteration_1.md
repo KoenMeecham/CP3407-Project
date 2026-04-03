@@ -35,32 +35,32 @@ In progress:
 
 Completed:
 
-- Create a landing page Thu 12/2/2026  
-- Create a search page Fri 13/2/2026  
+- Create a landing page - Thu 12/2/2026  
+- Create a search page - Fri 13/2/2026  
 
-- Create an orders page  Mon 16/2/2026  
-- Admin log in Tue 17/2/2026  
-- User registration page Wed 18/2/2026  
+- Create an orders page - Mon 16/2/2026  
+- Admin log in - Tue 17/2/2026  
+- User registration - page Wed 18/2/2026  
 
-- Restaurant menu  Thu 19/2/2026 – Fri 20/2/2026  
-- Shopping cart management Mon 23/2/2026 – Tue 24/2/2026  
+- Restaurant menu - Thu 19/2/2026 – Fri 20/2/2026  
+- Shopping cart management - Mon 23/2/2026 – Tue 24/2/2026  
 
-- Place order (dev), Wed 25/2/2026  
-- Online payment Thu 26/2/2026 – Fri 27/2/2026  
+- Place order - Wed 25/2/2026  
+- Online payment - Thu 26/2/2026 – Fri 27/2/2026  
 
-- Browse restaurants Mon 2/3/2026 – Tue 3/3/2026  
-- Receive new orders Wed 4/3/2026  
+- Browse restaurants - Mon 2/3/2026 – Tue 3/3/2026  
+- Receive new orders - Wed 4/3/2026  
 
-- AWS host  Thu 5/3/2026 – Fri 6/3/2026  
-- Configure RDS DB  Mon 9/3/2026 – Tue 10/3/2026  
+- AWS host - Thu 5/3/2026 – Fri 6/3/2026  
+- Configure RDS DB - Mon 9/3/2026 – Tue 10/3/2026  
 
 ---
 
 ### Added Mid-Iteration
 
-- Save Restaurants  Wed 11/3/2026  
-- Create Settings Page  Thu 12/3/2026  
-- Change Password  Fri 13/3/2026  
+- Save Restaurants - Wed 11/3/2026  
+- Create Settings Page -  Thu 12/3/2026  
+- Change Password - Fri 13/3/2026  
 
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
