@@ -47,6 +47,18 @@ The system is divided into four layers:
 
 ---
 
+## Screenshot of EC2
+
+<img width="2605" height="1457" alt="Screenshot 2026-04-03 123102" src="https://github.com/user-attachments/assets/5be3db55-7e76-4a20-811b-9f41d418ccb3" />
+
+---
+
+## Screenshot of RDS
+
+<img width="2511" height="1456" alt="Screenshot 2026-04-03 123230" src="https://github.com/user-attachments/assets/90ba8545-8ca4-4e1f-a4ff-5688c996a589" />
+
+---
+
 ## Project Structure
 
 ```bash
