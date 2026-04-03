@@ -87,7 +87,7 @@ In progress:
 
 
 
-Total: 28 days
+Total: 23 days
 
 ### Not enough time/developers: 
 1. [Restaurant Account Setup](./user_stories/incomplete_user_stories_iteration1/user_story_08_Restaurant_account_setup.md), priority 10, 1 day.  
