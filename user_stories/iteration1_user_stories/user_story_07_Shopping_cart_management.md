@@ -1,6 +1,6 @@
-## User story title: Shopping Cart Management
+# User story title: Shopping Cart Management
 
-https://github.com/KoenMeecham/CP3407-Project/issues/9#issue-3956096657
+Main Issue: https://github.com/KoenMeecham/CP3407-Project/issues/9#issue-3956096657
 
 ## Priority: 10
 Priority Notes:
@@ -22,10 +22,16 @@ Final agreed: 2 days
 Users can add, remove, and update items in their cart so they can finalise their order correctly.
 
 
-## Tasks:
-Task 1 – Create cart data model, Estimation 0.5 days
-Task 2 – Implement add/remove item logic, Estimation 0.5 days
-Task 3 – Implement update quantity feature, Estimation 0.5 days
-Task 4 – Display cart summary + total price, Estimation 0.5 days
+## Tasks:  
+Task 1 – Create cart data model, Estimation 0.5 days  
+Task 2 – Implement add/remove item logic, Estimation 0.5 days  
+Task 3 – Implement update quantity feature, Estimation 0.5 days  
+Task 4 – Display cart summary + total price, Estimation 0.5 days  
+Task 5 - Clear cart, Estimation 0.25 days  
+
+## UI Design:
+<img width="539" height="542" alt="image" src="https://github.com/user-attachments/assets/2a3da5df-4d81-4e68-8df9-278e21fb8b7b" />
 
 
+## Completed:
+<img width="1915" height="757" alt="image" src="https://github.com/user-attachments/assets/6b2e3d64-7f52-4c01-8c00-8125248991d2" />

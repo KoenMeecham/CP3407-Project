@@ -10,6 +10,7 @@ export default function Checkout() {
   const navigate = useNavigate();
   const { cart, subtotal, clearCart } = useCart();
   const { user } = useUser();
+  const isLoggedIn = !!user?.isLoggedIn;
 
   const [guestEmail, setGuestEmail] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
@@ -20,64 +21,57 @@ export default function Checkout() {
   const [error, setError] = useState("");
 
   const orderEmail = useMemo(() => {
-    return user.isLoggedIn ? user.email : guestEmail.trim();
-  }, [user, guestEmail]);
+  return isLoggedIn
+    ? user?.email
+    : guestEmail.trim();
+}, [isLoggedIn, user, guestEmail]);
 
   const deliveryFee = cart.length > 0 ? 4.99 : 0;
   const total = subtotal + deliveryFee;
 
-  const handlePlaceOrder = (e) => {
-      e.preventDefault();
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault();
 
-      if (cart.length === 0) {
-          setError("Your cart is empty.");
-          return;
-      }
+    if (cart.length === 0) {
+      setError("Your cart is empty.");
+      return;
+    }
 
-      if (!user.isLoggedIn && !guestEmail.trim()) {
-          setError("Please enter an email for guest checkout.");
-          return;
-      }
+    if (!isLoggedIn && !guestEmail.trim()) {
+      setError("Please enter an email.");
+      return;
+    }
 
-      if (!deliveryAddress.trim()) {
-          setError("Please enter a delivery address.");
-          return;
-      }
+    if (!isLoggedIn) {
+      setError("Please login to place an order.");
+      return;
+    }
 
-      if (!cardName.trim() || !cardNumber.trim() || !expiry.trim() || !cvv.trim()) {
-          setError("Please enter your dummy payment details.");
-          return;
-      }
-
-      const existingOrders = JSON.parse(localStorage.getItem("feedme_orders") || "[]");
-
-      const newOrder = {
-          id: Date.now(),
-          orderNumber: `FM${Date.now()}`,
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify({
+          restaurant_id: cart[0]?.restaurant_id || 1,
+          address_id: 1,
+          total_price: total,
           email: orderEmail,
-          customerName: user.isLoggedIn ? user.name : "Guest",
-          isGuestOrder: !user.isLoggedIn,
           items: cart,
-          subtotal,
-          deliveryFee,
-          total,
-          status: "Placed",
-          deliveryAddress: deliveryAddress.trim(),
-          createdAt: new Date().toISOString(),
-      };
-
-      localStorage.setItem(
-          "feedme_orders",
-          JSON.stringify([newOrder, ...existingOrders])
-      );
-
-      if (!user.isLoggedIn) {
-          localStorage.setItem("feedme_guest_email", orderEmail);
-      }
-      clearCart();
-      navigate("/orders", {
-          state: {orderPlaced: true, orderNumber: newOrder.orderNumber},
+        }),
       });
+
+      if (!res.ok) throw new Error("Order failed");
+
+      clearCart();
+      navigate("/orders");
+
+    } catch (err) {
+      console.error(err);
+      setError("Failed to place order");
+    }
   };
 
   return (
@@ -130,19 +124,13 @@ export default function Checkout() {
               <h1>Checkout</h1>
               <p>Review your details and place your order.</p>
 
-              {!user.isLoggedIn && (
+              {!isLoggedIn && (
                 <div className="checkout-authRow">
-                  <Link to="/login" className="checkout-linkBtn">
-                    Login
-                  </Link>
-                  <Link to="/register" className="checkout-linkBtn">
-                    Register
-                  </Link>
                 </div>
               )}
 
               <form onSubmit={handlePlaceOrder} className="checkout-form">
-                {!user.isLoggedIn && (
+                {!isLoggedIn && (
                   <div className="checkout-section">
                     <h3>Guest Details</h3>
                     <input
@@ -212,16 +200,22 @@ export default function Checkout() {
                   <div className="checkout-summaryList">
                     {cart.map((item, index) => (
                       <div
-                        key={`${item.id}-${item.restaurant}-${index}`}
+                        key={`${item.id}-${index}`}
                         className="checkout-summaryItem"
                       >
                         <div>
                           <strong>{item.name}</strong>
-                          <div className="checkout-muted">{item.restaurant}</div>
-                          <div className="checkout-muted">Qty: {item.quantity}</div>
+                          <div className="checkout-muted">
+                            {item.restaurant}
+                          </div>
+                          <div className="checkout-muted">
+                            Qty: {item.quantity}
+                          </div>
                         </div>
 
-                        <div>${(item.price * item.quantity).toFixed(2)}</div>
+                        <div>
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </div>
                       </div>
                     ))}
                   </div>

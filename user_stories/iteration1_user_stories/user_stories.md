@@ -42,5 +42,14 @@ Description: As a customer, I want to track my order status in real time so that
 
 Description: As a restaurant owner, I want to add, update, or remove menu items so that customers always see accurate information.
 
+## Create Settings Page | Priority: Low | Estimate: 1 day
+
+Description: As a user, I want to access a settings page so I can manage my account details and preferences.
+
+## Change Password | Priority: Low | Estimate: 1 day
+
+Description: As a user, I want to change my password so I can keep my account secure.
+
+
 // go to the issue click on it, three dots/ copy link in projecy
 https://github.com/users/KoenMeecham/projects/1/views/1?pane=issue&itemId=157952502&issue=KoenMeecham%7CCP3407-Project%7C3

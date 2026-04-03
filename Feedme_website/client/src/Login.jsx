@@ -16,15 +16,12 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
@@ -37,39 +34,46 @@ export default function Login() {
       login(data.user);
       navigate("/");
     } catch (err) {
-      console.error(err);
-      setError("Could not login.");
+      setError("Could not log in.");
     }
   };
 
   return (
     <div className="lm-shell">
-      <div style={{ maxWidth: "500px", margin: "60px auto", background: "#fff", padding: "30px", borderRadius: "16px" }}>
-        <h1>Login</h1>
-        <form onSubmit={handleLogin} className="checkout-form">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      <div className="lm-authWrap">
+        <div className="lm-card lm-authCard">
+          <h2>Login</h2>
 
-          {error && <div className="checkout-error">{error}</div>}
+          <form onSubmit={handleLogin} className="lm-authForm">
+            <input
+              className="lm-input"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-          <button type="submit" className="checkout-placeBtn">
-            Login
-          </button>
-        </form>
+            <input
+              className="lm-input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-        <p style={{ marginTop: "16px" }}>
-          Need an account? <Link to="/register">Register</Link>
-        </p>
+            {error && <div className="lm-error">{error}</div>}
+
+            <button type="submit" className="lm-btnPrimary">
+              Login
+            </button>
+          </form>
+
+          <p className="lm-authText">
+            Don’t have an account? <Link to="/register">Register</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

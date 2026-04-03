@@ -7,8 +7,8 @@ export default function Register() {
   const navigate = useNavigate();
   const { login } = useUser();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [f_name, setFirstName] = useState("");
+  const [l_ame, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,14 +18,14 @@ export default function Register() {
     setError("");
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          f_name,
+          l_name,
           email,
           password,
         }),
@@ -38,7 +38,7 @@ export default function Register() {
         return;
       }
 
-      login(data.user);
+      login({ ...data.user, token: data.token });
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -48,8 +48,17 @@ export default function Register() {
 
   return (
     <div className="lm-shell">
-      <div style={{ maxWidth: "500px", margin: "60px auto", background: "#fff", padding: "30px", borderRadius: "16px" }}>
+      <div
+        style={{
+          maxWidth: "500px",
+          margin: "60px auto",
+          background: "#fff",
+          padding: "30px",
+          borderRadius: "16px",
+        }}
+      >
         <h1>Register</h1>
+
         <form onSubmit={handleRegister} className="checkout-form">
           <input
             type="text"
@@ -57,18 +66,21 @@ export default function Register() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
+
           <input
             type="text"
             placeholder="Last name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
+
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <input
             type="password"
             placeholder="Password"

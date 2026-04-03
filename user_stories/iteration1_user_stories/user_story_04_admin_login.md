@@ -1,14 +1,14 @@
 ## User story title: Admin Login
 
-https://github.com/KoenMeecham/CP3407-Project/issues/5  
-Merged into issue#07 - [https://github.com/KoenMeecham/CP3407-Project/issues/7#issue-3956080344]
+Merged into user story#05 : https://github.com/KoenMeecham/CP3407-Project/issues/5  
+issue#07 - [https://github.com/KoenMeecham/CP3407-Project/issues/7#issue-3956080344]
 
 ## Priority: 10
 Priority Notes:
 Iteration 1 – Secure admin routes and basic admin login  
 
 ## Estimation: 1 day
-Planning Poker:
+Planning Poker:  
 Ty: 1 day  
 Scott: 2 days  
 Koen: 1 day  
@@ -29,3 +29,8 @@ Task 2 – Implement authentication logic, Estimation 0.25 days
 Task 3 – Add role-based access control, Estimation 0.25 days  
 Task 4 – Secure admin routes (middleware), Estimation 0.25 days  
 
+
+## UI Design:
+
+
+## Completed:
