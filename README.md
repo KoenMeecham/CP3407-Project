@@ -65,25 +65,25 @@ Velocity; 0.73
 
 ### Iteration 2 [duration 3-4 weeks], 12/3 --> 13/4
 Goal is to have 2 iterations during a trimester of teaching.
-
-1. [Show Current Deals](./user_stories/Iteration2_user_stories/user_story_15_show_current_deals.md), priority 10, 2 day.  
-2. [Browse by Cuisine](./user_stories/Iteration2_user_stories/user_story_17_Browse_by_Cuisine.md), priority 30, 3 day.  
-3. [Filter by Food](./user_stories/Iteration2_user_stories/user_story_18_Filter_by_food.md), priority 30, 3 day.  
-4. [Order Confirmation](./user_stories/Iteration2_user_stories/user_story_19_Order_Confirmation.md), priority 30, 2 day.  
-5. [Restaurant Image Implementation](./user_stories/Iteration2_user_stories/user_story_20_Restaurant_Image_Implementation.md), priority 20, 3 day.  
+In progress:
+1. [Show Current Deals](./user_stories/Iteration2_user_stories/user_story_15_show_current_deals.md), priority 10, 1 day.  
+2. [Browse by Cuisine](./user_stories/Iteration2_user_stories/user_story_17_Browse_by_Cuisine.md), priority 30, 2 days.  
+3. [Filter by Food](./user_stories/Iteration2_user_stories/user_story_18_Filter_by_food.md), priority 30, 1 day.  
+4. [Order Confirmation](./user_stories/Iteration2_user_stories/user_story_19_Order_Confirmation.md), priority 30, 2 days.  
+5. [Restaurant Image Implementation](./user_stories/Iteration2_user_stories/user_story_20_Restaurant_Image_Implementation.md), priority 20, 2 days.  
 6. [Menu Item Image](./user_stories/Iteration2_user_stories/user_story_21_Menu_Item_image.md), priority 15, 1 day.  
-7. [Order Tracking](./user_stories/Iteration2_user_stories/user_story_22_Order_tracking.md), priority 20, 2 day.  
-8. [Cancel Order](./user_stories/Iteration2_user_stories/user_story_23_Cancel_Order.md), priority 20, 2 day.  
+7. [Order Tracking](./user_stories/Iteration2_user_stories/user_story_22_Order_tracking.md), priority 20, 2 days.  
+8. [Cancel Order](./user_stories/Iteration2_user_stories/user_story_23_Cancel_Order.md), priority 20, 2 days.  
 9. [Add Delivery Fee](./user_stories/Iteration2_user_stories/user_story_24_Add_delivery_fee.md), priority 20, 1 day.  
 10. [Edit Profile](./user_stories/Iteration2_user_stories/user_story_25_Edit_profile.md), priority 20, 1 day.  
 11. [Select Pickup](./user_stories/Iteration2_user_stories/user_story_26_Select_pickup.md), priority 10, 1 day.  
 12. [Restaurant Menu Categories](./user_stories/Iteration2_user_stories/user_story_27_Restauraunt_Menu_categories.md), priority 30, 1 day.  
 13. [Leave Reviews](./user_stories/Iteration2_user_stories/user_story_28_Leave_reviews.md), priority 30, 1 day.  
-14. [Estimated Delivery Time](./user_stories/Iteration2_user_stories/user_story_29_Estimated_delivery_time.md), priority 30, 1 day.
+14. [Estimated Delivery Time](./user_stories/Iteration2_user_stories/user_story_29_Estimated_delivery_time.md), priority 30, 1 day.  
 
-  These were added mid way through
-15. [Creating a Domain](./user_stories/Iteration2_user_stories/user_story_32_Creating_a_domain.md), priority 10, 2 day.  
-16. [Hash Passwords](./user_stories/Iteration2_user_stories/user_story_33_Hash_passwords.md), priority 10, 2 day.  
+### Added Mid-Iteration
+15. [Creating a Domain](./user_stories/Iteration2_user_stories/user_story_32_Creating_a_domain.md), priority 10, 1 day.  
+16. [Hash Passwords](./user_stories/Iteration2_user_stories/user_story_33_Hash_passwords.md), priority 10, 1 day.  
 
 
 
