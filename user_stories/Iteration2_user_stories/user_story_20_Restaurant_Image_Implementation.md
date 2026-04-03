@@ -25,11 +25,11 @@ Users can see the photo of the restaurant they are ordering from
 
 
 
-## Tasks:
-Task 1 – Add image field to restaurant model (e.g. image_url), Estimation 0.5 days
-Task 2 – Update backend API to include image URL, Estimation 0.5 days
-Task 3 – Display images in restaurant listing page, Estimation 0.5 days
-Task 4 – Add fallback/default image if none exists, Estimation 0.5 days
+## Tasks:  
+Task 1 – Add image field to restaurant model (e.g. image_url), Estimation 0.5 days  
+Task 2 – Update backend API to include image URL, Estimation 0.5 days  
+Task 3 – Display images in restaurant listing page, Estimation 0.5 days  
+Task 4 – Add fallback/default image if none exists, Estimation 0.5 days  
 
 
 
