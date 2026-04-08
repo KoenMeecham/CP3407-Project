@@ -140,7 +140,7 @@ export default function Settings() {
               </p>
             </div>
 
-            {!user.isLoggedIn ? (
+            {!user || !user.isLoggedIn ? (
               <div className="settings-card">
                 <h2 className="settings-sectionTitle">Guest Account</h2>
                 <p>

@@ -8,7 +8,7 @@ export default function Register() {
   const { login } = useUser();
 
   const [f_name, setFirstName] = useState("");
-  const [l_ame, setLastName] = useState("");
+  const [l_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -63,14 +63,14 @@ export default function Register() {
           <input
             type="text"
             placeholder="First name"
-            value={firstName}
+            value={f_name}
             onChange={(e) => setFirstName(e.target.value)}
           />
 
           <input
             type="text"
             placeholder="Last name"
-            value={lastName}
+            value={l_name}
             onChange={(e) => setLastName(e.target.value)}
           />
 
