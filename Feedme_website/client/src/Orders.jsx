@@ -32,6 +32,19 @@ export default function Orders() {
       .then(async (res) => {
         const data = await res.json();
 
+        if (res.status === 401) {
+          localStorage.removeItem("feedme_token");
+          localStorage.removeItem("feedme_user");
+          localStorage.removeItem("feedme_guest_email");
+
+          if (guestEmail) {
+            return fetch(`/api/orders?email=${encodeURIComponent(guestEmail)}`)
+              .then((guestRes) => guestRes.json());
+          }
+
+          return [];
+        }
+
         if (!res.ok) {
           throw new Error(data.message || data.error || "Failed to load orders");
         }
@@ -45,7 +58,7 @@ export default function Orders() {
         console.error("Failed to load orders:", err);
         setOrders([]);
       });
-  }, []);
+    }, []);
 
   const visibleOrders = useMemo(() => {
     let filteredOrders = [...orders];
