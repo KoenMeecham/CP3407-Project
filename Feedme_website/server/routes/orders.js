@@ -113,6 +113,25 @@ router.get("/", checkJwt, attachUser, async (req, res) => {
       return res.json([]);
     }
 
+    for (const order of orders) {
+      const [items] = await db.query(
+        `
+        SELECT
+          oi.menu_item_id AS id,
+          oi.quantity,
+          mi.name,
+          mi.price,
+          mi.restaurant_id
+        FROM Order_Items oi
+        JOIN Menu_Items mi ON mi.id = oi.menu_item_id
+        WHERE oi.order_id = ?
+        `,
+        [order.id]
+      );
+
+      order.items = items;
+    }
+
     res.json(orders);
   } catch (err) {
     console.error("FETCH ORDERS ERROR:", err);

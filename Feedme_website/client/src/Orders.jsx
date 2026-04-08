@@ -215,6 +215,7 @@ export default function Orders() {
                     onClick={() => {
                       if (order.items && Array.isArray(order.items)) {
                         order.items.forEach((item) => addToCart(item));
+                        alert("Items added to cart.");
                       }
                     }}
                   >
