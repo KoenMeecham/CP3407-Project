@@ -19,18 +19,19 @@ export default function Checkout() {
   const [expiry, setExpiry] = useState("");
   const [cvv, setCvv] = useState("");
   const [error, setError] = useState("");
+  const [orderType, setOrderType] = useState("delivery");
+
+  const DELIVERY_FEE = 4.99;
+  const deliveryFee = orderType === "delivery" ? DELIVERY_FEE : 0;
+  const total = subtotal + deliveryFee;
 
   const orderEmail = useMemo(() => {
-  return isLoggedIn
-    ? user?.email
-    : guestEmail.trim();
-}, [isLoggedIn, user, guestEmail]);
-
-  const deliveryFee = cart.length > 0 ? 4.99 : 0;
-  const total = subtotal + deliveryFee;
+    return isLoggedIn ? user?.email : guestEmail.trim();
+  }, [isLoggedIn, user, guestEmail]);
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (cart.length === 0) {
       setError("Your cart is empty.");
@@ -47,6 +48,16 @@ export default function Checkout() {
       return;
     }
 
+    if (orderType === "delivery" && !deliveryAddress.trim()) {
+      setError("Please enter a delivery address.");
+      return;
+    }
+
+    if (!cardName.trim() || !cardNumber.trim() || !expiry.trim() || !cvv.trim()) {
+      setError("Please complete the payment details.");
+      return;
+    }
+
     try {
       const res = await fetch("/api/orders", {
         method: "POST",
@@ -56,21 +67,26 @@ export default function Checkout() {
         },
         body: JSON.stringify({
           restaurant_id: cart[0]?.restaurant_id || 1,
-          address_id: 1,
+          address_id: orderType === "delivery" ? 1 : null,
+          order_type: orderType,
+          delivery_fee: deliveryFee,
           total_price: total,
           email: orderEmail,
           items: cart,
         }),
       });
 
-      if (!res.ok) throw new Error("Order failed");
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Order failed");
+      }
 
       clearCart();
       navigate("/orders");
-
     } catch (err) {
       console.error(err);
-      setError("Failed to place order");
+      setError(err.message || "Failed to place order");
     }
   };
 
@@ -124,10 +140,7 @@ export default function Checkout() {
               <h1>Checkout</h1>
               <p>Review your details and place your order.</p>
 
-              {!isLoggedIn && (
-                <div className="checkout-authRow">
-                </div>
-              )}
+              {!isLoggedIn && <div className="checkout-authRow"></div>}
 
               <form onSubmit={handlePlaceOrder} className="checkout-form">
                 {!isLoggedIn && (
@@ -143,14 +156,42 @@ export default function Checkout() {
                 )}
 
                 <div className="checkout-section">
-                  <h3>Delivery Details</h3>
-                  <input
-                    type="text"
-                    placeholder="Delivery address"
-                    value={deliveryAddress}
-                    onChange={(e) => setDeliveryAddress(e.target.value)}
-                  />
+                  <h3>Order Method</h3>
+
+                  <label>
+                    <input
+                      type="radio"
+                      name="orderType"
+                      value="delivery"
+                      checked={orderType === "delivery"}
+                      onChange={(e) => setOrderType(e.target.value)}
+                    />
+                    {" "}Delivery
+                  </label>
+
+                  <label style={{ marginLeft: "16px" }}>
+                    <input
+                      type="radio"
+                      name="orderType"
+                      value="pickup"
+                      checked={orderType === "pickup"}
+                      onChange={(e) => setOrderType(e.target.value)}
+                    />
+                    {" "}Pickup
+                  </label>
                 </div>
+
+                {orderType === "delivery" && (
+                  <div className="checkout-section">
+                    <h3>Delivery Details</h3>
+                    <input
+                      type="text"
+                      placeholder="Delivery address"
+                      value={deliveryAddress}
+                      onChange={(e) => setDeliveryAddress(e.target.value)}
+                    />
+                  </div>
+                )}
 
                 <div className="checkout-section">
                   <h3>Dummy Payment Details</h3>
@@ -214,10 +255,15 @@ export default function Checkout() {
                         </div>
 
                         <div>
-                          ${(item.price * item.quantity).toFixed(2)}
+                          ${(Number(item.price) * Number(item.quantity)).toFixed(2)}
                         </div>
                       </div>
                     ))}
+                  </div>
+
+                  <div className="checkout-totalRow">
+                    <span>Method</span>
+                    <strong>{orderType === "delivery" ? "Delivery" : "Pickup"}</strong>
                   </div>
 
                   <div className="checkout-totalRow">

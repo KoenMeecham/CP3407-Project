@@ -6,16 +6,26 @@ const db = require("../database");
 router.post("/", async (req, res) => {
   try {
     const { id } = req.user;
-    const { restaurant_id, total_price, items } = req.body;
+    const { restaurant_id, total_price, items, order_type, delivery_fee, address_id } = req.body;
 
     if (!restaurant_id || !items || items.length === 0) {
       return res.status(400).json({ error: "Invalid order data" });
     }
 
+    const validOrderType = order_type === "pickup" ? "pickup" : "delivery";
+    const finalDeliveryFee = validOrderType === "delivery" ? Number(delivery_fee || 0) : 0;
+    const finalAddressId = validOrderType === "delivery" ? address_id : null;
+
+    if (validOrderType === "delivery" && !finalAddressId) {
+      return res.status(400).json({ error: "Delivery address is required" });
+    }
+
+    const finalTotalPrice = Number(total_price || 0);
+
     const [orderResult] = await db.query(
-      `INSERT INTO Orders (user_id, restaurant_id, total_price)
-       VALUES (?, ?, ?)`,
-      [id, restaurant_id, total_price]
+      `INSERT INTO Orders (user_id, restaurant_id, address_id, total_price, order_type, delivery_fee, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [id, restaurant_id, finalAddressId, finalTotalPrice, validOrderType, finalDeliveryFee, "pending"]
     );
 
     const orderId = orderResult.insertId;
@@ -29,7 +39,6 @@ router.post("/", async (req, res) => {
     }
 
     res.json({ success: true, orderId });
-
   } catch (err) {
     console.error("ORDER ERROR:", err);
     res.status(500).json({ error: "Order failed" });
@@ -52,7 +61,6 @@ router.get("/", async (req, res) => {
     );
 
     res.json(orders);
-
   } catch (err) {
     console.error("FETCH ORDERS ERROR:", err);
     res.status(500).json({ error: "Failed to fetch orders" });
