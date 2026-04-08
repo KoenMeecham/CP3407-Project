@@ -8,25 +8,31 @@ import UserMenu from "./UserMenu";
 
 export default function Orders() {
   const { user, logout } = useUser();
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("newest");
   const { addToCart } = useCart();
   const location = useLocation();
 
   const [orders, setOrders] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("newest");
 
   useEffect(() => {
     const token = localStorage.getItem("feedme_token");
+    const guestEmail = localStorage.getItem("feedme_guest_email") || "";
 
-    fetch("/api/orders", {
-      headers: token
-        ? {
-            Authorization: `Bearer ${token}`,
-          }
-        : {},
-    })
+    let url = "/api/orders";
+    const headers = {};
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    } else if (guestEmail) {
+      url = `/api/orders?email=${encodeURIComponent(guestEmail)}`;
+    }
+
+    fetch(url, { headers })
       .then((res) => res.json())
-      .then((data) => setOrders(Array.isArray(data) ? data : []))
+      .then((data) => {
+        setOrders(Array.isArray(data) ? data : []);
+      })
       .catch((err) => {
         console.error("Failed to load orders:", err);
         setOrders([]);
@@ -36,50 +42,28 @@ export default function Orders() {
   const visibleOrders = useMemo(() => {
     let filteredOrders = [...orders];
 
-    const guestEmail = localStorage.getItem("feedme_guest_email") || "";
-
-    if (user?.isLoggedIn) {
-      filteredOrders = filteredOrders.filter(
-        (order) => order.email === user.email
-      );
-    } else if (guestEmail) {
-      filteredOrders = filteredOrders.filter(
-        (order) => order.email === guestEmail
-      );
-    } else {
-      filteredOrders = [];
-    }
-
     if (search.trim()) {
       const term = search.toLowerCase();
+
       filteredOrders = filteredOrders.filter((order) => {
-        const restaurantNames = (order.items || [])
-          .map((item) => item.restaurant || "")
-          .join(" ")
-          .toLowerCase();
-
-        const itemNames = (order.items || [])
-          .map((item) => item.name || "")
-          .join(" ")
-          .toLowerCase();
-
         return (
-          String(order.orderNumber || "").toLowerCase().includes(term) ||
-          restaurantNames.includes(term) ||
-          itemNames.includes(term)
+          String(order.id || "").toLowerCase().includes(term) ||
+          String(order.status || "").toLowerCase().includes(term) ||
+          String(order.order_type || "").toLowerCase().includes(term) ||
+          String(order.email || "").toLowerCase().includes(term)
         );
       });
     }
 
     filteredOrders.sort((a, b) => {
       if (filter === "oldest") {
-        return new Date(a.createdAt) - new Date(b.createdAt);
+        return new Date(a.created_at) - new Date(b.created_at);
       }
-      return new Date(b.createdAt) - new Date(a.createdAt);
+      return new Date(b.created_at) - new Date(a.created_at);
     });
 
     return filteredOrders;
-  }, [orders, user, search, filter]);
+  }, [orders, search, filter]);
 
   return (
     <div className="lm-shell">
@@ -127,9 +111,11 @@ export default function Orders() {
 
           <div className="lm-spacer" />
 
-          <button className="lm-signout" onClick={logout}>
-            Sign Out
-          </button>
+          {user?.isLoggedIn && (
+            <button className="lm-signout" onClick={logout}>
+              Sign Out
+            </button>
+          )}
         </aside>
 
         <main className="lm-main">
@@ -172,44 +158,49 @@ export default function Orders() {
             </div>
           ) : (
             <div className="orders-list">
-              {visibleOrders.map((order) => {
-                const restaurantNames = [
-                  ...new Set((order.items || []).map((item) => item.restaurant)),
-                ].join(", ");
+              {visibleOrders.map((order) => (
+                <div key={order.id} className="order-card">
+                  <div className="order-cardLeft">
+                    <div className="order-icon">🍔</div>
 
-                const itemSummary = (order.items || [])
-                  .map((item) => `${item.name} x${item.quantity}`)
-                  .join(", ");
-
-                return (
-                  <div key={order.id} className="order-card">
-                    <div className="order-cardLeft">
-                      <div className="order-icon">🍔</div>
-
-                      <div>
-                        <div className="order-restaurant">
-                          {restaurantNames || "Restaurant"}
-                        </div>
-                        <div className="order-number">{order.orderNumber}</div>
-                        <div className="order-items">{itemSummary}</div>
-                        <div className="order-meta">
-                          {new Date(order.createdAt).toLocaleString()} • $
-                          {Number(order.total || 0).toFixed(2)} • {order.status}
-                        </div>
+                    <div>
+                      <div className="order-restaurant">
+                        Order #{order.id}
                       </div>
-                    </div>
 
-                    <button
-                      className="order-reorderBtn"
-                      onClick={() => {
-                        (order.items || []).forEach((item) => addToCart(item));
-                      }}
-                    >
-                      Reorder
-                    </button>
+                      <div className="order-number">
+                        {order.order_type === "delivery" ? "Delivery" : "Pickup"}
+                      </div>
+
+                      <div className="order-items">
+                        {order.email || "No email"}
+                      </div>
+
+                      <div className="order-meta">
+                        {new Date(order.created_at).toLocaleString()} • $
+                        {Number(order.total_price || 0).toFixed(2)} • {order.status}
+                      </div>
+
+                      {order.order_type === "delivery" && (
+                        <div className="order-meta">
+                          Delivery Fee: ${Number(order.delivery_fee || 0).toFixed(2)}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                );
-              })}
+
+                  <button
+                    className="order-reorderBtn"
+                    onClick={() => {
+                      if (order.items && Array.isArray(order.items)) {
+                        order.items.forEach((item) => addToCart(item));
+                      }
+                    }}
+                  >
+                    Reorder
+                  </button>
+                </div>
+              ))}
             </div>
           )}
         </main>
