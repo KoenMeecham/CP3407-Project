@@ -16,6 +16,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
+    localStorage.removeItem("feedme_guest_email");
     setUser({ ...userData, isLoggedIn: true });
     localStorage.setItem("feedme_user", JSON.stringify(userData));
     localStorage.setItem("feedme_token", userData.token);

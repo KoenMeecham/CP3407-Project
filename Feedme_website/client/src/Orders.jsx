@@ -21,8 +21,9 @@ export default function Orders() {
 
     let url = "/api/orders";
     const headers = {};
+    const usingToken = !!token;
 
-    if (token) {
+    if (usingToken) {
       headers.Authorization = `Bearer ${token}`;
     } else if (guestEmail) {
       url = `/api/orders?email=${encodeURIComponent(guestEmail)}`;
@@ -36,12 +37,6 @@ export default function Orders() {
           console.warn("Stored token is invalid or expired.");
           localStorage.removeItem("feedme_token");
           localStorage.removeItem("feedme_user");
-
-          if (guestEmail) {
-            return fetch(`/api/orders?email=${encodeURIComponent(guestEmail)}`)
-              .then((guestRes) => guestRes.json());
-          }
-
           setOrders([]);
           return [];
         }
