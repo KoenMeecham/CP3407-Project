@@ -19,7 +19,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/restaurants", restaurantRoutes);
 
 // PROTECTED ROUTES
-app.use("/api/orders", checkJwt, attachUser, orderRoutes);
+app.use("/api/orders", orderRoutes);
 
 // DEBUG ROUTE
 app.get("/api/health", (req, res) => {

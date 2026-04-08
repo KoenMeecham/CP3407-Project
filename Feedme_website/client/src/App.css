@@ -1285,6 +1285,19 @@ nav {
   font-size: 14px;
 }
 
+.order-method-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.order-method-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
 @media (max-width: 1100px) {
   .lm-resultsGrid {
     grid-template-columns: repeat(2, minmax(240px, 1fr));

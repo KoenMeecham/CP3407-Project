@@ -1,31 +1,54 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../database");
+const { checkJwt, attachUser } = require("../middleware/userauth");
 
 // CREATE ORDER
-router.post("/", async (req, res) => {
+router.post("/", checkJwt, attachUser, async (req, res) => {
   try {
-    const { id } = req.user;
-    const { restaurant_id, total_price, items, order_type, delivery_fee, address_id } = req.body;
+    const userId = req.user?.id || null;
+    const {
+      restaurant_id,
+      total_price,
+      items,
+      order_type,
+      delivery_fee,
+      address_id,
+      email,
+    } = req.body;
 
     if (!restaurant_id || !items || items.length === 0) {
       return res.status(400).json({ error: "Invalid order data" });
     }
 
+    if (!userId && !email) {
+      return res.status(400).json({ error: "Email is required for guest checkout" });
+    }
+
     const validOrderType = order_type === "pickup" ? "pickup" : "delivery";
-    const finalDeliveryFee = validOrderType === "delivery" ? Number(delivery_fee || 0) : 0;
-    const finalAddressId = validOrderType === "delivery" ? address_id : null;
+    const finalDeliveryFee =
+      validOrderType === "delivery" ? Number(delivery_fee || 0) : 0;
+    const finalAddressId =
+      validOrderType === "delivery" ? address_id : null;
+    const finalTotalPrice = Number(total_price || 0);
 
     if (validOrderType === "delivery" && !finalAddressId) {
       return res.status(400).json({ error: "Delivery address is required" });
     }
 
-    const finalTotalPrice = Number(total_price || 0);
-
     const [orderResult] = await db.query(
-      `INSERT INTO Orders (user_id, restaurant_id, address_id, total_price, order_type, delivery_fee, status)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [id, restaurant_id, finalAddressId, finalTotalPrice, validOrderType, finalDeliveryFee, "pending"]
+      `INSERT INTO Orders (user_id, email, restaurant_id, address_id, total_price, order_type, delivery_fee, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        userId,
+        email || null,
+        restaurant_id,
+        finalAddressId,
+        finalTotalPrice,
+        validOrderType,
+        finalDeliveryFee,
+        "pending",
+      ]
     );
 
     const orderId = orderResult.insertId;
@@ -45,20 +68,39 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET USER ORDERS
-router.get("/", async (req, res) => {
+// GET USER OR GUEST ORDERS
+router.get("/", checkJwt, attachUser, async (req, res) => {
   try {
-    const { id } = req.user;
+    const userId = req.user?.id || null;
+    const guestEmail = req.query.email || null;
 
-    const [orders] = await db.query(
-      `
-      SELECT o.*
-      FROM Orders o
-      WHERE o.user_id = ?
-      ORDER BY o.created_at DESC
-      `,
-      [id]
-    );
+    let orders = [];
+
+    if (userId) {
+      const [userOrders] = await db.query(
+        `
+        SELECT o.*
+        FROM Orders o
+        WHERE o.user_id = ?
+        ORDER BY o.created_at DESC
+        `,
+        [userId]
+      );
+      orders = userOrders;
+    } else if (guestEmail) {
+      const [guestOrders] = await db.query(
+        `
+        SELECT o.*
+        FROM Orders o
+        WHERE o.email = ?
+        ORDER BY o.created_at DESC
+        `,
+        [guestEmail]
+      );
+      orders = guestOrders;
+    } else {
+      return res.json([]);
+    }
 
     res.json(orders);
   } catch (err) {

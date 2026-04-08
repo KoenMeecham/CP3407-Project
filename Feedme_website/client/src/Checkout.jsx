@@ -38,13 +38,8 @@ export default function Checkout() {
       return;
     }
 
-    if (!isLoggedIn && !guestEmail.trim()) {
+    if (!orderEmail) {
       setError("Please enter an email.");
-      return;
-    }
-
-    if (!isLoggedIn) {
-      setError("Please login to place an order.");
       return;
     }
 
@@ -53,18 +48,28 @@ export default function Checkout() {
       return;
     }
 
-    if (!cardName.trim() || !cardNumber.trim() || !expiry.trim() || !cvv.trim()) {
+    if (
+      !cardName.trim() ||
+      !cardNumber.trim() ||
+      !expiry.trim() ||
+      !cvv.trim()
+    ) {
       setError("Please complete the payment details.");
       return;
     }
 
     try {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (user?.token) {
+        headers.Authorization = `Bearer ${user.token}`;
+      }
+
       const res = await fetch("/api/orders", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
+        headers,
         body: JSON.stringify({
           restaurant_id: cart[0]?.restaurant_id || 1,
           address_id: orderType === "delivery" ? 1 : null,
@@ -79,11 +84,21 @@ export default function Checkout() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || "Order failed");
+        throw new Error(data.error || data.message || "Order failed");
+      }
+
+      if (!isLoggedIn) {
+        localStorage.setItem("feedme_guest_email", orderEmail);
       }
 
       clearCart();
-      navigate("/orders");
+
+      navigate("/orders", {
+        state: {
+          orderPlaced: true,
+          orderNumber: data.orderId,
+        },
+      });
     } catch (err) {
       console.error(err);
       setError(err.message || "Failed to place order");
@@ -140,8 +155,6 @@ export default function Checkout() {
               <h1>Checkout</h1>
               <p>Review your details and place your order.</p>
 
-              {!isLoggedIn && <div className="checkout-authRow"></div>}
-
               <form onSubmit={handlePlaceOrder} className="checkout-form">
                 {!isLoggedIn && (
                   <div className="checkout-section">
@@ -158,27 +171,29 @@ export default function Checkout() {
                 <div className="checkout-section">
                   <h3>Order Method</h3>
 
-                  <label>
-                    <input
-                      type="radio"
-                      name="orderType"
-                      value="delivery"
-                      checked={orderType === "delivery"}
-                      onChange={(e) => setOrderType(e.target.value)}
-                    />
-                    {" "}Delivery
-                  </label>
+                  <div className="order-method-row">
+                    <label className="order-method-option">
+                      <input
+                        type="radio"
+                        name="orderType"
+                        value="delivery"
+                        checked={orderType === "delivery"}
+                        onChange={(e) => setOrderType(e.target.value)}
+                      />
+                      Delivery
+                    </label>
 
-                  <label style={{ marginLeft: "16px" }}>
-                    <input
-                      type="radio"
-                      name="orderType"
-                      value="pickup"
-                      checked={orderType === "pickup"}
-                      onChange={(e) => setOrderType(e.target.value)}
-                    />
-                    {" "}Pickup
-                  </label>
+                    <label className="order-method-option">
+                      <input
+                        type="radio"
+                        name="orderType"
+                        value="pickup"
+                        checked={orderType === "pickup"}
+                        onChange={(e) => setOrderType(e.target.value)}
+                      />
+                      Pickup
+                    </label>
+                  </div>
                 </div>
 
                 {orderType === "delivery" && (
@@ -263,7 +278,9 @@ export default function Checkout() {
 
                   <div className="checkout-totalRow">
                     <span>Method</span>
-                    <strong>{orderType === "delivery" ? "Delivery" : "Pickup"}</strong>
+                    <strong>
+                      {orderType === "delivery" ? "Delivery" : "Pickup"}
+                    </strong>
                   </div>
 
                   <div className="checkout-totalRow">
@@ -271,10 +288,12 @@ export default function Checkout() {
                     <strong>${subtotal.toFixed(2)}</strong>
                   </div>
 
-                  <div className="checkout-totalRow">
-                    <span>Delivery Fee</span>
-                    <strong>${deliveryFee.toFixed(2)}</strong>
-                  </div>
+                  {orderType === "delivery" && (
+                    <div className="checkout-totalRow">
+                      <span>Delivery Fee</span>
+                      <strong>${deliveryFee.toFixed(2)}</strong>
+                    </div>
+                  )}
 
                   <div className="checkout-totalRow checkout-grandTotal">
                     <span>Total</span>

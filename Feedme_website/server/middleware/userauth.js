@@ -3,8 +3,10 @@ const jwt = require("jsonwebtoken");
 const checkJwt = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
 
+  // No token = guest user, allow request through
   if (!token) {
-    return res.status(401).json({ message: "No token provided" });
+    req.user = null;
+    return next();
   }
 
   try {
