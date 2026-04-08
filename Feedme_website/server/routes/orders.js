@@ -88,17 +88,22 @@ router.get("/", checkJwt, attachUser, async (req, res) => {
     let orders = [];
 
     if (userId) {
+      const userEmail = req.user?.email || null;
+
       const [userOrders] = await db.query(
         `
-        SELECT o.*
+        SELECT DISTINCT o.*
         FROM Orders o
         WHERE o.user_id = ?
+           OR (? IS NOT NULL AND o.email = ?)
         ORDER BY o.created_at DESC
         `,
-        [userId]
+        [userId, userEmail, userEmail]
       );
+
       orders = userOrders;
-    } else if (guestEmail) {
+    }
+    else if (guestEmail) {
       const [guestOrders] = await db.query(
         `
         SELECT o.*

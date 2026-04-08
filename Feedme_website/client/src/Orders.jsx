@@ -33,15 +33,16 @@ export default function Orders() {
         const data = await res.json();
 
         if (res.status === 401) {
+          console.warn("Stored token is invalid or expired.");
           localStorage.removeItem("feedme_token");
           localStorage.removeItem("feedme_user");
-          localStorage.removeItem("feedme_guest_email");
 
           if (guestEmail) {
             return fetch(`/api/orders?email=${encodeURIComponent(guestEmail)}`)
               .then((guestRes) => guestRes.json());
           }
 
+          setOrders([]);
           return [];
         }
 
