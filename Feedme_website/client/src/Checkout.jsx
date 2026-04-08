@@ -72,7 +72,9 @@ export default function Checkout() {
         headers,
         body: JSON.stringify({
           restaurant_id: cart[0]?.restaurant_id || 1,
-          address_id: orderType === "delivery" ? 1 : null,
+          address_id: null,
+          delivery_address: deliveryAddress,
+          post_code: "0000",
           order_type: orderType,
           delivery_fee: deliveryFee,
           total_price: total,

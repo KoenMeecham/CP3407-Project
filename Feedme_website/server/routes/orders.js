@@ -13,8 +13,9 @@ router.post("/", checkJwt, attachUser, async (req, res) => {
       items,
       order_type,
       delivery_fee,
-      address_id,
       email,
+      delivery_address,
+      post_code,
     } = req.body;
 
     if (!restaurant_id || !items || items.length === 0) {
@@ -28,12 +29,22 @@ router.post("/", checkJwt, attachUser, async (req, res) => {
     const validOrderType = order_type === "pickup" ? "pickup" : "delivery";
     const finalDeliveryFee =
       validOrderType === "delivery" ? Number(delivery_fee || 0) : 0;
-    const finalAddressId =
-      validOrderType === "delivery" ? address_id : null;
     const finalTotalPrice = Number(total_price || 0);
 
-    if (validOrderType === "delivery" && !finalAddressId) {
-      return res.status(400).json({ error: "Delivery address is required" });
+    let finalAddressId = null;
+
+    if (validOrderType === "delivery") {
+      if (!delivery_address || !delivery_address.trim()) {
+        return res.status(400).json({ error: "Delivery address is required" });
+      }
+
+      const [addressResult] = await db.query(
+        `INSERT INTO Addresses (user_id, full_address, post_code)
+         VALUES (?, ?, ?)`,
+        [userId, delivery_address.trim(), post_code || "0000"]
+      );
+
+      finalAddressId = addressResult.insertId;
     }
 
     const [orderResult] = await db.query(
