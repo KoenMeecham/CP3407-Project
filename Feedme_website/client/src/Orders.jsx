@@ -29,7 +29,15 @@ export default function Orders() {
     }
 
     fetch(url, { headers })
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || data.error || "Failed to load orders");
+        }
+
+        return data;
+      })
       .then((data) => {
         setOrders(Array.isArray(data) ? data : []);
       })
