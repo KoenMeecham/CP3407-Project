@@ -1356,6 +1356,12 @@ nav {
   color: #1e293b;
 }
 
+.lm-card .lm-resultImgFallback {
+  height: 120px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 1100px) {
   .lm-resultsGrid {
     grid-template-columns: repeat(2, minmax(240px, 1fr));

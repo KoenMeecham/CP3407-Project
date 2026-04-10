@@ -6,6 +6,17 @@ import { useUser } from "./UserContext";
 import UserMenu from "./UserMenu";
 import { useSaved } from "./SavedContext";
 
+function getRestaurantInitial(name) {
+  if (!name) return "?";
+  return name.charAt(0).toUpperCase();
+}
+
+function getColorFromName(name) {
+  const colors = ["#dbeafe", "#dcfce7", "#fef3c7", "#fee2e2", "#e9d5ff"];
+  if (!name) return colors[0];
+  return colors[name.length % colors.length];
+}
+
 export default function Restaurants() {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
@@ -22,17 +33,6 @@ export default function Restaurants() {
 
   const { logout } = useUser();
   const { isSaved, toggleSaved } = useSaved();
-
-  function getRestaurantInitial(name) {
-    if (!name) return "?";
-    return name.charAt(0).toUpperCase();
-  }
-
-  function getColorFromName(name) {
-    const colors = ["#dbeafe", "#dcfce7", "#fef3c7", "#fee2e2", "#e9d5ff"];
-    if (!name) return colors[0];
-    return colors[name.length % colors.length];
-  }
 
   useEffect(() => {
     setSearch(q);
