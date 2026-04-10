@@ -8,7 +8,7 @@ Main Issue - https://github.com/KoenMeecham/CP3407-Project/issues/32#issue-41180
 Priority Notes:
 Iteration 2 - ensure the menu is split into categories
 
-## Estimation: 1 day   
+## Estimation: 3 day   
 Planning Poker:  
 Scott: 1 day  
 Kenneth: 1 day  
@@ -37,3 +37,6 @@ Task 4 – Display filtered results on page, Estimation 0.25 days
 
 
 # Completed
+
+<img width="1259" height="625" alt="image" src="https://github.com/user-attachments/assets/1b6ff934-c73f-4489-be05-0136fb7d867d" />
+
