@@ -46,3 +46,5 @@ Task 4 – Add confirmation message and navigation options, Estimated 0.5 day
 
 
 # Completed:
+
+<img width="1388" height="628" alt="image" src="https://github.com/user-attachments/assets/5a96bd0d-f55b-45d4-9b67-0d0295ef9bc0" />
