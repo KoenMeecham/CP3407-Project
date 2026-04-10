@@ -23,6 +23,17 @@ export default function Restaurants() {
   const { logout } = useUser();
   const { isSaved, toggleSaved } = useSaved();
 
+  function getRestaurantInitial(name) {
+    if (!name) return "?";
+    return name.charAt(0).toUpperCase();
+  }
+
+  function getColorFromName(name) {
+    const colors = ["#dbeafe", "#dcfce7", "#fef3c7", "#fee2e2", "#e9d5ff"];
+    if (!name) return colors[0];
+    return colors[name.length % colors.length];
+  }
+
   useEffect(() => {
     setSearch(q);
   }, [q]);
@@ -155,11 +166,12 @@ export default function Restaurants() {
               >
                 {restaurants.map((r, idx) => (
                   <div className="lm-resultCard" key={r.id ?? idx}>
-                    <img
-                      className="lm-resultImg"
-                      src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=60"
-                      alt={r.name || "Restaurant"}
-                    />
+                    <div
+                      className="lm-resultImgFallback"
+                      style={{ background: getColorFromName(r.name) }}
+                    >
+                      {getRestaurantInitial(r.name)}
+                    </div>
 
                     <div className="lm-resultBody">
                       <div className="lm-resultName">
