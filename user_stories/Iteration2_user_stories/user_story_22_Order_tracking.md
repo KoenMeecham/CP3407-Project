@@ -42,3 +42,5 @@ Task 4 – Improve UI with progress indicators, Estimation 0.5 days
 
 
 # Completed
+
+<img width="1388" height="628" alt="image" src="https://github.com/user-attachments/assets/54b42160-a2b5-464e-983d-ea327bb3b8cc" />
