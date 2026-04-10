@@ -39,3 +39,6 @@ Task 4 – Add fallback/default image, Estimation 0.25 days
 
 
 # Completed
+
+<img width="1257" height="630" alt="image" src="https://github.com/user-attachments/assets/ebee8b28-810f-49cc-a061-52f385226aa5" />
+
