@@ -94,13 +94,8 @@ export default function Checkout() {
       }
 
       clearCart();
+      navigate(`/orders/${data.orderId}/confirmation`);
 
-      navigate("/orders", {
-        state: {
-          orderPlaced: true,
-          orderNumber: data.orderId,
-        },
-      });
     } catch (err) {
       console.error(err);
       setError(err.message || "Failed to place order");
