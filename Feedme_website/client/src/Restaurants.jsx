@@ -14,11 +14,11 @@ function getRestaurantInitial(name) {
   const words = name
     .trim()
     .split(/\s+/)
-    .filter(w => w && !ignore.includes(w.toLowerCase()));
+    .filter((w) => w && !ignore.includes(w.toLowerCase()));
 
   const initials = words
     .slice(0, 2)
-    .map(w => w[0])
+    .map((w) => w[0])
     .join("")
     .toUpperCase();
 
@@ -28,7 +28,13 @@ function getRestaurantInitial(name) {
 function getColorFromName(name) {
   const colors = ["#dbeafe", "#dcfce7", "#fef3c7", "#fee2e2", "#e9d5ff"];
   if (!name) return colors[0];
-  return colors[name.length % colors.length];
+
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  return colors[Math.abs(hash) % colors.length];
 }
 
 export default function Restaurants() {
@@ -36,10 +42,12 @@ export default function Restaurants() {
   const [params, setParams] = useSearchParams();
 
   const q = (params.get("q") || "").trim();
+  const cuisine = (params.get("cuisine") || "").trim();
   const rawPage = Number(params.get("page") || 1);
   const page = rawPage > 0 ? rawPage : 1;
 
   const [search, setSearch] = useState(q);
+  const [selectedCuisine, setSelectedCuisine] = useState(cuisine);
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -53,6 +61,10 @@ export default function Restaurants() {
   }, [q]);
 
   useEffect(() => {
+    setSelectedCuisine(cuisine);
+  }, [cuisine]);
+
+  useEffect(() => {
     const load = async () => {
       try {
         setLoading(true);
@@ -60,6 +72,7 @@ export default function Restaurants() {
 
         const query = new URLSearchParams();
         if (q) query.append("q", q);
+        if (cuisine) query.append("cuisine", cuisine);
         query.append("page", page);
         query.append("limit", 20);
 
@@ -84,17 +97,28 @@ export default function Restaurants() {
     };
 
     load();
-  }, [q, page]);
+  }, [q, cuisine, page]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     const next = search.trim();
 
-    if (next) {
-      setParams({ q: next, page: "1" });
-    } else {
-      setParams({});
-    }
+    setParams({
+      ...(next ? { q: next } : {}),
+      ...(selectedCuisine ? { cuisine: selectedCuisine } : {}),
+      page: "1",
+    });
+  };
+
+  const handleCuisineChange = (e) => {
+    const value = e.target.value;
+    setSelectedCuisine(value);
+
+    setParams({
+      ...(q ? { q } : {}),
+      ...(value ? { cuisine: value } : {}),
+      page: "1",
+    });
   };
 
   return (
@@ -159,6 +183,29 @@ export default function Restaurants() {
             <h2 className="lm-resultsTitle">
               {q ? `Results for "${q}"` : "Explore Restaurants"}
             </h2>
+
+            <div
+              style={{
+                marginTop: "12px",
+                display: "flex",
+                gap: "12px",
+                flexWrap: "wrap",
+              }}
+            >
+              <select
+                value={selectedCuisine}
+                onChange={handleCuisineChange}
+                className="orders-sort"
+              >
+                <option value="">All Cuisines</option>
+                <option value="Burger">Burger</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Mexican">Mexican</option>
+                <option value="Cafe">Cafe</option>
+              </select>
+            </div>
           </div>
 
           {loading ? (
@@ -167,7 +214,17 @@ export default function Restaurants() {
             <div className="lm-empty">{error}</div>
           ) : restaurants.length === 0 ? (
             <div className="lm-empty">
-              No results {q ? <>for <b>"{q}"</b></> : null}.
+              No results
+              {q ? (
+                <>
+                  {" "}for <b>"{q}"</b>
+                </>
+              ) : null}
+              {cuisine ? (
+                <>
+                  {" "}in <b>{cuisine}</b>
+                </>
+              ) : null}.
             </div>
           ) : (
             <>
@@ -235,6 +292,7 @@ export default function Restaurants() {
                     onClick={() =>
                       setParams({
                         ...(q ? { q } : {}),
+                        ...(cuisine ? { cuisine } : {}),
                         page: String(page - 1),
                       })
                     }
@@ -251,6 +309,7 @@ export default function Restaurants() {
                     onClick={() =>
                       setParams({
                         ...(q ? { q } : {}),
+                        ...(cuisine ? { cuisine } : {}),
                         page: String(page + 1),
                       })
                     }
