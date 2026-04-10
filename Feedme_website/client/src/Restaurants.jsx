@@ -7,8 +7,8 @@ import UserMenu from "./UserMenu";
 import { useSaved } from "./SavedContext";
 
 function getRestaurantInitial(name) {
-  if (!name) return "?";
-  return name.charAt(0).toUpperCase();
+  if (!name || typeof name !== "string") return "?";
+  return name.trim().charAt(0).toUpperCase() || "?";
 }
 
 function getColorFromName(name) {
@@ -170,7 +170,7 @@ export default function Restaurants() {
                       className="lm-resultImgFallback"
                       style={{ background: getColorFromName(r.name) }}
                     >
-                      {getRestaurantInitial(r.name)}
+                      TEST
                     </div>
 
                     <div className="lm-resultBody">
