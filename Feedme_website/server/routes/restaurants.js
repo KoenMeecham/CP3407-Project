@@ -11,6 +11,7 @@ function parsePositiveInt(value, fallback) {
 router.get("/", async (req, res) => {
   try {
     const search = (req.query.q || "").trim();
+    const cuisine = (req.query.cuisine || "").trim();
     const page = parsePositiveInt(req.query.page, 1);
 
     let limit = parsePositiveInt(req.query.limit, 20);
@@ -18,17 +19,25 @@ router.get("/", async (req, res) => {
 
     const offset = (page - 1) * limit;
 
-    let baseQuery = "FROM Restaurants r";
-    let params = [];
+    const conditions = [];
+    const params = [];
 
     if (search !== "") {
-      baseQuery = "FROM Restaurants r WHERE r.name LIKE ?";
-      params = [`%${search}%`];
+      conditions.push("r.name LIKE ?");
+      params.push(`%${search}%`);
     }
+
+    if (cuisine !== "") {
+      conditions.push("r.category LIKE ?");
+      params.push(`%${cuisine}%`);
+    }
+
+    const whereClause =
+      conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
     // COUNT
     const [countResult] = await db.query(
-      `SELECT COUNT(*) AS count ${baseQuery}`,
+      `SELECT COUNT(*) AS count FROM Restaurants r ${whereClause}`,
       params
     );
 

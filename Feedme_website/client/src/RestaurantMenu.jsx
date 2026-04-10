@@ -42,6 +42,7 @@ export default function RestaurantMenu() {
   const [restaurant, setRestaurant] = useState(null);
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const { addToCart } = useCart();
 
@@ -55,7 +56,7 @@ export default function RestaurantMenu() {
         const menuData = await m.json();
 
         setRestaurant(restaurantData);
-        setMenu(menuData);
+        setMenu(Array.isArray(menuData) ? menuData : []);
       } catch (error) {
         console.error("Failed to load restaurant menu:", error);
         setRestaurant(null);
@@ -69,8 +70,23 @@ export default function RestaurantMenu() {
   }, [id]);
 
   if (loading) return <div className="lm-empty">Loading...</div>;
-
   if (!restaurant) return <div className="lm-empty">Restaurant not found.</div>;
+
+  const groupedMenu = menu.reduce((acc, item) => {
+    const category = item.category?.trim() || "Other";
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(item);
+    return acc;
+  }, {});
+
+  const categories = ["All", ...Object.keys(groupedMenu)];
+
+  const visibleGroupedMenu =
+    selectedCategory === "All"
+      ? groupedMenu
+      : { [selectedCategory]: groupedMenu[selectedCategory] || [] };
 
   return (
     <div className="lm-shell">
@@ -82,7 +98,6 @@ export default function RestaurantMenu() {
         <div className="lm-navSpacer" />
 
         <CartDropdown />
-
         <UserMenu />
       </header>
 
@@ -92,42 +107,78 @@ export default function RestaurantMenu() {
           <p>{restaurant.category}</p>
         </div>
 
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            marginBottom: "20px",
+          }}
+        >
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => setSelectedCategory(category)}
+              style={{
+                padding: "10px 14px",
+                borderRadius: "999px",
+                border: "1px solid #d8dbe5",
+                background: selectedCategory === category ? "#21c45a" : "white",
+                color: selectedCategory === category ? "white" : "#111827",
+                fontWeight: "700",
+                cursor: "pointer",
+              }}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
         <div className="lm-contentWrap">
-          <div className="lm-menuGrid">
-            {menu.map((item) => (
-              <div className="lm-menuCard" key={item.id}>
-                <div
-                  className="lm-menuImgFallback"
-                  style={{ background: getColorFromName(item.name) }}
-                >
-                  {getMenuInitial(item.name)}
-                </div>
+          <div style={{ flex: 1 }}>
+            {Object.entries(visibleGroupedMenu).map(([category, items]) => (
+              <div key={category} style={{ marginBottom: "28px" }}>
+                <h2 style={{ marginBottom: "14px" }}>{category}</h2>
 
-                <div className="lm-menuTitle">{item.name}</div>
+                <div className="lm-menuGrid">
+                  {items.map((item) => (
+                    <div className="lm-menuCard" key={item.id}>
+                      <div
+                        className="lm-menuImgFallback"
+                        style={{ background: getColorFromName(item.name) }}
+                      >
+                        {getMenuInitial(item.name)}
+                      </div>
 
-                <div className="lm-menuDesc">
-                  {item.description || "No description available."}
-                </div>
+                      <div className="lm-menuTitle">{item.name}</div>
 
-                <div className="lm-menuBottom">
-                  <span className="lm-menuPrice">
-                    ${Number(item.price).toFixed(2)}
-                  </span>
+                      <div className="lm-menuDesc">
+                        {item.description || "No description available."}
+                      </div>
 
-                  <button
-                    className="lm-addBtn"
-                    onClick={() =>
-                      addToCart({
-                        id: item.id,
-                        name: item.name,
-                        price: item.price,
-                        restaurant: restaurant.name,
-                        restaurant_id: restaurant.id,
-                      })
-                    }
-                  >
-                    Add
-                  </button>
+                      <div className="lm-menuBottom">
+                        <span className="lm-menuPrice">
+                          ${Number(item.price).toFixed(2)}
+                        </span>
+
+                        <button
+                          className="lm-addBtn"
+                          onClick={() =>
+                            addToCart({
+                              id: item.id,
+                              name: item.name,
+                              price: item.price,
+                              restaurant: restaurant.name,
+                              restaurant_id: restaurant.id,
+                            })
+                          }
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
