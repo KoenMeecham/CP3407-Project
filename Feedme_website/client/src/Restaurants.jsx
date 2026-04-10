@@ -170,7 +170,7 @@ export default function Restaurants() {
                       className="lm-resultImgFallback"
                       style={{ background: getColorFromName(r.name) }}
                     >
-                      TEST
+                      {getRestaurantInitial(r.name)}
                     </div>
 
                     <div className="lm-resultBody">
