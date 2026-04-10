@@ -55,3 +55,6 @@ Currently they look like this:
 
 
 # Completed:
+
+<img width="1329" height="623" alt="image" src="https://github.com/user-attachments/assets/27a647f0-a5b3-4f0b-bfde-ac587ac1d330" />
+
