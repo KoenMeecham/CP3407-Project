@@ -36,3 +36,4 @@ Task 5 – Test functionality and edge cases, Estimation 0.25 days
 
 
 # Completed
+<img width="713" height="733" alt="image" src="https://github.com/user-attachments/assets/147fdbab-df6c-47e9-b96b-98500aff26e1" />
