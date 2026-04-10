@@ -42,3 +42,5 @@ Task 4 – Update final total including delivery fee, Estimation 0.25 days
 
 
 # Completed:
+
+<img width="1388" height="628" alt="image" src="https://github.com/user-attachments/assets/08737f65-c21b-4b51-bcb3-adf66b0bd3e0" />
