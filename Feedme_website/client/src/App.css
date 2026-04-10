@@ -1344,22 +1344,26 @@ nav {
 }
 
 .lm-resultImgFallback {
-  width: 100%;
-  height: 140px;
+  height: 120px;
   border-radius: 12px;
-  background: #e2e8f0;
+  margin-bottom: 12px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+
+  font-size: 48px;
   font-weight: 700;
-  color: #1e293b;
+  color: #1f2937;
+  width: 100%;
+  max-height: 120px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.lm-card .lm-resultImgFallback {
-  height: 120px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.lm-resultCard:hover {
+  transform: translateY(-4px);
+  transition: 0.2s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 @media (max-width: 1100px) {
