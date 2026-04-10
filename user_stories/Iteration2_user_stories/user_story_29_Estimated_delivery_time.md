@@ -37,3 +37,5 @@ Task 4 – Handle edge cases (e.g. delayed orders, no estimate available) — Es
 
 
 # Completed:
+
+<img width="1388" height="628" alt="image" src="https://github.com/user-attachments/assets/0b9aba38-4cee-42e4-991b-8ba83f68d6d4" />
