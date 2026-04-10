@@ -46,7 +46,7 @@ export default function SavedRestaurants() {
         <div className="lm-topsearchForm">
           <input
             className="lm-search"
-            placeholder="Search restaurants, cuisines, or dishes"
+            placeholder="Search favourite restaurants"
             readOnly
           />
         </div>

@@ -133,7 +133,7 @@ export default function Restaurants() {
             className="lm-search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search restaurants, cuisines, or dishes"
+            placeholder="Search restaurants"
           />
         </form>
 

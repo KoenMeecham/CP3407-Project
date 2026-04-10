@@ -87,7 +87,7 @@ export default function Landing() {
           <input
             name="search"
             className="lm-search"
-            placeholder="Search restaurants, cuisines, or dishes"
+            placeholder="Search restaurants"
           />
         </form>
 
