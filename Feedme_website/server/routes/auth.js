@@ -32,6 +32,15 @@ router.post("/register", async (req, res) => {
       [f_name, l_name, email, hashedPassword, "customer"]
     );
 
+    await db.query(
+      `
+      UPDATE Orders
+      SET user_id = ?
+      WHERE email = ? AND user_id IS NULL
+      `,
+      [result.insertId, email]
+    );
+
     const token = jwt.sign(
       {
         id: result.insertId,
@@ -84,6 +93,15 @@ router.post("/login", async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
+
+    await db.query(
+      `
+      UPDATE Orders
+      SET user_id = ?
+      WHERE email = ? AND user_id IS NULL
+      `,
+      [user.user_id, user.email]
+    );
 
     const token = jwt.sign(
       {

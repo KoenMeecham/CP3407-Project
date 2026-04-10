@@ -7,7 +7,8 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("feedme_token");
-    const savedUser = JSON.parse(localStorage.getItem("feedme_user"));
+    const rawUser = localStorage.getItem("feedme_user");
+    const savedUser = rawUser ? JSON.parse(rawUser) : null;
 
     if (token && savedUser) {
       setUser({ ...savedUser, token, isLoggedIn: true });
@@ -15,6 +16,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
+    localStorage.removeItem("feedme_guest_email");
     setUser({ ...userData, isLoggedIn: true });
     localStorage.setItem("feedme_user", JSON.stringify(userData));
     localStorage.setItem("feedme_token", userData.token);
@@ -23,6 +25,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("feedme_token");
     localStorage.removeItem("feedme_user");
+    localStorage.removeItem("feedme_guest_email");
     setUser(null);
   };
 

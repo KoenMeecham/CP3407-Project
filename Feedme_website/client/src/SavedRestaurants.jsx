@@ -6,6 +6,31 @@ import UserMenu from "./UserMenu";
 import { useSaved } from "./SavedContext";
 import { useUser } from "./UserContext";
 
+const ignore = ["and", "&", "the"];
+
+function getRestaurantInitial(name) {
+  if (!name || typeof name !== "string") return "?";
+
+  const words = name
+    .trim()
+    .split(/\s+/)
+    .filter(w => w && !ignore.includes(w.toLowerCase()));
+
+  const initials = words
+    .slice(0, 2)
+    .map(w => w[0])
+    .join("")
+    .toUpperCase();
+
+  return initials || "?";
+}
+
+function getColorFromName(name) {
+  const colors = ["#dbeafe", "#dcfce7", "#fef3c7", "#fee2e2", "#e9d5ff"];
+  if (!name) return colors[0];
+  return colors[name.length % colors.length];
+}
+
 export default function SavedRestaurants() {
   const navigate = useNavigate();
   const { savedRestaurants, isSaved, toggleSaved } = useSaved();
@@ -21,7 +46,7 @@ export default function SavedRestaurants() {
         <div className="lm-topsearchForm">
           <input
             className="lm-search"
-            placeholder="Search restaurants, cuisines, or dishes"
+            placeholder="Search favourite restaurants"
             readOnly
           />
         </div>
@@ -81,11 +106,12 @@ export default function SavedRestaurants() {
             <div className="lm-resultsGrid">
               {savedRestaurants.map((restaurant, idx) => (
                 <div className="lm-resultCard" key={restaurant.id ?? idx}>
-                  <img
-                    className="lm-resultImg"
-                    src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=60"
-                    alt={restaurant.name || "Restaurant"}
-                  />
+                  <div
+                    className="lm-resultImgFallback"
+                    style={{ background: getColorFromName(restaurant.name) }}
+                  >
+                    {getRestaurantInitial(restaurant.name)}
+                  </div>
 
                   <div className="lm-resultBody">
                     <div className="lm-resultName">

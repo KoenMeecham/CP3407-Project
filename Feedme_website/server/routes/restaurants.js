@@ -11,6 +11,7 @@ function parsePositiveInt(value, fallback) {
 router.get("/", async (req, res) => {
   try {
     const search = (req.query.q || "").trim();
+    const cuisine = (req.query.cuisine || "").trim();
     const page = parsePositiveInt(req.query.page, 1);
 
     let limit = parsePositiveInt(req.query.limit, 20);
@@ -18,17 +19,25 @@ router.get("/", async (req, res) => {
 
     const offset = (page - 1) * limit;
 
-    let baseQuery = "FROM Restaurants r";
-    let params = [];
+    const conditions = [];
+    const params = [];
 
     if (search !== "") {
-      baseQuery = "FROM Restaurants r WHERE r.name LIKE ?";
-      params = [`%${search}%`];
+      conditions.push("r.name LIKE ?");
+      params.push(`%${search}%`);
     }
+
+    if (cuisine !== "") {
+      conditions.push("r.category LIKE ?");
+      params.push(`%${cuisine}%`);
+    }
+
+    const whereClause =
+      conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
     // COUNT
     const [countResult] = await db.query(
-      `SELECT COUNT(*) AS count ${baseQuery}`,
+      `SELECT COUNT(*) AS count FROM Restaurants r ${whereClause}`,
       params
     );
 
@@ -39,7 +48,8 @@ router.get("/", async (req, res) => {
     const [results] = await db.query(
       `
       SELECT r.id, r.name, r.category, r.price_range
-      ${baseQuery}
+      FROM Restaurants r
+      ${whereClause}
       ORDER BY r.name ASC
       LIMIT ? OFFSET ?
       `,
@@ -52,13 +62,11 @@ router.get("/", async (req, res) => {
       totalRestaurants: total,
       restaurants: results || [],
     });
-
   } catch (err) {
     console.error("RESTAURANT ERROR:", err);
     res.status(500).json({ error: "Database error" });
   }
 });
-
 
 // GET ONE RESTAURANT
 router.get("/:id", async (req, res) => {
@@ -75,13 +83,11 @@ router.get("/:id", async (req, res) => {
     }
 
     res.json(results[0]);
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "DB error" });
   }
 });
-
 
 // GET MENU
 router.get("/:id/menu", async (req, res) => {
@@ -89,12 +95,16 @@ router.get("/:id/menu", async (req, res) => {
 
   try {
     const [results] = await db.query(
-      "SELECT * FROM Menu_Items WHERE restaurant_id = ?",
+      `
+      SELECT id, restaurant_id, category, name, description, price
+      FROM Menu_Items
+      WHERE restaurant_id = ?
+      ORDER BY category ASC, name ASC
+      `,
       [id]
     );
 
     res.json(results || []);
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "DB error" });

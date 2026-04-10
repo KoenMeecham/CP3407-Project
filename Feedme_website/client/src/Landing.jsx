@@ -6,6 +6,31 @@ import { useUser } from "./UserContext";
 import UserMenu from "./UserMenu";
 import { useSaved } from "./SavedContext";
 
+const ignore = ["and", "&", "the"];
+
+function getRestaurantInitial(name) {
+  if (!name || typeof name !== "string") return "?";
+
+  const words = name
+    .trim()
+    .split(/\s+/)
+    .filter(w => w && !ignore.includes(w.toLowerCase()));
+
+  const initials = words
+    .slice(0, 2)
+    .map(w => w[0])
+    .join("")
+    .toUpperCase();
+
+  return initials || "?";
+}
+
+function getColorFromName(name) {
+  const colors = ["#dbeafe", "#dcfce7", "#fef3c7", "#fee2e2", "#e9d5ff"];
+  if (!name) return colors[0];
+  return colors[name.length % colors.length];
+}
+
 export default function Landing() {
   const { logout } = useUser();
   const navigate = useNavigate();
@@ -62,7 +87,7 @@ export default function Landing() {
           <input
             name="search"
             className="lm-search"
-            placeholder="Search restaurants, cuisines, or dishes"
+            placeholder="Search restaurants"
           />
         </form>
 
@@ -144,10 +169,12 @@ export default function Landing() {
             <div className="lm-cardRow">
               {featuredRestaurants.map((restaurant) => (
                 <div key={restaurant.id} className="lm-card">
-                  <img
-                    src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=60"
-                    alt={restaurant.name || "Restaurant"}
-                  />
+                  <div
+                    className="lm-resultImgFallback"
+                    style={{ background: getColorFromName(restaurant.name) }}
+                  >
+                    {getRestaurantInitial(restaurant.name)}
+                  </div>
 
                   <h3>{restaurant.name || "Restaurant"}</h3>
 

@@ -1285,6 +1285,105 @@ nav {
   font-size: 14px;
 }
 
+.order-method-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.order-method-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.order-status-pill {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #eef2ff;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.order-progress-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.order-progress-step {
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f5f5f5;
+  text-transform: capitalize;
+}
+
+.order-progress-step.complete {
+  background: #dff7e8;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.confirmation-container {
+  display: flex;
+  justify-content: center;
+}
+
+.confirmation-card {
+  max-width: 700px;
+  width: 100%;
+}
+
+.lm-resultImgFallback {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 48px !important;
+  font-weight: 800 !important;
+  line-height: 1;
+  color: #111827 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+}
+
+.lm-resultCard:hover {
+  transform: translateY(-4px);
+  transition: 0.2s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.lm-menuImgFallback {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
 @media (max-width: 1100px) {
   .lm-resultsGrid {
     grid-template-columns: repeat(2, minmax(240px, 1fr));
