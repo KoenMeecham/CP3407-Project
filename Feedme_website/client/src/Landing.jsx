@@ -6,9 +6,23 @@ import { useUser } from "./UserContext";
 import UserMenu from "./UserMenu";
 import { useSaved } from "./SavedContext";
 
+const ignore = ["and", "&", "the"];
+
 function getRestaurantInitial(name) {
-  if (!name) return "?";
-  return name.charAt(0).toUpperCase();
+  if (!name || typeof name !== "string") return "?";
+
+  const words = name
+    .trim()
+    .split(/\s+/)
+    .filter(w => w && !ignore.includes(w.toLowerCase()));
+
+  const initials = words
+    .slice(0, 2)
+    .map(w => w[0])
+    .join("")
+    .toUpperCase();
+
+  return initials || "?";
 }
 
 function getColorFromName(name) {
