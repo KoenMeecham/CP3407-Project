@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./App.css";
 import CartDropdown from "./CartDropdown";
@@ -45,6 +45,12 @@ export default function OrderConfirmation() {
       });
   }, [id]);
 
+  const estimatedTime = useMemo(() => {
+  const min = 20;
+  const max = 45;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}, []);
+
   if (loading) {
     return (
       <div className="lm-shell">
@@ -87,8 +93,8 @@ export default function OrderConfirmation() {
       </header>
 
       <div className="lm-body">
-        <main className="lm-main">
-          <div className="checkout-formCard">
+        <main className="lm-main confirmation-container">
+          <div className="checkout-formCard confirmation-card">
             <h1>Order Confirmed</h1>
             <p>Your order has been placed successfully.</p>
 
@@ -106,6 +112,11 @@ export default function OrderConfirmation() {
               <div className="checkout-summaryItem">
                 <span>Order Method</span>
                 <strong>{order.order_type}</strong>
+              </div>
+
+              <div className="checkout-summaryItem">
+                <span>Estimated Delivery</span>
+                <strong>{estimatedTime} mins</strong>
               </div>
             </div>
 
@@ -146,7 +157,7 @@ export default function OrderConfirmation() {
                   textAlign: "center",
                 }}
               >
-                Track Order
+                View Order
               </Link>
 
               <Link

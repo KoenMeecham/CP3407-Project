@@ -1333,6 +1333,16 @@ nav {
   margin-top: 1rem;
 }
 
+.confirmation-container {
+  display: flex;
+  justify-content: center;
+}
+
+.confirmation-card {
+  max-width: 700px;
+  width: 100%;
+}
+
 @media (max-width: 1100px) {
   .lm-resultsGrid {
     grid-template-columns: repeat(2, minmax(240px, 1fr));
