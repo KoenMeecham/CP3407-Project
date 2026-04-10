@@ -1,60 +1,108 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./App.css";
 import CartDropdown from "./CartDropdown";
 import { useUser } from "./UserContext";
 import { useCart } from "./Cart";
 import UserMenu from "./UserMenu";
 
+
 export default function Orders() {
   const { user, logout } = useUser();
   const { addToCart } = useCart();
-  const location = useLocation();
 
   const [orders, setOrders] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("newest");
+  const [error, setError] = useState("");
+
+  const fetchOrders = async () => {
+    try {
+      const token = localStorage.getItem("feedme_token");
+      const guestEmail = localStorage.getItem("feedme_guest_email") || "";
+
+      let url = "/api/orders";
+      const headers = {};
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      } else if (guestEmail) {
+        url = `/api/orders?email=${encodeURIComponent(guestEmail)}`;
+      }
+
+      const res = await fetch(url, { headers });
+      const data = await res.json();
+
+      if (res.status === 401) {
+        localStorage.removeItem("feedme_token");
+        localStorage.removeItem("feedme_user");
+        setOrders([]);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error(data.message || data.error || "Failed to load orders");
+      }
+
+      setOrders(Array.isArray(data) ? data : []);
+      setError("");
+    } catch (err) {
+      console.error("Failed to load orders:", err);
+      setError(err.message || "Failed to load orders");
+      setOrders([]);
+    }
+  };
 
   useEffect(() => {
-    const token = localStorage.getItem("feedme_token");
-    const guestEmail = localStorage.getItem("feedme_guest_email") || "";
+    fetchOrders();
+  }, []);
 
-    let url = "/api/orders";
-    const headers = {};
-    const usingToken = !!token;
+  useEffect(() => {
+    const activeOrders = orders.some((order) =>
+      order.status === "pending"
+    );
 
-    if (usingToken) {
-      headers.Authorization = `Bearer ${token}`;
-    } else if (guestEmail) {
-      url = `/api/orders?email=${encodeURIComponent(guestEmail)}`;
-    }
+    if (!activeOrders) return;
 
-    fetch(url, { headers })
-      .then(async (res) => {
-        const data = await res.json();
+    const interval = setInterval(() => {
+      fetchOrders();
+    }, 10000);
 
-        if (res.status === 401) {
-          console.warn("Stored token is invalid or expired.");
-          localStorage.removeItem("feedme_token");
-          localStorage.removeItem("feedme_user");
-          setOrders([]);
-          return [];
-        }
+    return () => clearInterval(interval);
+  }, [orders]);
 
-        if (!res.ok) {
-          throw new Error(data.message || data.error || "Failed to load orders");
-        }
+  const handleCancelOrder = async (orderId) => {
+    try {
+      const token = localStorage.getItem("feedme_token");
+      const guestEmail = localStorage.getItem("feedme_guest_email") || "";
 
-        return data;
-      })
-      .then((data) => {
-        setOrders(Array.isArray(data) ? data : []);
-      })
-      .catch((err) => {
-        console.error("Failed to load orders:", err);
-        setOrders([]);
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const res = await fetch(`/api/orders/${orderId}/cancel`, {
+        method: "PATCH",
+        headers,
+        body: JSON.stringify({
+          email: token ? undefined : guestEmail,
+        }),
       });
-    }, []);
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || data.message || "Failed to cancel order");
+      }
+
+      await fetchOrders();
+    } catch (err) {
+      alert(err.message || "Failed to cancel order");
+    }
+  };
 
   const visibleOrders = useMemo(() => {
     let filteredOrders = [...orders];
@@ -140,7 +188,7 @@ export default function Orders() {
             <div>
               <h1 className="orders-title">Past Orders</h1>
               <p className="orders-subtitle">
-                Track, reorder, and review your past deliveries
+                Track, reorder, and manage your active deliveries
               </p>
             </div>
 
@@ -163,11 +211,7 @@ export default function Orders() {
             </div>
           </div>
 
-          {location.state?.orderPlaced && (
-            <div className="checkout-successBanner">
-              Order {location.state.orderNumber} placed successfully.
-            </div>
-          )}
+          {error && <div className="checkout-error">{error}</div>}
 
           {visibleOrders.length === 0 ? (
             <div className="lm-empty">
@@ -175,50 +219,100 @@ export default function Orders() {
             </div>
           ) : (
             <div className="orders-list">
-              {visibleOrders.map((order) => (
-                <div key={order.id} className="order-card">
-                  <div className="order-cardLeft">
-                    <div className="order-icon">🍔</div>
+              {visibleOrders.map((order) => {
 
-                    <div>
-                      <div className="order-restaurant">
-                        Order #{order.id}
-                      </div>
+                return (
+                  <div key={order.id} className="order-card" style={{ display: "block" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        gap: "1rem",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <div className="order-cardLeft">
+                        <div className="order-icon">🍔</div>
 
-                      <div className="order-number">
-                        {order.order_type === "delivery" ? "Delivery" : "Pickup"}
-                      </div>
+                        <div>
+                          <div className="order-restaurant">Order #{order.id}</div>
 
-                      <div className="order-items">
-                        {order.email || "No email"}
-                      </div>
+                          <div className="order-number">
+                            {order.order_type === "delivery" ? "Delivery" : "Pickup"}
+                          </div>
 
-                      <div className="order-meta">
-                        {new Date(order.created_at).toLocaleString()} • $
-                        {Number(order.total_price || 0).toFixed(2)} • {order.status}
-                      </div>
+                          <div className="order-items">{order.email || "No email"}</div>
 
-                      {order.order_type === "delivery" && (
-                        <div className="order-meta">
-                          Delivery Fee: ${Number(order.delivery_fee || 0).toFixed(2)}
+                          <div className="order-meta">
+                            {new Date(order.created_at).toLocaleString()} • $
+                            {Number(order.total_price || 0).toFixed(2)} • {order.status}
+                          </div>
+
+                          {order.order_type === "delivery" && (
+                            <div className="order-meta">
+                              Delivery Fee: $
+                              {Number(order.delivery_fee || 0).toFixed(2)}
+                            </div>
+                          )}
+
+
                         </div>
-                      )}
-                    </div>
-                  </div>
+                      </div>
 
-                  <button
-                    className="order-reorderBtn"
-                    onClick={() => {
-                      if (order.items && Array.isArray(order.items)) {
-                        order.items.forEach((item) => addToCart(item));
-                        alert("Items added to cart.");
-                      }
-                    }}
-                  >
-                    Reorder
-                  </button>
-                </div>
-              ))}
+                      <div style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", flexWrap: "wrap" }}>
+                        <button
+                          className="order-reorderBtn"
+                          onClick={() => {
+                            if (order.items && Array.isArray(order.items)) {
+                              order.items.forEach((item) => addToCart(item));
+                              alert("Items added to cart.");
+                            }
+                          }}
+                        >
+                          Reorder
+                        </button>
+
+                        {order.status === "pending" && (
+                          <button
+                            className="order-reorderBtn"
+                            onClick={() => handleCancelOrder(order.id)}
+                          >
+                            Cancel Order
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+
+                    {order.items?.length > 0 && (
+                      <div style={{ marginTop: "1rem" }}>
+                        <strong>Items</strong>
+                        <div className="checkout-summaryList" style={{ marginTop: "0.5rem" }}>
+                          {order.items.map((item, index) => (
+                            <div
+                              key={`${item.id}-${index}`}
+                              className="checkout-summaryItem"
+                            >
+                              <div>
+                                <strong>{item.name}</strong>
+                                <div className="checkout-muted">
+                                  Qty: {item.quantity}
+                                </div>
+                              </div>
+                              <div>
+                                $
+                                {(
+                                  Number(item.price || 0) * Number(item.quantity || 0)
+                                ).toFixed(2)}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
         </main>

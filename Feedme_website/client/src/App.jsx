@@ -9,6 +9,7 @@ import Register from "./Register";
 import SavedRestaurants from "./SavedRestaurants";
 import Settings from "./Settings";
 import Checkout from "./Checkout";
+import OrderConfirmation from "./OrderConfirmation";
 import { CartProvider } from "./Cart";
 import { UserProvider } from "./UserContext";
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/restaurants" element={<Restaurants />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:id/confirmation" element={<OrderConfirmation />} />
               <Route path="/restaurants/:id" element={<RestaurantMenu />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
