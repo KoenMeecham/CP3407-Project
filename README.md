@@ -90,17 +90,17 @@ In progress:
 14. [Hash Passwords](./user_stories/Iteration2_user_stories/user_story_33_Hash_passwords.md), priority 10, 1 day.  
 
 
-
-Total: 23 days
-Velocity: 0.74
-
 ### Not enough time/developers: 
 Iteration 2:
 1. [Show Current Deals](./user_stories/Iteration2_user_stories/user_story_15_show_current_deals.md), priority 10, 1 day.
 2. [Leave Reviews](./user_stories/Iteration2_user_stories/user_story_28_Leave_reviews.md), priority 30, 1 day.  
 
 
-Total: YY days
+
+
+Total: 23 days
+Velocity: 0.74
+
 
 # Actual iterations
 1. [Iteration-1](./iteration_1.md)
