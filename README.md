@@ -1,9 +1,6 @@
 
 # cp3407-project
 
-This a project assignment template for CP3407. 
-
-
 ## Team
 
 It is recommended to complete this assignment in a group of 2-4 students.
@@ -13,16 +10,6 @@ It is recommended to complete this assignment in a group of 2-4 students.
 4. Kenneth Njeri
 
 
-# Project planning BEFORE iteration-1
-Checklist/TODOs: 
-* Update the following during each week prac session
-* github entry timestamp is BEFORE the iteration-1
-* User stories are correct: see p39
-* Must have more user stories than fits into iterations 1 and 2. To practice the priority.
-* [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-* ...
-
-Total: YY days
 
 
 ## Iteration 1 [duration 3-4 weeks], 11/2 --> 12/3 
@@ -85,12 +72,8 @@ Iteration 2:
 1. [Show Current Deals](./user_stories/Iteration2_user_stories/user_story_15_show_current_deals.md), priority 10, 1 day.
 2. [Leave Reviews](./user_stories/Iteration2_user_stories/user_story_28_Leave_reviews.md), priority 30, 1 day.  
 
-
-
-
 Total: 23 days
 Velocity: 0.74
-
 
 # Actual iterations
 1. [Iteration-1](./iteration_1.md)
